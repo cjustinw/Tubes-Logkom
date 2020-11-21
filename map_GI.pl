@@ -1,8 +1,6 @@
 :- dynamic(player_X/1).
 :- dynamic(player_Y/1).
-:- dynamic(water/2).
-:- dynamic(mount/2).
-:- dynamic(quest/2).
+:- dynamic(stamina/1).
 
 quest(9,20).
 quest(28,14).
@@ -11,7 +9,6 @@ shop(27,13).
 shop(8,20).
 
 boss_dungeon(6,14).
-boss_dungeon(13,32).
 
 water(1,16).
 water(1,17).
@@ -540,7 +537,8 @@ mount(32,4).
 
 initial :-
 	asserta(player_X(26)),
-	asserta(player_Y(7))
+	asserta(player_Y(7)),
+	asserta(stamina(5))
 	.
 
 /*
@@ -743,7 +741,7 @@ printX(Y,X) :-
 	),
     NextX is (X + 1),
     printX(Y,NextX).
-
+/*
 % Print simbol Enemy --> Debugger
 printX(Y,X) :-
 	(
@@ -752,7 +750,7 @@ printX(Y,X) :-
 	),
     NextX is (X + 1),
     printX(Y,NextX).
-
+*/
 % Print batas bawah
 printX(Y,X) :-
 	(

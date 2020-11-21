@@ -34,34 +34,50 @@ w :-
 	;
 	shop(Y,X), Next =:= Y, TempX =:= X ->
 		write('Ada di Shop!'),nl,
-		nl,
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
-		write('['),write(Next),write(','),write(TempX),write(']')
+		write('['),write(Next),write(','),write(TempX),write(']'),
+        retract(stamina(_)),
+        asserta(stamina(5))
 	;
 	boss_dungeon(Y,X), Next =:= Y, TempX =:= X ->
 		write('Ada di Dungeon Boss!'),nl,
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
-		write('['),write(Next),write(','),write(TempX),write(']')
+		write('['),write(Next),write(','),write(TempX),write(']'),
+        retract(stamina(_)),
+        asserta(stamina(5))
 	;
 	water(Y,X), Next =:= Y, TempX =:= X ->
-		write('Ada di air!'),nl,
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
-		write('['),write(Next),write(','),write(TempX),write(']')
+		write('['),write(Next),write(','),write(TempX),write(']'),
+        stamina(N),
+        N1 is N - 1,
+        (
+        N1 =:= 0 ->
+            write('You drowned! Better see your surroundings next time!'),
+            quit
+        ;
+        retract(stamina(N)),
+        asserta(stamina(N1))
+        )
 	;
 	quest(Y,X), Next =:= Y, TempX =:= X ->
 		write('Ada di Quest Board!'),nl,
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
-		write('['),write(Next),write(','),write(TempX),write(']')
+		write('['),write(Next),write(','),write(TempX),write(']'),
+        retract(stamina(_)),
+        asserta(stamina(5))
 	;
 	enemy(_,_,_,_,_,_,_,Y,X), Next =:= Y, TempX =:= X ->
 		write('Ada Musuh!'),nl,
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
 		write('['),write(Next),write(','),write(TempX),write(']'),
+        retract(stamina(_)),
+        asserta(stamina(5)),
         battleMode(X,Next),
         randomEnemy,!
 	;
@@ -70,7 +86,9 @@ w :-
 	;
 	retract(player_Y(_)),
 	asserta(player_Y(Next)),!,
-	write('['),write(Next),write(','),write(TempX),write(']')
+	write('['),write(Next),write(','),write(TempX),write(']'),
+    retract(stamina(_)),
+    asserta(stamina(5))
 	).
 
 % Gerak ke kiri
@@ -85,31 +103,48 @@ a :-
 		write('Ada di Shop!'),nl,
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
-		write('['),write(TempY),write(','),write(Next),write(']')
+		write('['),write(TempY),write(','),write(Next),write(']'),
+        retract(stamina(_)),
+        asserta(stamina(5))
 	;
 	boss_dungeon(Y,X), TempY =:= Y, Next =:= X ->
 		write('Ada di Dungeon Boss!'),nl,
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
-		write('['),write(TempY),write(','),write(Next),write(']')
+		write('['),write(TempY),write(','),write(Next),write(']'),
+        retract(stamina(_)),
+        asserta(stamina(5))
 	;
 	water(Y,X), TempY =:= Y, Next =:= X ->
-		write('Ada di air!'),nl,
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
-		write('['),write(TempY),write(','),write(Next),write(']')
+		write('['),write(TempY),write(','),write(Next),write(']'),
+        stamina(N),
+        N1 is N - 1,
+        (
+        N1 =:= 0 ->
+            write('You drowned! Better see your surroundings next time!'),
+            quit
+        ;
+        retract(stamina(N)),
+        asserta(stamina(N1))
+        )
 	;
     quest(Y,X), TempY =:= Y, Next =:= X ->
 		write('Ada di Quest Board!'),nl,
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
-		write('['),write(TempY),write(','),write(Next),write(']')
+		write('['),write(TempY),write(','),write(Next),write(']'),
+        retract(stamina(_)),
+        asserta(stamina(5))
     ;
     enemy(_,_,_,_,_,_,_,Y,X), TempY =:= Y, Next =:= X ->
 		write('Ada Musuh!'),nl,
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
 		write('['),write(TempY),write(','),write(Next),write(']'),
+        retract(stamina(_)),
+        asserta(stamina(5)),
         battleMode(Next,Y),
         randomEnemy,!
     ;
@@ -118,7 +153,9 @@ a :-
 	;
 	retract(player_X(_)),
 	asserta(player_X(Next)),!,
-	write('['),write(TempY),write(','),write(Next),write(']')
+	write('['),write(TempY),write(','),write(Next),write(']'),
+    retract(stamina(_)),
+    asserta(stamina(5))
 	).
 
 % Gerak ke bawah
@@ -133,31 +170,48 @@ s :-
 		write('Ada di Shop!'),nl,
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
-		write('['),write(Next),write(','),write(TempX),write(']')
+		write('['),write(Next),write(','),write(TempX),write(']'),
+        retract(stamina(_)),
+        asserta(stamina(5))
 	;
 	boss_dungeon(Y,X), TempX =:= X, Next =:= Y ->
 		write('Ada di Dungeon Boss!'),nl,
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
-		write('['),write(Next),write(','),write(TempX),write(']')
+		write('['),write(Next),write(','),write(TempX),write(']'),
+        retract(stamina(_)),
+        asserta(stamina(5))
 	;
 	water(Y,X), TempX =:= X, Next =:= Y ->
-		write('Ada di air!'),nl,
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
-		write('['),write(Next),write(','),write(TempX),write(']')
+		write('['),write(Next),write(','),write(TempX),write(']'),
+        stamina(N),
+        N1 is N - 1,
+        (
+        N1 =:= 0 ->
+            write('You drowned! Better see your surroundings next time!'),
+            quit
+        ;
+        retract(stamina(N)),
+        asserta(stamina(N1))
+        )
 	;
     quest(Y,X), TempX =:= X, Next =:= Y ->
 		write('Ada di Quest Board!'),nl,
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
-		write('['),write(Next),write(','),write(TempX),write(']')
+		write('['),write(Next),write(','),write(TempX),write(']'),
+        retract(stamina(_)),
+        asserta(stamina(5))
     ;
     enemy(_,_,_,_,_,_,_,Y,X), TempX =:= X, Next =:= Y ->
 		write('Ada Musuh!'),nl,
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
 		write('['),write(Next),write(','),write(TempX),write(']'),
+        retract(stamina(_)),
+        asserta(stamina(5)),
         battleMode(X,Next),
         randomEnemy,!
     ;
@@ -166,7 +220,9 @@ s :-
 	;
 	retract(player_Y(_)),
 	asserta(player_Y(Next)),!,
-	write('['),write(Next),write(','),write(TempX),write(']')
+	write('['),write(Next),write(','),write(TempX),write(']'),
+    retract(stamina(_)),
+    asserta(stamina(5))
 	).
 
 % Gerak ke kanan
@@ -181,31 +237,48 @@ d :-
 		write('Ada di Shop!'),nl,
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
-		write('['),write(TempY),write(','),write(Next),write(']')
+		write('['),write(TempY),write(','),write(Next),write(']'),
+        retract(stamina(_)),
+        asserta(stamina(5))
 	;
 	boss_dungeon(Y,X), TempY =:= Y, Next =:= X ->
 		write('Ada di Dungeon Boss!'),nl,
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
-		write('['),write(TempY),write(','),write(Next),write(']')
+		write('['),write(TempY),write(','),write(Next),write(']'),
+        retract(stamina(_)),
+        asserta(stamina(5))
 	;
 	water(Y,X), TempY =:= Y, Next =:= X ->
-		write('Ada di air!'),nl,
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
-		write('['),write(TempY),write(','),write(Next),write(']')
+		write('['),write(TempY),write(','),write(Next),write(']'),
+        stamina(N),
+        N1 is N - 1,
+        (
+        N1 =:= 0 ->
+            write('You drowned! Better see your surroundings next time!'),
+            quit
+        ;
+        retract(stamina(N)),
+        asserta(stamina(N1))
+        )
 	;
     quest(Y,X), TempY =:= Y, Next =:= X ->
 		write('Ada di Quest Board!'),nl,
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
-		write('['),write(TempY),write(','),write(Next),write(']')
+		write('['),write(TempY),write(','),write(Next),write(']'),
+        retract(stamina(_)),
+        asserta(stamina(5))
     ;
     enemy(_,_,_,_,_,_,_,Y,X), TempY =:= Y, Next =:= X ->
 		write('Ada Musuh!'),nl,
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
 		write('['),write(TempY),write(','),write(Next),write(']'),
+        retract(stamina(_)),
+        asserta(stamina(5)),
         battleMode(Next,Y),
         randomEnemy,!
     ;
@@ -214,5 +287,7 @@ d :-
 	;
 	retract(player_X(_)),
 	asserta(player_X(Next)),!,
-	write('['),write(TempY),write(','),write(Next),write(']')
+	write('['),write(TempY),write(','),write(Next),write(']'),
+    retract(stamina(_)),
+    asserta(stamina(5))
 	).

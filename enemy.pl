@@ -74,7 +74,7 @@ generateEnemy(Condition) :-
         );
         (
             Condition = success,
-            createEnemy(ID,PosX,PosY)
+            createEnemy(ID,PosY,PosX)
         )
     ).
 

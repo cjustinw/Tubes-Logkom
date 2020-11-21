@@ -59,16 +59,3 @@ quit :-
     retractall(shopPosition(_,_)),
     retractall(questPosition(_,_)),
     retractall(dungeonPosition(_,_)),!.
-
-quickstr :-
-    asserta(init(1)),
-    initial,
-    write('\nNow, please choose your job!\n'),
-    write('1. Swordsman\n'),
-    write('2. Archer\n'),
-    write('3. Sorcerer\n'),
-    read(JobID),
-    generatePlayer(Username,JobID),
-    player(Username,Job,_,_,_,_,_,_,_,_),
-    generateAllEnemy(80)
-    .
