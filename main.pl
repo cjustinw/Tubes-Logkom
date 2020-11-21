@@ -1,8 +1,11 @@
 
 :- dynamic(init/1).
-:- dynamic(player/11).
 
-:- include('character.pl').
+:- include('command.pl').
+:- include('player.pl').
+:- include('map.pl').
+:- include('enemy.pl').
+:- include('battle.pl').
 
 title :- 
     write('     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
@@ -15,18 +18,18 @@ title :-
     write('     %     s       : gerak ke selatan 1 langkah     %\n'),
     write('     %     d       : gerak ke timur 1 langkah       %\n'),
     write('     %     help    : menampilkan bantuan            %\n'),
+    write('     %     quit    : keluar permainan               %\n'),
     write('     %                                              %\n'),
     write('     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n').
 
-
 start :- 
     init(_),
-    write('Game already started!').
+    write('Game already started!'),!.
 
 start :- 
     \+init(_),
-    title,
     asserta(init(1)),
+    title, 
     write('\nWelcome to Genshin Sekai!\n'),
     write('\nWhat is your name, traveler? '),
     read(Username),
@@ -37,30 +40,24 @@ start :-
     write('1. Swordsman\n'),
     write('2. Archer\n'),
     write('3. Sorcerer\n'),
-    read(JobNumber),
-    jobOption(JobNumber,X),
+    read(JobID),
+    generatePlayer(Username,JobID),
+    player(Username,Job,_,_,_,_,_,_,_,_),
     write('\nYou choose '),
-    write(X),
-    write(', lets explore the world!\n'),
-    asserta(player(Username,X,1,1000,1000,50,50,0,100,1000,[])).
-
-
-status :-
-    player(Username,Job,Level,HP,MaxHP,Att,Def,EXP,MaxEXP,Gold,_),
-    write('\nUsername :'),
-    write(Username),
-    write('\nJob      :'),
     write(Job),
-    write('\nLevel    :'),
-    write(Level),
-    write('\nHealth   :'),
-    write(HP),write('/'), write(MaxHP),
-    write('\nAttack   :'),
-    write(Att),
-    write('\nDefense  :'),
-    write(Def),
-    write('\nEXP      :'),
-    write(EXP),write('/'), write(MaxEXP),
-    write('\nGold     :'),
-    write(Gold).
+    write(', lets explore the world!\n'),
+    createMap, 
+    generateAllEnemy(50),!.
+
+quit :-
+    init(_),
+    write('\nGood-bye!\n'),
+    retractall(player(_,_,_,_,_,_,_,_,_,_)),
+    retractall(enemy(_,_,_,_,_,_,_,_,_)),
+    retractall(size(_,_)),
+    retractall(playerPosition(_,_)),
+    retractall(shopPosition(_,_)),
+    retractall(questPosition(_,_)),
+    retractall(dungeonPosition(_,_)),!.
+
 
