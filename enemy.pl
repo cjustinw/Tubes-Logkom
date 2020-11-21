@@ -1,7 +1,7 @@
 
 :- dynamic(enemy/9).
 
-createEnemy(ID,PosX,PosY) :-
+createEnemy(ID,PosY,PosX) :-
     player(_,_,PlayerLevel,_,_,_,_,_,_,_),
     ID =:= 1,
     LVL is PlayerLevel+2,
@@ -13,9 +13,9 @@ createEnemy(ID,PosX,PosY) :-
     MaxHP = HP,
     ATT is Attack*Level,
     DEF is Defense*Level,
-    asserta(enemy(ID,slime,Level,HP,MaxHP,ATT,DEF,PosX,PosY)),!.
+    asserta(enemy(ID,slime,Level,HP,MaxHP,ATT,DEF,PosY,PosX)),!.
 
-createEnemy(ID,PosX,PosY) :-
+createEnemy(ID,PosY,PosX) :-
     player(_,_,PlayerLevel,_,_,_,_,_,_,_),
     ID =:= 2,
     LVL is PlayerLevel+2,
@@ -27,9 +27,9 @@ createEnemy(ID,PosX,PosY) :-
     MaxHP = HP,
     ATT is Attack*Level,
     DEF is Defense*Level,
-    asserta(enemy(ID,goblin,Level,HP,MaxHP,ATT,DEF,PosX,PosY)),!.
+    asserta(enemy(ID,goblin,Level,HP,MaxHP,ATT,DEF,PosY,PosX)),!.
 
-createEnemy(ID,PosX,PosY) :-
+createEnemy(ID,PosY,PosX) :-
     player(_,_,PlayerLevel,_,_,_,_,_,_,_),
     ID =:= 3,
     LVL is PlayerLevel+2,
@@ -41,27 +41,36 @@ createEnemy(ID,PosX,PosY) :-
     MaxHP = HP,
     ATT is Attack*Level,
     DEF is Defense*Level,
-    asserta(enemy(ID,wolf,Level,HP,MaxHP,ATT,DEF,PosX,PosY)),!.
+    asserta(enemy(ID,wolf,Level,HP,MaxHP,ATT,DEF,PosY,PosX)),!.
 
 generateEnemy(Condition) :-
     random(1,4,ID),
-    random(1,30,PosX),
-    random(1,15,PosY),
+    random(1,33,PosX),
+    random(1,33,PosY),
     (
         (
-            isPlayer(PosX,PosY) -> Condition = fail
+            player_X(TempX), player_Y(TempY), PosY =:= TempY, PosX =:= TempX ->
+                Condition = fail
         );
         (
-            isShop(PosX,PosY) ->  Condition = fail
+            shop(Y,X), PosY =:= Y, PosX =:= X ->
+                Condition = fail
         );
         (
-            isQuest(PosX,PosY) ->  Condition = fail
+            quest(Y,X), PosY =:= Y, PosX =:= X ->
+                Condition = fail
         );
         (
-            isDungeon(PosX,PosY) -> Condition = fail
+            boss_dungeon(Y,X), PosY =:= Y, PosX =:= X ->
+                Condition = fail
         );
         (
-            isEnemy(PosX,PosY) -> Condition = fail
+            enemy(_,_,_,_,_,_,_,Y,X), PosY =:= Y, PosX =:= X ->
+                Condition = fail
+        );
+        (
+            water(Y,X), PosY =:= Y, PosX =:= X ->
+                Condition = fail
         );
         (
             Condition = success,

@@ -21,165 +21,198 @@ status :-
     
 map :-
     init(_),
-    printMap(0,0).
+    printX(0,0),!.
 
+% Perintah Navigasi:
+% Gerak ke atas
 w :-
-    playerPosition(X,Y),
-    Y1 is Y-1,
-    \+isShop(X,Y1),
-    \+isQuest(X,Y1),
-    \+isDungeon(X,Y1),
-    \+isTopBorder(X,Y1),
-    \+isLeftBorder(X,Y1),
-    \+isBottomBorder(X,Y1),
-    \+isRightBorder(X,Y1),
-    \+isEnemy(X,Y1),
-    retract(playerPosition(_,_)),
-    asserta(playerPosition(X,Y1)),!.
+    player_X(TempX),
+    player_Y(TempY),
+    Next is (TempY - 1),
+	(
+	Next =:= 0 -> write('Kena Batas')
+	;
+	shop(Y,X), Next =:= Y, TempX =:= X ->
+		write('Ada di Shop!'),nl,
+		nl,
+		retract(player_Y(_)),
+		asserta(player_Y(Next)),!,
+		write('['),write(Next),write(','),write(TempX),write(']')
+	;
+	boss_dungeon(Y,X), Next =:= Y, TempX =:= X ->
+		write('Ada di Dungeon Boss!'),nl,
+		retract(player_Y(_)),
+		asserta(player_Y(Next)),!,
+		write('['),write(Next),write(','),write(TempX),write(']')
+	;
+	water(Y,X), Next =:= Y, TempX =:= X ->
+		write('Ada di air!'),nl,
+		retract(player_Y(_)),
+		asserta(player_Y(Next)),!,
+		write('['),write(Next),write(','),write(TempX),write(']')
+	;
+	quest(Y,X), Next =:= Y, TempX =:= X ->
+		write('Ada di Quest Board!'),nl,
+		retract(player_Y(_)),
+		asserta(player_Y(Next)),!,
+		write('['),write(Next),write(','),write(TempX),write(']')
+	;
+	enemy(_,_,_,_,_,_,_,Y,X), Next =:= Y, TempX =:= X ->
+		write('Ada Musuh!'),nl,
+		retract(player_Y(_)),
+		asserta(player_Y(Next)),!,
+		write('['),write(Next),write(','),write(TempX),write(']'),
+        battleMode(X,Next),
+        randomEnemy,!
+	;
+	mount(Y,X), Next =:= Y, TempX =:= X ->
+		write('Gunung ini tidak mungkin didaki!')
+	;
+	retract(player_Y(_)),
+	asserta(player_Y(Next)),!,
+	write('['),write(Next),write(','),write(TempX),write(']')
+	).
 
-w :-
-    playerPosition(X,Y),
-    Y1 is Y-1,
-    isShop(X,Y1),
-    write('You re at the Shop'),
-    retract(playerPosition(_,_)),
-    asserta(playerPosition(X,Y1)),!.
-
-w :-
-    playerPosition(X,Y),
-    Y1 is Y-1,
-    isQuest(X,Y1),
-    write('You re at the Quest'),
-    retract(playerPosition(_,_)),
-    asserta(playerPosition(X,Y1)),!.
-
-w :-
-    playerPosition(X,Y),
-    Y1 is Y-1,
-    isEnemy(X,Y1),
-    write('You face the enemy!'),
-    retract(playerPosition(_,_)),
-    asserta(playerPosition(X,Y1)),
-    battleMode(X,Y1),
-    randomEnemy,!.
-
+% Gerak ke kiri
 a :-
-    playerPosition(X,Y),
-    X1 is X-1,
-    \+isShop(X1,Y),
-    \+isQuest(X1,Y),
-    \+isDungeon(X1,Y),
-    \+isTopBorder(X1,Y),
-    \+isLeftBorder(X1,Y),
-    \+isBottomBorder(X1,Y),
-    \+isRightBorder(X1,Y),
-    \+isEnemy(X1,Y),
-    retract(playerPosition(_,_)),
-    asserta(playerPosition(X1,Y)),!.
+    player_X(TempX),
+    player_Y(TempY),
+    Next is (TempX - 1),
+	(
+	Next =:= 0 -> write('Kena Batas')
+	;
+	shop(Y,X), TempY =:= Y, Next =:= X ->
+		write('Ada di Shop!'),nl,
+		retract(player_X(_)),
+		asserta(player_X(Next)),!,
+		write('['),write(TempY),write(','),write(Next),write(']')
+	;
+	boss_dungeon(Y,X), TempY =:= Y, Next =:= X ->
+		write('Ada di Dungeon Boss!'),nl,
+		retract(player_X(_)),
+		asserta(player_X(Next)),!,
+		write('['),write(TempY),write(','),write(Next),write(']')
+	;
+	water(Y,X), TempY =:= Y, Next =:= X ->
+		write('Ada di air!'),nl,
+		retract(player_X(_)),
+		asserta(player_X(Next)),!,
+		write('['),write(TempY),write(','),write(Next),write(']')
+	;
+    quest(Y,X), TempY =:= Y, Next =:= X ->
+		write('Ada di Quest Board!'),nl,
+		retract(player_X(_)),
+		asserta(player_X(Next)),!,
+		write('['),write(TempY),write(','),write(Next),write(']')
+    ;
+    enemy(_,_,_,_,_,_,_,Y,X), TempY =:= Y, Next =:= X ->
+		write('Ada Musuh!'),nl,
+		retract(player_X(_)),
+		asserta(player_X(Next)),!,
+		write('['),write(TempY),write(','),write(Next),write(']'),
+        battleMode(Next,Y),
+        randomEnemy,!
+    ;
+	mount(Y,X), TempY =:= Y, Next =:= X ->
+		write('Gunung ini tidak mungkin didaki!')
+	;
+	retract(player_X(_)),
+	asserta(player_X(Next)),!,
+	write('['),write(TempY),write(','),write(Next),write(']')
+	).
 
-a :-
-    playerPosition(X,Y),
-    X1 is X-1,
-    isShop(X1,Y),
-    write('You re at the Shop'),
-    retract(playerPosition(_,_)),
-    asserta(playerPosition(X1,Y)),!.
-
-a :-
-    playerPosition(X,Y),
-    X1 is X-1,
-    isQuest(X1,Y),
-    write('You re at the Quest'),
-    retract(playerPosition(_,_)),
-    asserta(playerPosition(X1,Y)),!.
-
-a :-
-    playerPosition(X,Y),
-    X1 is X-1,
-    isEnemy(X1,Y),
-    write('You face the enemy!'),
-    retract(playerPosition(_,_)),
-    asserta(playerPosition(X1,Y)),
-    battleMode(X1,Y),
-    randomEnemy,!.
-
+% Gerak ke bawah
 s :-
-    playerPosition(X,Y),
-    Y1 is Y+1,
-    \+isShop(X,Y1),
-    \+isQuest(X,Y1),
-    \+isDungeon(X,Y1),
-    \+isTopBorder(X,Y1),
-    \+isLeftBorder(X,Y1),
-    \+isBottomBorder(X,Y1),
-    \+isRightBorder(X,Y1),
-    \+isEnemy(X,Y1),
-    retract(playerPosition(_,_)),
-    asserta(playerPosition(X,Y1)),!.
+    player_X(TempX),
+    player_Y(TempY),
+    Next is (TempY + 1),
+	(
+	Next =:= 34 -> write('Kena Batas')
+	;
+	shop(Y,X), TempX =:= X, Next =:= Y ->
+		write('Ada di Shop!'),nl,
+		retract(player_Y(_)),
+		asserta(player_Y(Next)),!,
+		write('['),write(Next),write(','),write(TempX),write(']')
+	;
+	boss_dungeon(Y,X), TempX =:= X, Next =:= Y ->
+		write('Ada di Dungeon Boss!'),nl,
+		retract(player_Y(_)),
+		asserta(player_Y(Next)),!,
+		write('['),write(Next),write(','),write(TempX),write(']')
+	;
+	water(Y,X), TempX =:= X, Next =:= Y ->
+		write('Ada di air!'),nl,
+		retract(player_Y(_)),
+		asserta(player_Y(Next)),!,
+		write('['),write(Next),write(','),write(TempX),write(']')
+	;
+    quest(Y,X), TempX =:= X, Next =:= Y ->
+		write('Ada di Quest Board!'),nl,
+		retract(player_Y(_)),
+		asserta(player_Y(Next)),!,
+		write('['),write(Next),write(','),write(TempX),write(']')
+    ;
+    enemy(_,_,_,_,_,_,_,Y,X), TempX =:= X, Next =:= Y ->
+		write('Ada Musuh!'),nl,
+		retract(player_Y(_)),
+		asserta(player_Y(Next)),!,
+		write('['),write(Next),write(','),write(TempX),write(']'),
+        battleMode(X,Next),
+        randomEnemy,!
+    ;
+	mount(Y,X), TempX =:= X, Next =:= Y ->
+		write('Gunung ini tidak mungkin didaki!')
+	;
+	retract(player_Y(_)),
+	asserta(player_Y(Next)),!,
+	write('['),write(Next),write(','),write(TempX),write(']')
+	).
 
-s :-
-    playerPosition(X,Y),
-    Y1 is Y+1,
-    isShop(X,Y1),
-    write('You re at the Shop'),
-    retract(playerPosition(_,_)),
-    asserta(playerPosition(X,Y1)),!.
-
-s :-
-    playerPosition(X,Y),
-    Y1 is Y+1,
-    isQuest(X,Y1),
-    write('You re at the Quest'),
-    retract(playerPosition(_,_)),
-    asserta(playerPosition(X,Y1)),!.
-
-s :-
-    playerPosition(X,Y),
-    Y1 is Y+1,
-    isEnemy(X,Y1),
-    write('You face the enemy!'),
-    retract(playerPosition(_,_)),
-    asserta(playerPosition(X,Y1)),
-    battleMode(X,Y1),
-    randomEnemy,!.
-
+% Gerak ke kanan
 d :-
-    playerPosition(X,Y),
-    X1 is X+1,
-    \+isShop(X1,Y),
-    \+isQuest(X1,Y),
-    \+isDungeon(X1,Y),
-    \+isTopBorder(X1,Y),
-    \+isLeftBorder(X1,Y),
-    \+isBottomBorder(X1,Y),
-    \+isRightBorder(X1,Y),
-    \+isEnemy(X1,Y),
-    retract(playerPosition(_,_)),
-    asserta(playerPosition(X1,Y)),!.
-
-d :-
-    playerPosition(X,Y),
-    X1 is X+1,
-    isShop(X1,Y),
-    write('You re at the Shop'),
-    retract(playerPosition(_,_)),
-    asserta(playerPosition(X1,Y)),!.
-
-d :-
-    playerPosition(X,Y),
-    X1 is X+1,
-    isQuest(X1,Y),
-    write('You re at the Quest'),
-    retract(playerPosition(_,_)),
-    asserta(playerPosition(X1,Y)),!.
-
-d :-
-    playerPosition(X,Y),
-    X1 is X+1,
-    isEnemy(X1,Y),
-    write('You face the enemy!'),
-    retract(playerPosition(_,_)),
-    asserta(playerPosition(X1,Y)),
-    battleMode(X1,Y),
-    randomEnemy,!.
-
+    player_X(TempX),
+    player_Y(TempY),
+    Next is (TempX + 1),
+	(
+	Next =:= 34 -> write('Kena Batas')
+	;
+	shop(Y,X), TempY =:= Y, Next =:= X ->
+		write('Ada di Shop!'),nl,
+		retract(player_X(_)),
+		asserta(player_X(Next)),!,
+		write('['),write(TempY),write(','),write(Next),write(']')
+	;
+	boss_dungeon(Y,X), TempY =:= Y, Next =:= X ->
+		write('Ada di Dungeon Boss!'),nl,
+		retract(player_X(_)),
+		asserta(player_X(Next)),!,
+		write('['),write(TempY),write(','),write(Next),write(']')
+	;
+	water(Y,X), TempY =:= Y, Next =:= X ->
+		write('Ada di air!'),nl,
+		retract(player_X(_)),
+		asserta(player_X(Next)),!,
+		write('['),write(TempY),write(','),write(Next),write(']')
+	;
+    quest(Y,X), TempY =:= Y, Next =:= X ->
+		write('Ada di Quest Board!'),nl,
+		retract(player_X(_)),
+		asserta(player_X(Next)),!,
+		write('['),write(TempY),write(','),write(Next),write(']')
+    ;
+    enemy(_,_,_,_,_,_,_,Y,X), TempY =:= Y, Next =:= X ->
+		write('Ada Musuh!'),nl,
+		retract(player_X(_)),
+		asserta(player_X(Next)),!,
+		write('['),write(TempY),write(','),write(Next),write(']'),
+        battleMode(Next,Y),
+        randomEnemy,!
+    ;
+	mount(Y,X), TempY =:= Y, Next =:= X ->
+		write('Gunung ini tidak mungkin didaki!')
+	;
+	retract(player_X(_)),
+	asserta(player_X(Next)),!,
+	write('['),write(TempY),write(','),write(Next),write(']')
+	).
