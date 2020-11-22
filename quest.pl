@@ -4,6 +4,44 @@
 :- dynamic(questing/1).
 
 
+quest :-
+    \+questing(_),
+    write('You are not on a quest! "questlist" to choose quest!'),!.
+
+quest :-
+    questing(_),
+    killcount(Cslime,_,_),
+    killreq(Rslime,_,_),
+    Cslime < Rslime,
+    questRemain,!.
+
+quest :-
+    questing(_),
+    killcount(_,Cgoblin,_),
+    killreq(_,Rgoblin,_),
+    Cgoblin < Rgoblin,
+    questRemain,!.
+
+quest :-
+    questing(_),
+    killcount(_,_,Cwolf),
+    killreq(_,_,Rwolf),
+    Cwolf < Rwolf,
+    questRemain,!.
+
+quest :-
+    questing(_),
+    questing(QuestID),
+    killcount(Cslime,Cgoblin,Cwolf),
+    killreq(Rslime,Rgoblin,Rwolf),
+    Rslime =:= Cslime,
+    Rgoblin =:= Cgoblin,
+    Rwolf =:= Cwolf,
+    questComplete,
+    retract(questing(QuestID)),
+    retract(killcount(Cslime,Cgoblin,Cwolf)),
+    retract(killreq(Rslime,Rgoblin,Rwolf)),!.
+
 
 questlist :-
     \+questing(_),
@@ -44,45 +82,6 @@ getQuest(QuestID) :-
     write('\nDialogue quest 4 kill 2 slime 2 goblin 1 wolf\n'),
     asserta(killcount(0,0,0)),
     asserta(killreq(2,2,1)),!.
-
-quest :-
-    \+questing(_),
-    write('You are not on a quest! "questlist" to choose quest!'),!.
-
-
-quest :-
-    questing(_),
-    killcount(Cslime,_,_),
-    killreq(Rslime,_,_),
-    Cslime < Rslime,
-    questRemain,!.
-
-quest :-
-    questing(_),
-    killcount(_,Cgoblin,_),
-    killreq(_,Rgoblin,_),
-    Cgoblin < Rgoblin,
-    questRemain,!.
-
-quest :-
-    questing(_),
-    killcount(_,_,Cwolf),
-    killreq(_,_,Rwolf),
-    Cwolf < Rwolf,
-    questRemain,!.
-
-quest :-
-    questing(_),
-    questing(QuestID),
-    killcount(Cslime,Cgoblin,Cwolf),
-    killreq(Rslime,Rgoblin,Rwolf),
-    Rslime =:= Cslime,
-    Rgoblin =:= Cgoblin,
-    Rwolf =:= Cwolf,
-    questComplete,
-    retract(questing(QuestID)),
-    retract(killcount(Cslime,Cgoblin,Cwolf)),
-    retract(killreq(Rslime,Rgoblin,Rwolf)),!.
 
 questRemain :-
     questing(_),
