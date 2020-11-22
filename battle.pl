@@ -274,6 +274,7 @@ battleMode(_,_) :-
 battleMode(X,Y) :-
     isEnemyDefeated(X,Y),
     write('\nEnemy is defeated!\n'),
+    questEnemyKilled(X,Y),
     expIncrease(X,Y),
     levelUp,!.
 
