@@ -607,7 +607,7 @@ printX(Y,X) :-
 printX(Y,X) :-
 	(
 	enemy(_,_,_,_,_,_,_,TempY,TempX), Y =:= TempY, X =:= TempX ->
-		write('*E')
+		put(164),write('E')
 	),
     NextX is (X + 1),
     printX(Y,NextX).
