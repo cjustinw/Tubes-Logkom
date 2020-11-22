@@ -8,19 +8,29 @@
 :- include('battle.pl').
 
 title :- 
-    write('     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
-    write('     %                ~Genshin Sekai~               %\n'),
-    write('     %                                              %\n'),
-    write('     %     status  : menampilkan status pemain      %\n'),
-    write('     %     map     : menampilkan peta               %\n'),
-    write('     %     w       : gerak ke utara 1 langkah       %\n'),
-    write('     %     a       : gerak ke barat 1 langkah       %\n'),
-    write('     %     s       : gerak ke selatan 1 langkah     %\n'),
-    write('     %     d       : gerak ke timur 1 langkah       %\n'),
-    write('     %     help    : menampilkan bantuan            %\n'),
-    write('     %     quit    : keluar permainan               %\n'),
-    write('     %                                              %\n'),
-    write('     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n').
+    nl,
+    write(' $$$$$$'),put(92),write('  $$$$$$$$'),put(92),write(' $$'),put(92),write('   $$'),put(92),write('  $$$$$$'),put(92),write('  $$'),put(92),write('   $$'),put(92),write(' $$$$$$'),put(92),write(' $$'),put(92),write('   $$'),put(92),write('        $$$$$$'),put(92),write('  $$$$$$$$'),put(92),write(' $$'),put(92),write('   $$'),put(92),write('  $$$$$$'),put(92),write('  $$$$$$'),put(92),nl,
+    write('$$  __$$'),put(92),write(' $$  _____|$$$'),put(92),write('  $$ |$$  __$$'),put(92),write(' $$ |  $$ |'),put(92),write('_$$  _|$$$'),put(92),write('  $$ |      $$  __$$'),put(92),write(' $$  _____|$$ | $$  |$$  __$$'),put(92),write(' '),put(92),write('_$$  _|'),nl,
+    write('$$ /  '),put(92),write('__|$$ |      $$$$'),put(92),write(' $$ |$$ /  '),put(92),write('__|$$ |  $$ |  $$ |  $$$$'),put(92),write(' $$ |      $$ /  '),put(92),write('__|$$ |      $$ |$$  / $$ /  $$ |  $$ |  '),nl,
+    write('$$ |$$$$'),put(92),write(' $$$$$'),put(92),write('    $$ $$'),put(92),write('$$ |'),put(92),write('$$$$$$'),put(92),write('  $$$$$$$$ |  $$ |  $$ $$'),put(92),write('$$ |      '),put(92),write('$$$$$$'),put(92),write('  $$$$$'),put(92),write('    $$$$$  /  $$$$$$$$ |  $$ |  '),nl,
+    write('$$ |'),put(92),write('_$$ |$$  __|   $$ '),put(92),write('$$$$ | '),put(92),write('____$$'),put(92),write(' $$  __$$ |  $$ |  $$ '),put(92),write('$$$$ |       '),put(92),write('____$$'),put(92),write(' $$  __|   $$  $$<   $$  __$$ |  $$ |  '),nl,
+    write('$$ |  $$ |$$ |      $$ |'),put(92),write('$$$ |$$'),put(92),write('   $$ |$$ |  $$ |  $$ |  $$ |'),put(92),write('$$$ |      $$'),put(92),write('   $$ |$$ |      $$ |'),put(92),write('$$'),put(92),write('  $$ |  $$ |  $$ |  '),nl,
+    put(92),write('$$$$$$  |$$$$$$$$'),put(92),write(' $$ | '),put(92),write('$$ |'),put(92),write('$$$$$$  |$$ |  $$ |$$$$$$'),put(92),write(' $$ | '),put(92),write('$$ |      '),put(92),write('$$$$$$  |$$$$$$$$'),put(92),write(' $$ | '),put(92),write('$$'),put(92),write(' $$ |  $$ |$$$$$$'),put(92),write(' '),nl,
+    write(' '),put(92),write('______/ '),put(92),write('________|'),put(92),write('__|  '),put(92),write('__| '),put(92),write('______/ '),put(92),write('__|  '),put(92),write('__|'),put(92),write('______|'),put(92),write('__|  '),put(92),write('__|       '),put(92),write('______/ '),put(92),write('________|'),put(92),write('__|  '),put(92),write('__|'),put(92),write('__|  '),put(92),write('__|'),put(92),write('______|'),nl,
+    nl,
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
+    write('%                ~Command Table~               %\n'),
+    write('%                                              %\n'),
+    write('%     status  : menampilkan status pemain      %\n'),
+    write('%     map     : menampilkan peta               %\n'),
+    write('%     w       : gerak ke utara 1 langkah       %\n'),
+    write('%     a       : gerak ke barat 1 langkah       %\n'),
+    write('%     s       : gerak ke selatan 1 langkah     %\n'),
+    write('%     d       : gerak ke timur 1 langkah       %\n'),
+    write('%     help    : menampilkan bantuan            %\n'),
+    write('%     quit    : keluar permainan               %\n'),
+    write('%                                              %\n'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n').
 
 start :- 
     init(_),
