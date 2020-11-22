@@ -741,7 +741,7 @@ printX(Y,X) :-
 	),
     NextX is (X + 1),
     printX(Y,NextX).
-/*
+
 % Print simbol Enemy --> Debugger
 printX(Y,X) :-
 	(
@@ -750,7 +750,7 @@ printX(Y,X) :-
 	),
     NextX is (X + 1),
     printX(Y,NextX).
-*/
+
 % Print batas bawah
 printX(Y,X) :-
 	(

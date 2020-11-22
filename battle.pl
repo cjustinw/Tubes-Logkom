@@ -1,78 +1,241 @@
 
-attack(Option,X,Y) :-
-    Option =:= 1,
-    normalAttack(X,Y),!.
+actionName :-
+    player(_,Job,_,_,_,_,_,_,_,_),
+    (
+        Job = swordsman ->
+            write('\n1. Use Slash'),
+            write('\n2. Use Sword Storm'),
+            write('\n3. Run\n'),!
+    );
+    (
+        Job = archer ->
+            write('\n1. Use Shoot'),
+            write('\n2. Use Arrow Rain'),
+            write('\n3. Run\n'),!
+    );
+    (
+        Job = sorcerer ->
+            write('\n1. Use normal attack'),
+            write('\n2. Use Elemental Fire'),
+            write('\n3. Run\n'),!
+    ).
+    
 
-attack(Option,X,Y) :-
-    Option =:= 2,
-    specialAttack(X,Y),!.
+playerAttack(Option,X,Y) :-
+    player(_,Job,_,_,_,_,_,_,_,_),
+    (
+        Job = swordsman ->
+            swordsmanAttack(Option,X,Y),!
+    );
+    (
+        Job = archer ->
+            archerAttack(Option,X,Y),!
+    );
+    (
+        Job = sorcerer ->
+            sorcererAttack(Option,X,Y),!
+    ).
+
+swordsmanAttack(Option,X,Y) :-
+    (
+        Option =:= 1 ->
+        (   
+            player(_,_,_,_,_,ATT,_,_,_,_),
+            enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
+            write('you use Slash\n'),
+            Damage is ATT*(100/(100+EnemyDEF)),
+            NewEnemyHP is round(EnemyHP-Damage),
+            retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
+            asserta(enemy(EnemyID,EnemyType,EnemyLVL,NewEnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X))
+        )
+    );
+    (
+        Option =:= 2 ->
+        (
+            player(_,_,_,_,_,ATT,_,_,_,_),
+            enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
+            write('you use Sword Storm\n'),
+            Damage is ATT*(100/(100+EnemyDEF))*3,
+            NewEnemyHP is round(EnemyHP-Damage),
+            retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
+            asserta(enemy(EnemyID,EnemyType,EnemyLVL,NewEnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X))
+        )
+    ).
+    
+
+archerAttack(Option,X,Y) :-
+    (
+        Option =:= 1 ->
+            player(_,_,_,_,_,ATT,_,_,_,_),
+            enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
+            write('you use Shoot\n'),
+            Damage is ATT*(100/(100+EnemyDEF)),
+            NewEnemyHP is round(EnemyHP-Damage),
+            retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
+            asserta(enemy(EnemyID,EnemyType,EnemyLVL,NewEnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X))
+    );
+    (
+        Option =:= 2 ->
+            player(_,_,_,_,_,ATT,_,_,_,_),
+            enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
+            write('you use Arrow Rain\n'),
+            Damage is ATT*(100/(100+EnemyDEF))*3,
+            NewEnemyHP is round(EnemyHP-Damage),
+            retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
+            asserta(enemy(EnemyID,EnemyType,EnemyLVL,NewEnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X))
+    ).
+
+sorcererAttack(Option,X,Y) :-
+    (
+        Option =:= 1 ->
+            player(_,_,_,_,_,ATT,_,_,_,_),
+            enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
+            write('you use normal attack\n'),
+            Damage is ATT*(100/(100+EnemyDEF)),
+            NewEnemyHP is round(EnemyHP-Damage),
+            retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
+            asserta(enemy(EnemyID,EnemyType,EnemyLVL,NewEnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X))
+    );
+    (
+        Option =:= 2 ->
+            player(_,_,_,_,_,ATT,_,_,_,_),
+            enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
+            write('you use Elemental Fire\n'),
+            Damage is ATT*(100/(100+EnemyDEF))*3,
+            NewEnemyHP is round(EnemyHP-Damage),
+            retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
+            asserta(enemy(EnemyID,EnemyType,EnemyLVL,NewEnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X))      
+    ).
 
 run :- 
     write('\nyou\'re running away from the enemy\n').
 
-normalAttack(X,Y) :-
-    player(_,_,_,_,_,ATT,_,_,_,_),
-    enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,X,Y),
-    Damage is ATT*(100/(100+EnemyDEF)),
-    NewEnemyHP is round(EnemyHP-Damage),
-    retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,X,Y)),
-    asserta(enemy(EnemyID,EnemyType,EnemyLVL,NewEnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,X,Y)),
-    write('you use normal attack\n'),!.
-
-specialAttack(X,Y) :-
-    player(_,_,_,_,_,ATT,_,_,_,_),
-    enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,X,Y),
-    Damage is ATT*(100/(100+EnemyDEF))*3,
-    NewEnemyHP is round(EnemyHP-Damage),
-    retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,X,Y)),
-    asserta(enemy(EnemyID,EnemyType,EnemyLVL,NewEnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,X,Y)),
-    write('you use special attack\n'),!.
-
 enemyAttack(X,Y) :-
     write('\nEnemy turn\n'),
-    player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
-    enemy(_,EnemyName,_,_,_,EnemyATT,_,X,Y),
-    Damage is EnemyATT*(100/(100+DEF)),
-    NewHP is round(HP-Damage),
-    retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
-    asserta(player(Username,Job,LVL,NewHP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
-    write(EnemyName),
-    write(' use normal attack\n'),!.
+    enemy(_,EnemyName,_,_,_,_,_,Y,X),
+    (
+        EnemyName = slime ->
+            random(1,3,Option),
+            slimeAttack(Option,X,Y)
+    );
+    (
+        EnemyName = goblin ->
+            random(1,3,Option),
+            goblinAttack(Option,X,Y)
+    );
+    (
+        EnemyName = wolf ->
+            random(1,3,Option),
+            wolfAttack(Option,X,Y)
+    ).
+
+slimeAttack(Option,X,Y) :-
+    (
+        Option =:= 1 ->
+            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+            enemy(_,EnemyName,_,_,_,EnemyATT,_,Y,X),
+            write(EnemyName),
+            write(' use normal attack\n'),
+            Damage is EnemyATT*(100/(100+DEF)),
+            NewHP is round(HP-Damage),
+            retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+            asserta(player(Username,Job,LVL,NewHP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold))
+    );
+    (
+        Option =:= 2 ->
+            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+            enemy(_,EnemyName,_,_,_,EnemyATT,_,Y,X),
+            write(EnemyName),
+            write(' use special attack\n'),
+            Damage is EnemyATT*(100/(100+DEF)),
+            NewHP is round(HP-Damage),
+            retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+            asserta(player(Username,Job,LVL,NewHP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold))
+    ).
+    
+
+goblinAttack(Option,X,Y) :-
+    (
+        Option =:= 1 ->
+            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+            enemy(_,EnemyName,_,_,_,EnemyATT,_,Y,X),
+            write(EnemyName),
+            write(' use normal attack\n'),
+            Damage is EnemyATT*(100/(100+DEF)),
+            NewHP is round(HP-Damage),
+            retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+            asserta(player(Username,Job,LVL,NewHP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold))
+    );
+    (
+        Option =:= 2 ->
+            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+            enemy(_,EnemyName,_,_,_,EnemyATT,_,Y,X),
+            write(EnemyName),
+            write(' use special attack\n'),
+            Damage is EnemyATT*(100/(100+DEF)),
+            NewHP is round(HP-Damage),
+            retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+            asserta(player(Username,Job,LVL,NewHP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold))
+    ).
+
+wolfAttack(Option,X,Y) :-
+    (
+        Option =:= 1 ->
+            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+            enemy(_,EnemyName,_,_,_,EnemyATT,_,Y,X),
+            write(EnemyName),
+            write(' use normal attack\n'),
+            Damage is EnemyATT*(100/(100+DEF)),
+            NewHP is round(HP-Damage),
+            retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+            asserta(player(Username,Job,LVL,NewHP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold))
+    );
+    (
+        Option =:= 2 ->
+            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+            enemy(_,EnemyName,_,_,_,EnemyATT,_,Y,X),
+            write(EnemyName),
+            write(' use special attack\n'),
+            Damage is EnemyATT*(100/(100+DEF)),
+            NewHP is round(HP-Damage),
+            retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+            asserta(player(Username,Job,LVL,NewHP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold))
+    ).
 
 isPlayerDefeated :-
     player(_,_,_,HP,_,_,_,_,_,_),
     HP =< 0.
 
 isEnemyDefeated(X,Y) :-
-    enemy(_,_,_,EnemyHP,_,_,_,X,Y),
+    enemy(_,_,_,EnemyHP,_,_,_,Y,X),
     EnemyHP =< 0.
 
 expIncrease(X,Y) :-
-    player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
-    enemy(_,EnemyType,EnemyLVL,_,_,_,_,X,Y),
-    EnemyType = slime,
-    IncreaseEXP is EnemyLVL*30,
-    NewEXP is EXP+IncreaseEXP,
-    retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
-    asserta(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,NewEXP,MaxEXP,Gold)),!.
-
-expIncrease(X,Y) :-
-    player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
-    enemy(_,EnemyType,EnemyLVL,_,_,_,_,X,Y),
-    EnemyType = goblin,
-    IncreaseEXP is EnemyLVL*30,
-    NewEXP is EXP+IncreaseEXP,
-    retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
-    asserta(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,NewEXP,MaxEXP,Gold)),!.
-
-expIncrease(X,Y) :-
-    player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
-    enemy(_,EnemyType,EnemyLVL,_,_,_,_,X,Y),
-    EnemyType = wolf,
-    IncreaseEXP is EnemyLVL*30,
-    NewEXP is EXP+IncreaseEXP,
-    retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
-    asserta(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,NewEXP,MaxEXP,Gold)),!.
+    (
+        enemy(_,EnemyType,EnemyLVL,_,_,_,_,Y,X),EnemyType = slime ->
+            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+            IncreaseEXP is EnemyLVL*30,
+            NewEXP is EXP+IncreaseEXP,
+            retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+            asserta(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,NewEXP,MaxEXP,Gold))
+    );
+    (
+        enemy(_,EnemyType,EnemyLVL,_,_,_,_,Y,X),EnemyType = goblin ->
+            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+            IncreaseEXP is EnemyLVL*30,
+            NewEXP is EXP+IncreaseEXP,
+            retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+            asserta(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,NewEXP,MaxEXP,Gold))
+    );
+    (
+        enemy(_,EnemyType,EnemyLVL,_,_,_,_,Y,X),EnemyType = wolf ->
+            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+            IncreaseEXP is EnemyLVL*30,
+            NewEXP is EXP+IncreaseEXP,
+            retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+            asserta(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,NewEXP,MaxEXP,Gold))
+    ).
+    
 
 playerStatus :-
     player(Name,_,Level,HP,MaxHP,ATT,DEF,_,_,_),
@@ -88,7 +251,7 @@ playerStatus :-
     write(DEF).
     
 enemyStatus(X,Y) :-
-    enemy(_,Name,Level,HP,MaxHP,_,_,X,Y),
+    enemy(_,Name,Level,HP,MaxHP,_,_,Y,X),
     write('\n\nEnemy\'s status:\n\n'),
     write(Name),
     write('\nLevel    :'),
@@ -113,16 +276,14 @@ battleMode(X,Y) :-
     playerStatus,
     enemyStatus(X,Y),
     write('\n\nYour action: '),
-    write('\n1. Use normal attack'),
-    write('\n2. Use special attack'),
-    write('\n3. Run\n'),
+    actionName,
     read(Option),
     (
         (
-            Option = 3 -> run
+            Option =:= 3 -> run
         );
         (
-            attack(Option,X,Y),
+            playerAttack(Option,X,Y),
             (
                 (
                     isEnemyDefeated(X,Y)
