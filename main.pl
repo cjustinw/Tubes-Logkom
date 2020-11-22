@@ -6,6 +6,7 @@
 :- include('map_GI.pl').
 :- include('enemy.pl').
 :- include('battle.pl').
+:- include('quest.pl').
 
 title :- 
     nl,

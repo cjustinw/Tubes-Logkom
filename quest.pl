@@ -4,9 +4,6 @@
 :- dynamic(questing/1).
 
 
-quest :-
-    \+questing(_),
-    write('You are not on a quest! "questlist" to choose quest!'),!.
 
 questlist :-
     \+questing(_),
@@ -48,6 +45,9 @@ getQuest(QuestID) :-
     asserta(killcount(0,0,0)),
     asserta(killreq(2,2,1)),!.
 
+quest :-
+    \+questing(_),
+    write('You are not on a quest! "questlist" to choose quest!'),!.
 
 
 quest :-
