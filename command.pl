@@ -99,7 +99,8 @@ w :-
 		asserta(player_Y(Next)),!,
 		% write('['),write(Next),write(','),write(TempX),write(']'),
         retract(stamina(_)),
-        asserta(stamina(5))
+        asserta(stamina(5)),
+		shop
 	;
 	boss_dungeon(Y,X), Next =:= Y, TempX =:= X ->
 		write('You are at The Iron Catacombs! Advance at once pyrrhic victory, Traveler'),nl,
@@ -176,7 +177,8 @@ a :-
 		asserta(player_X(Next)),!,
 		% write('['),write(TempY),write(','),write(Next),write(']'),
         retract(stamina(_)),
-        asserta(stamina(5))
+        asserta(stamina(5)),
+		shop
 	;
 	boss_dungeon(Y,X), TempY =:= Y, Next =:= X ->
 		write('You are at The Iron Catacombs! Advance at once pyrrhic victory, Traveler'),nl,
@@ -253,7 +255,8 @@ s :-
 		asserta(player_Y(Next)),!,
 		% write('['),write(Next),write(','),write(TempX),write(']'),
         retract(stamina(_)),
-        asserta(stamina(5))
+        asserta(stamina(5)),
+		shop
 	;
 	boss_dungeon(Y,X), TempX =:= X, Next =:= Y ->
 		write('You are at The Iron Catacombs! Advance at once pyrrhic victory, Traveler'),nl,
@@ -330,7 +333,8 @@ d :-
 		asserta(player_X(Next)),!,
 		% write('['),write(TempY),write(','),write(Next),write(']'),
         retract(stamina(_)),
-        asserta(stamina(5))
+        asserta(stamina(5)),
+		shop
 	;
 	boss_dungeon(Y,X), TempY =:= Y, Next =:= X ->
 		write('You are at The Iron Catacombs! Advance at once for pyrrhic victory, Traveler'),nl,
