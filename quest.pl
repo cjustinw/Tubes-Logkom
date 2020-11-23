@@ -49,7 +49,7 @@ questlist :-
     write('1. kill 3 slime\n'),
     write('2. kill 4 goblin\n'),
     write('3. kill 2 wolf\n'),
-    write('4. kill 2 slime 2 goblin 1 wolf\n'),
+    write('4. kill 2 slime 2 goblin 1 wolf\n\n'),
     read(QuestID),
     asserta(questing(QuestID)),
     getQuest(QuestID),!.
@@ -155,8 +155,8 @@ questComplete :-
     NewGold is Gold+IncreaseGold,
     write('\nExp Reward : '),
     write(IncreaseEXP),
-    write('\nGold Reward : \n'),
-    write(IncreaseGold),
+    write('\nGold Reward : '),
+    write(IncreaseGold),nl,
     retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
     asserta(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,NewEXP,MaxEXP,NewGold)).
 

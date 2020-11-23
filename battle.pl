@@ -6,21 +6,21 @@ actionName :-
             write('\n1. Use Slash'),
             write('\n2. Use Ravage Conqueror'),
             write('\n3. Use Potion'),
-            write('\n4. Run\n'),!
+            write('\n4. Run\n\n'),!
     );
     (
         Job = archer ->
             write('\n1. Take Aim'),
             write('\n2. Use Divine Puncture'),
             write('\n3. Use Potion'),
-            write('\n4. Run\n'),!
+            write('\n4. Run\n\n'),!
     );
     (
         Job = sorcerer ->
             write('\n1. Use Fireball'),
             write('\n2. Use Elemental Armageddon'),
             write('\n3. Use Potion'),
-            write('\n4. Run\n'),!
+            write('\n4. Run\n\n'),!
     ).
     
 

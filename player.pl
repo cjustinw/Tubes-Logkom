@@ -26,7 +26,7 @@ levelUp :-
     NewMaxEXP is NewLVL*100,
     retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
     asserta(player(Username,Job,NewLVL,HP,NewMaxHP,NewATT,NewDEF,NewEXP,NewMaxEXP,Gold)),
-    write('Congratulations, you go up to level '),
+    write('Congratulations! You achieve level '),
     write(NewLVL),!.
 
 levelUp :-
@@ -49,7 +49,7 @@ levelUp :-
     NewMaxEXP is NewLVL*90,
     retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
     asserta(player(Username,Job,NewLVL,HP,NewMaxHP,NewATT,NewDEF,NewEXP,NewMaxEXP,Gold)),
-    write('Congratulations, you go up to level '),
+    write('Congratulations! You achieve level '),
     write(NewLVL),!.
 
 levelUp :-
@@ -72,7 +72,7 @@ levelUp :-
     NewMaxEXP is NewLVL*90,
     retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
     asserta(player(Username,Job,NewLVL,HP,NewMaxHP,NewATT,NewDEF,NewEXP,NewMaxEXP,Gold)),
-    write('Congratulations, you go up to level '),
+    write('Congratulations! You achieve level '),
     write(NewLVL),!.
 
 levelUp :-
