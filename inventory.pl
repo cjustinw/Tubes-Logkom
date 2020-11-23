@@ -9,6 +9,10 @@ isInventoryFull :-
     playerInventory(_,Total),
     Total =:= 100.
 
+isInventoryEmpty :-
+    playerInventory(_,Total),
+    Total =:= 0.
+
 pushItem(X,[],[X]).
 
 pushItem(X,[H|T],[H|L]) :- 
@@ -19,28 +23,77 @@ deleteItem(A,[A|B],B).
 deleteItem(A,[B,C|D],[B|E]) :- 
 	deleteItem(A,[C|D],E),!.
 
+addInventory(_) :-
+    isInventoryFull,
+    write('\nYour inventory is full\n'),!.
+
 addInventory(Item) :-
-    playerInventory(Inventory,TotalItem),
-    pushItem(Item,Inventory,NewInventory),
-    NewTotalItem is TotalItem+1,
-    retract(playerInventory(Inventory,TotalItem)),
-    asserta(playerInventory(NewInventory,NewTotalItem)).
+    \+isInventoryFull,
+    playerInventory(Inventory,Total),
+    \+member([Item,_],Inventory),
+    pushItem([Item,1],Inventory,NewInventory),
+    NewTotal is Total+1,
+    retract(playerInventory(Inventory,Total)),
+    asserta(playerInventory(NewInventory,NewTotal)).
+
+addInventory(Item) :-
+    \+isInventoryFull, 
+    playerInventory(Inventory,Total),
+    member([Item,TotalItem],Inventory),
+    deleteItem([Item,TotalItem],Inventory,Inventorytmp),
+    NewTotalItem is TotalItem + 1,
+    pushItem([Item,NewTotalItem],Inventorytmp,NewInventory),
+    NewTotal is Total+1,
+    retract(playerInventory(Inventory,Total)),
+    asserta(playerInventory(NewInventory,NewTotal)),!.
 
 removeInventory(Item) :-
-    playerInventory(Inventory,TotalItem),
-    deleteItem(Item,Inventory,NewInventory),
-    NewTotalItem is TotalItem-1,
-    retract(playerInventory(Inventory,TotalItem)),
-    asserta(playerInventory(NewInventory,NewTotalItem)).
+    \+isInventoryEmpty,
+    playerInventory(Inventory,_),
+    \+member([Item,_],Inventory),
+    write('\nYou don\'t have '),write(Item),write(' to remove\n'),!.
 
+removeInventory(Item) :-
+    \+isInventoryEmpty,
+    playerInventory(Inventory,Total),
+    member([Item,TotalItem],Inventory),
+    TotalItem =:= 1,
+    deleteItem([Item,TotalItem],Inventory,NewInventory),
+    NewTotal is Total-1,
+    retract(playerInventory(Inventory,Total)),
+    asserta(playerInventory(NewInventory,NewTotal)),!.
+
+removeInventory(Item) :-
+    \+isInventoryEmpty,
+    playerInventory(Inventory,Total),
+    member([Item,TotalItem],Inventory),
+    TotalItem > 1,
+    deleteItem([Item,TotalItem],Inventory,Inventorytmp),
+    NewTotalItem is TotalItem - 1,
+    pushItem([Item,NewTotalItem],Inventorytmp,NewInventory),
+    NewTotal is Total-1,
+    retract(playerInventory(Inventory,Total)),
+    asserta(playerInventory(NewInventory,NewTotal)),!.
 
 isItemAvailable(Item) :-
     playerInventory(Inventory,_),
-    member(Item,Inventory).
+    member([Item,_],Inventory).
+
+printInventory([]).
+printInventory([[A|[B|_]]|T]) :-
+    write(B),write(' '),write(A),write('\n'),
+    printInventory(T).
 
 inventory :-
-    playerInventory(Item,_),
-    write(Item).
+    (
+        isInventoryEmpty ->
+            write('\nYour inventory is empty\n')
+    );
+    (
+        \+isInventoryEmpty ->
+            playerInventory(Inventory,_),
+            printInventory(Inventory)
+    ).
 
 usePotion:-
     (
@@ -56,7 +109,8 @@ usePotion:-
         NewHP =< MaxHP ->
             retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
             asserta(player(Username,Job,LVL,NewHP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
-            removeInventory(potion),!
+            removeInventory(potion),
+            write('\nYou heal 500 exp\n'),!
     );
     (
         isItemAvailable(potion),
@@ -67,5 +121,8 @@ usePotion:-
         NewHP > MaxHP ->
             retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
             asserta(player(Username,Job,LVL,MaxHP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
-            removeInventory(potion),!
+            removeInventory(potion),
+            Heal is NewHP-MaxHP,
+            write('\nYou heal '),write(Heal),write('exp\n'),!
     ).
+
