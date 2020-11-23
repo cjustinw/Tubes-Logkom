@@ -4,6 +4,8 @@
 :- include('command.pl').
 :- include('player.pl').
 :- include('map_GI.pl').
+:- include('item.pl').
+:- include('inventory.pl').
 :- include('enemy.pl').
 :- include('battle.pl').
 :- include('quest.pl').
@@ -28,6 +30,7 @@ title :-
     write('%     a       : gerak ke barat 1 langkah       %\n'),
     write('%     s       : gerak ke selatan 1 langkah     %\n'),
     write('%     d       : gerak ke timur 1 langkah       %\n'),
+    write('%     quest   : menampilkan quest berlangsung  %\n'),
     write('%     help    : menampilkan bantuan            %\n'),
     write('%     quit    : keluar permainan               %\n'),
     write('%                                              %\n'),
