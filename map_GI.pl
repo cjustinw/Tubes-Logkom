@@ -2,6 +2,207 @@
 :- dynamic(player_Y/1).
 :- dynamic(stamina/1).
 
+slime_Z(5,23).
+slime_Z(5,24).
+slime_Z(5,25).
+slime_Z(6,23).
+slime_Z(6,24).
+slime_Z(6,25).
+slime_Z(7,22).
+slime_Z(7,23).
+slime_Z(7,24).
+slime_Z(7,25).
+slime_Z(7,26).
+slime_Z(8,23).
+slime_Z(8,24).
+slime_Z(8,25).
+slime_Z(9,23).
+slime_Z(9,24).
+slime_Z(10,23).
+slime_Z(10,24).
+slime_Z(10,25).
+slime_Z(11,21).
+slime_Z(11,22).
+slime_Z(11,23).
+slime_Z(11,24).
+slime_Z(12,22).
+slime_Z(12,23).
+slime_Z(13,23).
+slime_Z(13,24).
+slime_Z(14,24).
+slime_Z(15,24).
+slime_Z(15,25).
+slime_Z(15,26).
+slime_Z(15,27).
+slime_Z(16,24).
+slime_Z(16,25).
+slime_Z(19,13).
+slime_Z(20,9).
+slime_Z(20,10).
+slime_Z(20,12).
+slime_Z(20,13).
+slime_Z(20,14).
+slime_Z(21,9).
+slime_Z(21,10).
+slime_Z(21,11).
+slime_Z(21,12).
+slime_Z(21,13).
+slime_Z(21,14).
+slime_Z(22,8).
+slime_Z(22,9).
+slime_Z(22,12).
+slime_Z(22,13).
+slime_Z(22,14).
+slime_Z(23,7).
+slime_Z(23,8).
+slime_Z(23,9).
+slime_Z(23,10).
+slime_Z(24,8).
+slime_Z(24,9).
+
+goblin_Z(2,21).
+goblin_Z(2,22).
+goblin_Z(3,21).
+goblin_Z(3,22).
+goblin_Z(4,19).
+goblin_Z(4,20).
+goblin_Z(4,21).
+goblin_Z(8,6).
+goblin_Z(9,5).
+goblin_Z(9,6).
+goblin_Z(10,4).
+goblin_Z(10,5).
+goblin_Z(10,6).
+goblin_Z(10,11).
+goblin_Z(11,5).
+goblin_Z(11,6).
+goblin_Z(11,7).
+goblin_Z(11,10).
+goblin_Z(11,11).
+goblin_Z(11,12).
+goblin_Z(12,4).
+goblin_Z(12,5).
+goblin_Z(12,11).
+goblin_Z(13,3).
+goblin_Z(13,4).
+goblin_Z(13,10).
+goblin_Z(13,11).
+goblin_Z(13,12).
+goblin_Z(13,13).
+goblin_Z(14,1).
+goblin_Z(14,2).
+goblin_Z(14,3).
+goblin_Z(14,11).
+goblin_Z(14,12).
+goblin_Z(15,1).
+goblin_Z(15,2).
+goblin_Z(15,3).
+goblin_Z(16,1).
+goblin_Z(17,16).
+goblin_Z(18,16).
+goblin_Z(18,17).
+goblin_Z(18,18).
+goblin_Z(19,17).
+goblin_Z(19,18).
+
+wolf_Z(1,1).
+wolf_Z(1,2).
+wolf_Z(1,3).
+wolf_Z(1,4).
+wolf_Z(1,5).
+wolf_Z(1,6).
+wolf_Z(1,7).
+wolf_Z(1,8).
+wolf_Z(1,9).
+wolf_Z(1,10).
+wolf_Z(1,11).
+wolf_Z(1,12).
+wolf_Z(1,13).
+wolf_Z(1,14).
+wolf_Z(2,1).
+wolf_Z(2,2).
+wolf_Z(2,3).
+wolf_Z(2,4).
+wolf_Z(2,5).
+wolf_Z(2,6).
+wolf_Z(2,7).
+wolf_Z(2,8).
+wolf_Z(2,9).
+wolf_Z(2,10).
+wolf_Z(2,11).
+wolf_Z(2,12).
+wolf_Z(3,1).
+wolf_Z(3,2).
+wolf_Z(3,3).
+wolf_Z(3,4).
+wolf_Z(3,5).
+wolf_Z(3,6).
+wolf_Z(3,7).
+wolf_Z(3,8).
+wolf_Z(3,9).
+wolf_Z(3,10).
+wolf_Z(4,1).
+wolf_Z(4,2).
+wolf_Z(4,3).
+wolf_Z(4,4).
+wolf_Z(4,5).
+wolf_Z(4,6).
+wolf_Z(4,7).
+wolf_Z(4,8).
+wolf_Z(5,1).
+wolf_Z(5,2).
+wolf_Z(5,3).
+wolf_Z(5,4).
+wolf_Z(6,1).
+wolf_Z(6,2).
+wolf_Z(6,3).
+wolf_Z(7,1).
+wolf_Z(7,2).
+wolf_Z(7,3).
+wolf_Z(8,1).
+wolf_Z(8,2).
+wolf_Z(9,2).
+wolf_Z(8,17).
+wolf_Z(9,16).
+wolf_Z(9,17).
+wolf_Z(10,16).
+wolf_Z(10,17).
+wolf_Z(10,18).
+wolf_Z(11,17).
+wolf_Z(11,18).
+wolf_Z(26,1).
+wolf_Z(27,1).
+wolf_Z(28,1).
+wolf_Z(28,2).
+wolf_Z(29,1).
+wolf_Z(29,2).
+wolf_Z(29,3).
+wolf_Z(30,1).
+wolf_Z(30,2).
+wolf_Z(30,3).
+wolf_Z(31,1).
+wolf_Z(31,2).
+wolf_Z(31,3).
+wolf_Z(31,4).
+wolf_Z(31,11).
+wolf_Z(32,1).
+wolf_Z(32,2).
+wolf_Z(32,3).
+wolf_Z(32,3).
+wolf_Z(32,9).
+wolf_Z(32,10).
+wolf_Z(32,11).
+wolf_Z(33,1).
+wolf_Z(33,2).
+wolf_Z(33,3).
+wolf_Z(33,4).
+wolf_Z(33,7).
+wolf_Z(33,8).
+wolf_Z(33,9).
+wolf_Z(33,10).
+wolf_Z(33,11).
+wolf_Z(33,12).
+
 quest(9,20).
 quest(28,14).
 
@@ -608,6 +809,33 @@ printX(Y,X) :-
 	(
 	enemy(_,_,_,_,_,_,_,TempY,TempX), Y =:= TempY, X =:= TempX ->
 		put(164),write('E')
+	),
+    NextX is (X + 1),
+    printX(Y,NextX).
+
+% Print simbol Wolf Zone
+printX(Y,X) :-
+	(
+	wolf_Z(TempY,TempX), Y =:= TempY, X =:= TempX ->
+		write('{}')
+	),
+    NextX is (X + 1),
+    printX(Y,NextX).
+
+% Print simbol Slime Zone
+printX(Y,X) :-
+	(
+	slime_Z(TempY,TempX), Y =:= TempY, X =:= TempX ->
+		write('()')
+	),
+    NextX is (X + 1),
+    printX(Y,NextX).
+
+% Print simbol Slime Zone
+printX(Y,X) :-
+	(
+	goblin_Z(TempY,TempX), Y =:= TempY, X =:= TempX ->
+		write('<>')
 	),
     NextX is (X + 1),
     printX(Y,NextX).

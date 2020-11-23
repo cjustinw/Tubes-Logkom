@@ -44,7 +44,6 @@ createEnemy(ID,PosY,PosX) :-
     asserta(enemy(ID,wolf,Level,HP,MaxHP,ATT,DEF,PosY,PosX)),!.
 
 generateEnemy(Condition) :-
-    random(1,4,ID),
     random(1,33,PosX),
     random(1,33,PosY),
     (
@@ -74,7 +73,22 @@ generateEnemy(Condition) :-
         );
         (
             Condition = success,
-            createEnemy(ID,PosY,PosX)
+            (
+                wolf_Z(Y,X), PosY =:= Y, PosX =:= X ->
+                    createEnemy(3,PosY,PosX)
+            );
+            (
+                slime_Z(Y,X), PosY =:= Y, PosX =:= X ->
+                    createEnemy(1,PosY,PosX)
+            );
+            (
+                goblin_Z(Y,X), PosY =:= Y, PosX =:= X ->
+                    createEnemy(2,PosY,PosX)
+            );
+            (
+                random(1,4,ID),
+                createEnemy(ID,PosY,PosX)
+            )
         )
     ).
 
