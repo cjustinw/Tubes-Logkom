@@ -118,6 +118,7 @@ w :-
         N1 is N - 1,
         (
         N1 =:= 0 ->
+			nl,
             write('You drowned! Better watch your surroundings next time, Traveler!'),
             quit
         ;
@@ -191,6 +192,7 @@ a :-
         N1 is N - 1,
         (
         N1 =:= 0 ->
+			nl,
             write('You drowned! Better watch your surroundings next time, Traveler!'),
             quit
         ;
@@ -264,6 +266,7 @@ s :-
         N1 is N - 1,
         (
         N1 =:= 0 ->
+			nl,
             write('You drowned! Better watch your surroundings next time, Traveler!'),
             quit
         ;
@@ -337,6 +340,7 @@ d :-
         N1 is N - 1,
         (
         N1 =:= 0 ->
+			nl,
             write('You drowned! Better watch your surroundings next time, Traveler!'),
             quit
         ;

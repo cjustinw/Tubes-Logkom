@@ -21,6 +21,9 @@ title :-
     put(92),write('$$$$$$  |$$$$$$$$'),put(92),write(' $$ | '),put(92),write('$$ |'),put(92),write('$$$$$$  |$$ |  $$ |$$$$$$'),put(92),write(' $$ | '),put(92),write('$$ |      '),put(92),write('$$$$$$  |$$$$$$$$'),put(92),write(' $$ | '),put(92),write('$$'),put(92),write(' $$ |  $$ |$$$$$$'),put(92),write(' '),nl,
     write(' '),put(92),write('______/ '),put(92),write('________|'),put(92),write('__|  '),put(92),write('__| '),put(92),write('______/ '),put(92),write('__|  '),put(92),write('__|'),put(92),write('______|'),put(92),write('__|  '),put(92),write('__|       '),put(92),write('______/ '),put(92),write('________|'),put(92),write('__|  '),put(92),write('__|'),put(92),write('__|  '),put(92),write('__|'),put(92),write('______|'),nl,
     nl,
+    help.
+
+help :-
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
     write('%                ~Command Table~               %\n'),
     write('%                                              %\n'),
@@ -65,6 +68,7 @@ start :-
 
 quit :-
     init(_),
+    retract(init(_)),
     write('\nGood-bye!\n'),
     retractall(player(_,_,_,_,_,_,_,_,_,_)),
     retractall(enemy(_,_,_,_,_,_,_,_,_)),
