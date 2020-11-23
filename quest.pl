@@ -99,10 +99,15 @@ questRemain :-
     write(WolfRemain),
     write(' Wolf(s)\n'),!.
 
-questEnemyKilled(X,Y):-
+questEnemyKilled(_,_):-
+    \+questing(_).
 
+questEnemyKilled(X,Y):-
     (
-            questing(_),enemy(_,EnemyType,_,_,_,_,_,Y,X),EnemyType = slime ->               
+            questing(_),enemy(_,EnemyType,_,_,_,_,_,Y,X),EnemyType = slime,killreq(Rslime,_,_),Rslime =:= 0
+    );
+    (
+            questing(_),enemy(_,EnemyType,_,_,_,_,_,Y,X),EnemyType = slime,killreq(Rslime,_,_),Rslime =\= 0 ->               
                 killcount(Cslime,Cgoblin,Cwolf),
                 killreq(Rslime,_,_),
                 Cslime < Rslime,
@@ -112,7 +117,10 @@ questEnemyKilled(X,Y):-
                 quest
     );
     (
-            questing(_),enemy(_,EnemyType,_,_,_,_,_,Y,X),EnemyType = goblin ->
+            questing(_),enemy(_,EnemyType,_,_,_,_,_,Y,X),EnemyType = goblin,killreq(_,Rgoblin,_),Rgoblin =:= 0
+    );
+    (
+            questing(_),enemy(_,EnemyType,_,_,_,_,_,Y,X),EnemyType = goblin,killreq(_,Rgoblin,_),Rgoblin =\= 0 ->
                 killcount(Cslime,Cgoblin,Cwolf),
                 killreq(_,Rgoblin,_),
                 Cgoblin < Rgoblin,
@@ -122,7 +130,10 @@ questEnemyKilled(X,Y):-
                 quest
     );
     (
-            questing(_),enemy(_,EnemyType,_,_,_,_,_,Y,X),EnemyType = wolf ->
+            questing(_),enemy(_,EnemyType,_,_,_,_,_,Y,X),EnemyType = wolf,killreq(_,_,Rwolf),Rwolf =:= 0 
+    );
+    (
+            questing(_),enemy(_,EnemyType,_,_,_,_,_,Y,X),EnemyType = wolf,killreq(_,_,Rwolf),Rwolf =\= 0 ->
                 killcount(Cslime,Cgoblin,Cwolf),
                 killreq(_,_,Rwolf),
                 Cwolf < Rwolf,
@@ -135,16 +146,16 @@ questEnemyKilled(X,Y):-
 
 
 questComplete :-
-    write('\n Quest complete ! '),
+    write('\nQuest complete ! '),
     player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
     killreq(Rslime,Rgoblin,Rwolf),
     IncreaseEXP is (Rslime+Rgoblin+Rwolf)*50,
     IncreaseGold is (Rslime+Rgoblin+Rwolf)*30,
     NewEXP is EXP+IncreaseEXP,
     NewGold is Gold+IncreaseGold,
-    write('\n Exp Reward : '),
+    write('\nExp Reward : '),
     write(IncreaseEXP),
-    write('\n Gold Reward : '),
+    write('\nGold Reward : '),
     write(IncreaseGold),
     retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
     asserta(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,NewEXP,MaxEXP,NewGold)),

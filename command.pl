@@ -69,7 +69,8 @@ w :-
 		asserta(player_Y(Next)),!,
 		write('['),write(Next),write(','),write(TempX),write(']'),
         retract(stamina(_)),
-        asserta(stamina(5))
+        asserta(stamina(5)),
+		questlist
 	;
 	enemy(_,_,_,_,_,_,_,Y,X), Next =:= Y, TempX =:= X ->
 		write('Ada Musuh!'),nl,
@@ -136,7 +137,8 @@ a :-
 		asserta(player_X(Next)),!,
 		write('['),write(TempY),write(','),write(Next),write(']'),
         retract(stamina(_)),
-        asserta(stamina(5))
+        asserta(stamina(5)),
+		questlist
     ;
     enemy(_,_,_,_,_,_,_,Y,X), TempY =:= Y, Next =:= X ->
 		write('Ada Musuh!'),nl,
@@ -203,7 +205,8 @@ s :-
 		asserta(player_Y(Next)),!,
 		write('['),write(Next),write(','),write(TempX),write(']'),
         retract(stamina(_)),
-        asserta(stamina(5))
+        asserta(stamina(5)),
+		questlist
     ;
     enemy(_,_,_,_,_,_,_,Y,X), TempX =:= X, Next =:= Y ->
 		write('Ada Musuh!'),nl,
@@ -270,7 +273,8 @@ d :-
 		asserta(player_X(Next)),!,
 		write('['),write(TempY),write(','),write(Next),write(']'),
         retract(stamina(_)),
-        asserta(stamina(5))
+        asserta(stamina(5)),
+		questlist
     ;
     enemy(_,_,_,_,_,_,_,Y,X), TempY =:= Y, Next =:= X ->
 		write('Ada Musuh!'),nl,
