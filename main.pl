@@ -6,6 +6,7 @@
 :- include('map_GI.pl').
 :- include('item.pl').
 :- include('inventory.pl').
+:- include('shop.pl').
 :- include('enemy.pl').
 :- include('battle.pl').
 :- include('quest.pl').
@@ -65,6 +66,7 @@ start :-
     write(Job),
     write(', lets explore the world!\n'),
     initial,
+    initInventory,
     generateAllEnemy(50),!.
 
 quit :-
