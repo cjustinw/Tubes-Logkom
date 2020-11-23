@@ -5,6 +5,7 @@
 :- include('player.pl').
 :- include('map_GI.pl').
 :- include('item.pl').
+:- include('shop.pl').
 :- include('inventory.pl').
 :- include('enemy.pl').
 :- include('battle.pl').
@@ -24,21 +25,22 @@ title :-
     help.
 
 help :-
-    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
-    write('%                ~Command Table~               %\n'),
-    write('%                                              %\n'),
-    write('%     status  : menampilkan status pemain      %\n'),
-    write('%     map     : menampilkan peta               %\n'),
-    write('%     w       : gerak ke utara 1 langkah       %\n'),
-    write('%     a       : gerak ke barat 1 langkah       %\n'),
-    write('%     s       : gerak ke selatan 1 langkah     %\n'),
-    write('%     d       : gerak ke timur 1 langkah       %\n'),
-    write('%     tp      : berpindah ke waypoint          %\n'),
-    write('%     quest   : menampilkan quest berlangsung  %\n'),
-    write('%     help    : menampilkan bantuan            %\n'),
-    write('%     quit    : keluar permainan               %\n'),
-    write('%                                              %\n'),
-    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n').
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
+    write('%                  ~Command Table~                %\n'),
+    write('%                                                 %\n'),
+    write('%     status     : menampilkan status pemain      %\n'),
+    write('%     map        : menampilkan peta               %\n'),
+    write('%     w          : gerak ke utara 1 langkah       %\n'),
+    write('%     a          : gerak ke barat 1 langkah       %\n'),
+    write('%     s          : gerak ke selatan 1 langkah     %\n'),
+    write('%     d          : gerak ke timur 1 langkah       %\n'),
+    write('%     tp         : berpindah ke waypoint          %\n'),
+    write('%     inventory  : menampilkan inventory pemain   %\n'),
+    write('%     quest      : menampilkan quest berlangsung  %\n'),
+    write('%     help       : menampilkan bantuan            %\n'),
+    write('%     quit       : keluar permainan               %\n'),
+    write('%                                                 %\n'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n').
 
 start :- 
     init(_),
@@ -65,6 +67,7 @@ start :-
     write(Job),
     write(', lets explore the world!\n'),
     initial,
+    initInventory,
     generateAllEnemy(50),!.
 
 quit :-
