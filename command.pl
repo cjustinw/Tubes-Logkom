@@ -1,3 +1,64 @@
+print_wolf :-
+	write('                              __'),nl,
+	write('                            .d$$b'),nl,
+	write('                          .'),put(39),write(' TO$;'),put(92),nl,
+	write('                         /  : TP._;'),nl,
+	write('                        / _.;  :Tb|'),nl,
+	write('                       /   /   ;j$j'),nl,
+	write('                   _.-"       d$$$$'),nl,
+	write('                 .'),put(39),write(' ..       d$$$$;'),nl,
+	write('                /  /P'),put(39),write('      d$$$$P. |'),put(92),nl,
+	write('               /   "      .d$$$P'),put(92),write(' |'),put(92),write('^"l'),nl,
+	write('             .'),put(39),write('           `T$P^"""""  :'),nl,
+	write('         ._.'),put(39),write('      _.'),put(39),write('                ;'),nl,
+	write('      `-.-".-'),put(39),write('-'),put(39),write(' ._.       _.-"    .-"'),nl,
+	write('    `.-" _____  ._              .-"'),nl,
+	write('   -(.g$$$$$$$b.              .'),put(39),nl,
+	write('     ""^^T$$$P^)            .(:'),nl,
+	write('       _/  -"  /.'),put(39),write('         /:/;'),nl,
+	write('    ._.'),put(39),write('-'),put(39),write('`-'),put(39),write('  ")/         /;/;'),nl,
+	write(' `-.-"..--""   " /         /  ;'),nl,
+	write('.-" ..--""        -'),put(39),write('          :'),nl,
+	write('..--""--.-"         ('),put(92),write('      .-('),put(92),nl,
+	write('  ..--""              `-'),put(92),write('('),put(92),write('/;`'),nl,
+	write('    _.                      :'),nl,
+	write('                            ;`-'),nl,
+	write('                           :'),put(92),nl,
+	write('                           ;'),nl,nl,
+	write('There is a wild wolf ahead, Traveler! Prepare for bloodbath!').
+
+print_slime :-
+	write('                @@@@@@@@@@@@@@@@/                '),nl,
+	write('          @@@@@@.  *//.   .***. #@@@@@@          '),nl,
+	write('       @@@.............................@@@       '),nl,
+	write('       @@@.............................@@@       '),nl,
+	write('   %@@@...................................@@@    '),nl,
+	write('   %@@@......@@@.................@@@......@@@    '),nl,
+	write('   %@@@......@@@.................@@@......@@@    '),nl,
+	write('@@@..........@@@.................@@@.........@@@@'),nl,
+	write('@@@..........@@@.................@@@.........&@@@'),nl,
+	write('@@@*.........@@@,...............(@@@.........&@@@'),nl,
+	write('@@@*.........................................&@@@'),nl,
+	write('@@@/*........./*@@@&.........@@@(*........./*@@@@'),nl,
+	write('@@@&%%%**.........,*@@@@@@@@@*,............%&@@@@'),nl,
+	write('@@@%/*/.............@@@@@@@@@............./*(&@@@'),nl,
+	write('   %@@@%%%%%%%%%%%%%%%%%&%%%%%%%%%%%%%%%%%@@@    '),nl,
+	write('       @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@       '),nl,nl,
+	write('There is a slime ahead, Traveler! Prepare for bloodbath!').
+
+print_goblin :-
+	write('         ,      ,         '),write('         ,      ,         '),write('         ,      ,         '),nl,
+	write('        /(.-""-.)'),put(92),write('        '),write('        /(.-""-.)'),put(92),write('        '),write('        /(.-""-.)'),put(92),write('        '),nl,
+	write('    |'),put(92),write('  '),put(92),write('/      '),put(92),write('/  /|    '),write('    |'),put(92),write('  '),put(92),write('/      '),put(92),write('/  /|    '),write('    |'),put(92),write('  '),put(92),write('/      '),put(92),write('/  /|    '),nl,
+	write('    | '),put(92),write(' / =.  .= '),put(92),write(' / |    '),write('    | '),put(92),write(' / =.  .= '),put(92),write(' / |    '),write('    | '),put(92),write(' / =.  .= '),put(92),write(' / |    '),nl,
+	write('    '),put(92),write('( '),put(92),write('   o'),put(92),write('/o   / )/    '),write('    '),put(92),write('( '),put(92),write('   o'),put(92),write('/o   / )/    '),write('    '),put(92),write('( '),put(92),write('   o'),put(92),write('/o   / )/    '),nl,
+	write('     '),put(92),write('_, '),put(39),write('-/  '),put(92),write('-'),put(39),write(' ,_/     '),write('     '),put(92),write('_, '),put(39),write('-/  '),put(92),write('-'),put(39),write(' ,_/     '),write('     '),put(92),write('_, '),put(39),write('-/  '),put(92),write('-'),put(39),write(' ,_/     '),nl,
+	write('       /   '),put(92),write('__/   '),put(92),write('       '),write('       /   '),put(92),write('__/   '),put(92),write('       '),write('       /   '),put(92),write('__/   '),put(92),write('       '),nl,
+	write('       '),put(92),write(' '),put(92),write('__/'),put(92),write('__/ /       '),write('       '),put(92),write(' '),put(92),write('__/'),put(92),write('__/ /       '),write('       '),put(92),write(' '),put(92),write('__/'),put(92),write('__/ /       '),nl,
+	write('     ___'),put(92),write(' '),put(92),write('|--|/ /___     '),write('     ___'),put(92),write(' '),put(92),write('|--|/ /___     '),write('     ___'),put(92),write(' '),put(92),write('|--|/ /___     '),nl,
+	write('   /`    '),put(92),write('      /    `'),put(92),write('   '),write('   /`    '),put(92),write('      /    `'),put(92),write('   '),write('   /`    '),put(92),write('      /    `'),put(92),write('   '),nl,
+	write('  /       '),put(39),write('----'),put(39),write('       '),put(92),write('  '),write('  /       '),put(39),write('----'),put(39),write('       '),put(92),write('  '),write('  /       '),put(39),write('----'),put(39),write('       '),put(92),write('  '),nl,nl,
+	write('There is a group of goblins ahead, Traveler! Prepare for bloodbath!').
 
 status :-
     init(_),
@@ -30,21 +91,21 @@ w :-
     player_Y(TempY),
     Next is (TempY - 1),
 	(
-	Next =:= 0 -> write('Kena Batas')
+	Next =:= 0 -> write('Hmmm... You still have a task to do in this world, Traveler!')
 	;
 	shop(Y,X), Next =:= Y, TempX =:= X ->
-		write('Ada di Shop!'),nl,
+		write('You are at Shop! Happy Trading!'),nl,
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
-		write('['),write(Next),write(','),write(TempX),write(']'),
+		% write('['),write(Next),write(','),write(TempX),write(']'),
         retract(stamina(_)),
         asserta(stamina(5))
 	;
 	boss_dungeon(Y,X), Next =:= Y, TempX =:= X ->
-		write('Ada di Dungeon Boss!'),nl,
+		write('You are at The Iron Catacombs! Advance at once pyrrhic victory, Traveler'),nl,
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
-		write('['),write(Next),write(','),write(TempX),write(']'),
+		% write('['),write(Next),write(','),write(TempX),write(']'),
         retract(stamina(_)),
         asserta(stamina(5))
 	;
@@ -56,7 +117,7 @@ w :-
         N1 is N - 1,
         (
         N1 =:= 0 ->
-            write('You drowned! Better see your surroundings next time!'),
+            write('You drowned! Better see your surroundings next time, Traveler!'),
             quit
         ;
         retract(stamina(N)),
@@ -64,26 +125,35 @@ w :-
         )
 	;
 	quest(Y,X), Next =:= Y, TempX =:= X ->
-		write('Ada di Quest Board!'),nl,
+		write('Ad astra abyssoque! You are at Quest Board!'),nl,
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
-		write('['),write(Next),write(','),write(TempX),write(']'),
+		% write('['),write(Next),write(','),write(TempX),write(']'),
         retract(stamina(_)),
         asserta(stamina(5)),
 		questlist
 	;
-	enemy(_,_,_,_,_,_,_,Y,X), Next =:= Y, TempX =:= X ->
-		write('Ada Musuh!'),nl,
+	enemy(ID,_,_,_,_,_,_,Y,X), Next =:= Y, TempX =:= X ->
+		(
+			ID =:= 1 ->
+				print_slime
+			;
+			ID =:= 2 ->
+				print_goblin
+			;
+			ID =:= 3 ->
+				print_wolf
+		),
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
-		write('['),write(Next),write(','),write(TempX),write(']'),
+		% write('['),write(Next),write(','),write(TempX),write(']'),
         retract(stamina(_)),
         asserta(stamina(5)),
         battleMode(X,Next),
         randomEnemy,!
 	;
 	mount(Y,X), Next =:= Y, TempX =:= X ->
-		write('Gunung ini tidak mungkin didaki!')
+		write('This path is too dangerous, better pick another way around, Traveler!')
 	;
 	retract(player_Y(_)),
 	asserta(player_Y(Next)),!,
@@ -98,21 +168,21 @@ a :-
     player_Y(TempY),
     Next is (TempX - 1),
 	(
-	Next =:= 0 -> write('Kena Batas')
+	Next =:= 0 -> write('Hmmm... You still have a task to do in this world, Traveler!')
 	;
 	shop(Y,X), TempY =:= Y, Next =:= X ->
-		write('Ada di Shop!'),nl,
+		write('You are at Shop! Happy Trading!'),nl,
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
-		write('['),write(TempY),write(','),write(Next),write(']'),
+		% write('['),write(TempY),write(','),write(Next),write(']'),
         retract(stamina(_)),
         asserta(stamina(5))
 	;
 	boss_dungeon(Y,X), TempY =:= Y, Next =:= X ->
-		write('Ada di Dungeon Boss!'),nl,
+		write('You are at The Iron Catacombs! Advance at once pyrrhic victory, Traveler'),nl,
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
-		write('['),write(TempY),write(','),write(Next),write(']'),
+		% write('['),write(TempY),write(','),write(Next),write(']'),
         retract(stamina(_)),
         asserta(stamina(5))
 	;
@@ -124,7 +194,7 @@ a :-
         N1 is N - 1,
         (
         N1 =:= 0 ->
-            write('You drowned! Better see your surroundings next time!'),
+            write('You drowned! Better see your surroundings next time, Traveler!'),
             quit
         ;
         retract(stamina(N)),
@@ -132,26 +202,35 @@ a :-
         )
 	;
     quest(Y,X), TempY =:= Y, Next =:= X ->
-		write('Ada di Quest Board!'),nl,
+		write('Ad astra abyssoque! You are at Quest Board!'),nl,
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
-		write('['),write(TempY),write(','),write(Next),write(']'),
+		% write('['),write(TempY),write(','),write(Next),write(']'),
         retract(stamina(_)),
         asserta(stamina(5)),
 		questlist
     ;
-    enemy(_,_,_,_,_,_,_,Y,X), TempY =:= Y, Next =:= X ->
-		write('Ada Musuh!'),nl,
+    enemy(ID,_,_,_,_,_,_,Y,X), TempY =:= Y, Next =:= X ->
+		(
+			ID =:= 1 ->
+				print_slime
+			;
+			ID =:= 2 ->
+				print_goblin
+			;
+			ID =:= 3 ->
+				print_wolf
+		),
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
-		write('['),write(TempY),write(','),write(Next),write(']'),
+		% write('['),write(TempY),write(','),write(Next),write(']'),
         retract(stamina(_)),
         asserta(stamina(5)),
         battleMode(Next,Y),
         randomEnemy,!
     ;
 	mount(Y,X), TempY =:= Y, Next =:= X ->
-		write('Gunung ini tidak mungkin didaki!')
+		write('This path is too dangerous, better pick another way around, Traveler!')
 	;
 	retract(player_X(_)),
 	asserta(player_X(Next)),!,
@@ -166,21 +245,21 @@ s :-
     player_Y(TempY),
     Next is (TempY + 1),
 	(
-	Next =:= 34 -> write('Kena Batas')
+	Next =:= 34 -> write('Hmmm... You still have a task to do in this world, Traveler!')
 	;
 	shop(Y,X), TempX =:= X, Next =:= Y ->
-		write('Ada di Shop!'),nl,
+		write('You are at Shop! Happy Trading!'),nl,
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
-		write('['),write(Next),write(','),write(TempX),write(']'),
+		% write('['),write(Next),write(','),write(TempX),write(']'),
         retract(stamina(_)),
         asserta(stamina(5))
 	;
 	boss_dungeon(Y,X), TempX =:= X, Next =:= Y ->
-		write('Ada di Dungeon Boss!'),nl,
+		write('You are at The Iron Catacombs! Advance at once pyrrhic victory, Traveler'),nl,
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
-		write('['),write(Next),write(','),write(TempX),write(']'),
+		% write('['),write(Next),write(','),write(TempX),write(']'),
         retract(stamina(_)),
         asserta(stamina(5))
 	;
@@ -192,7 +271,7 @@ s :-
         N1 is N - 1,
         (
         N1 =:= 0 ->
-            write('You drowned! Better see your surroundings next time!'),
+            write('You drowned! Better see your surroundings next time, Traveler!'),
             quit
         ;
         retract(stamina(N)),
@@ -200,26 +279,35 @@ s :-
         )
 	;
     quest(Y,X), TempX =:= X, Next =:= Y ->
-		write('Ada di Quest Board!'),nl,
+		write('Ad astra abyssoque! You are at Quest Board!'),nl,
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
-		write('['),write(Next),write(','),write(TempX),write(']'),
+		% write('['),write(Next),write(','),write(TempX),write(']'),
         retract(stamina(_)),
         asserta(stamina(5)),
 		questlist
     ;
-    enemy(_,_,_,_,_,_,_,Y,X), TempX =:= X, Next =:= Y ->
-		write('Ada Musuh!'),nl,
+    enemy(ID,_,_,_,_,_,_,Y,X), TempX =:= X, Next =:= Y ->
+		(
+			ID =:= 1 ->
+				print_slime
+			;
+			ID =:= 2 ->
+				print_goblin
+			;
+			ID =:= 3 ->
+				print_wolf
+		),
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
-		write('['),write(Next),write(','),write(TempX),write(']'),
+		% write('['),write(Next),write(','),write(TempX),write(']'),
         retract(stamina(_)),
         asserta(stamina(5)),
         battleMode(X,Next),
         randomEnemy,!
     ;
 	mount(Y,X), TempX =:= X, Next =:= Y ->
-		write('Gunung ini tidak mungkin didaki!')
+		write('This path is too dangerous, better pick another way around, Traveler!')
 	;
 	retract(player_Y(_)),
 	asserta(player_Y(Next)),!,
@@ -234,21 +322,21 @@ d :-
     player_Y(TempY),
     Next is (TempX + 1),
 	(
-	Next =:= 34 -> write('Kena Batas')
+	Next =:= 34 -> write('Hmmm... You still have a task to do in this world, Traveler!')
 	;
 	shop(Y,X), TempY =:= Y, Next =:= X ->
-		write('Ada di Shop!'),nl,
+		write('You are at Shop! Happy Trading!'),nl,
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
-		write('['),write(TempY),write(','),write(Next),write(']'),
+		% write('['),write(TempY),write(','),write(Next),write(']'),
         retract(stamina(_)),
         asserta(stamina(5))
 	;
 	boss_dungeon(Y,X), TempY =:= Y, Next =:= X ->
-		write('Ada di Dungeon Boss!'),nl,
+		write('You are at The Iron Catacombs! Advance at once for pyrrhic victory, Traveler'),nl,
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
-		write('['),write(TempY),write(','),write(Next),write(']'),
+		% write('['),write(TempY),write(','),write(Next),write(']'),
         retract(stamina(_)),
         asserta(stamina(5))
 	;
@@ -260,7 +348,7 @@ d :-
         N1 is N - 1,
         (
         N1 =:= 0 ->
-            write('You drowned! Better see your surroundings next time!'),
+            write('You drowned! Better see your surroundings next time, Traveler!'),
             quit
         ;
         retract(stamina(N)),
@@ -268,26 +356,35 @@ d :-
         )
 	;
     quest(Y,X), TempY =:= Y, Next =:= X ->
-		write('Ada di Quest Board!'),nl,
+		write('Ad astra abyssoque! You are at Quest Board!'),nl,
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
-		write('['),write(TempY),write(','),write(Next),write(']'),
+		% write('['),write(TempY),write(','),write(Next),write(']'),
         retract(stamina(_)),
         asserta(stamina(5)),
 		questlist
     ;
-    enemy(_,_,_,_,_,_,_,Y,X), TempY =:= Y, Next =:= X ->
-		write('Ada Musuh!'),nl,
+    enemy(ID,_,_,_,_,_,_,Y,X), TempY =:= Y, Next =:= X ->
+		(
+			ID =:= 1 ->
+				print_slime
+			;
+			ID =:= 2 ->
+				print_goblin
+			;
+			ID =:= 3 ->
+				print_wolf
+		),
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
-		write('['),write(TempY),write(','),write(Next),write(']'),
+ 		% write('['),write(TempY),write(','),write(Next),write(']'),
         retract(stamina(_)),
         asserta(stamina(5)),
         battleMode(Next,Y),
         randomEnemy,!
     ;
 	mount(Y,X), TempY =:= Y, Next =:= X ->
-		write('Gunung ini tidak mungkin didaki!')
+		write('This path is too dangerous, better pick another way around, Traveler!')
 	;
 	retract(player_X(_)),
 	asserta(player_X(Next)),!,
@@ -295,3 +392,4 @@ d :-
     retract(stamina(_)),
     asserta(stamina(5))
 	).
+
