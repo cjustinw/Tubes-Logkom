@@ -45,7 +45,7 @@ swordsmanAttack(Option,X,Y) :-
         (   
             player(_,_,_,_,_,ATT,_,_,_,_),
             enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
-            write('you use Slash\n'),
+            write('\nYou use Slash\n'),
             Damage is ATT*(100/(100+EnemyDEF)),
             NewEnemyHP is round(EnemyHP-Damage),
             retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
@@ -57,7 +57,7 @@ swordsmanAttack(Option,X,Y) :-
         (
             player(_,_,_,_,_,ATT,_,_,_,_),
             enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
-            write('you use Ravage Conqueror\n'),
+            write('\nYou use Ravage Conqueror\n'),
             Damage is ATT*(100/(100+EnemyDEF))*3,
             NewEnemyHP is round(EnemyHP-Damage),
             retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
@@ -75,7 +75,7 @@ archerAttack(Option,X,Y) :-
         Option =:= 1 ->
             player(_,_,_,_,_,ATT,_,_,_,_),
             enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
-            write('you Take Aim\n'),
+            write('\nYou Take Aim\n'),
             Damage is ATT*(100/(100+EnemyDEF)),
             NewEnemyHP is round(EnemyHP-Damage),
             retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
@@ -85,7 +85,7 @@ archerAttack(Option,X,Y) :-
         Option =:= 2 ->
             player(_,_,_,_,_,ATT,_,_,_,_),
             enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
-            write('you use Divine Puncture\n'),
+            write('\nYou use Divine Puncture\n'),
             Damage is ATT*(100/(100+EnemyDEF))*3,
             NewEnemyHP is round(EnemyHP-Damage),
             retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
@@ -101,7 +101,7 @@ sorcererAttack(Option,X,Y) :-
         Option =:= 1 ->
             player(_,_,_,_,_,ATT,_,_,_,_),
             enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
-            write('you use Fireball\n'),
+            write('\nYou use Fireball\n'),
             Damage is ATT*(100/(100+EnemyDEF)),
             NewEnemyHP is round(EnemyHP-Damage),
             retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
@@ -111,7 +111,7 @@ sorcererAttack(Option,X,Y) :-
         Option =:= 2 ->
             player(_,_,_,_,_,ATT,_,_,_,_),
             enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
-            write('you use Elemental Armageddon\n'),
+            write('\nYou use Elemental Armageddon\n'),
             Damage is ATT*(100/(100+EnemyDEF))*3,
             NewEnemyHP is round(EnemyHP-Damage),
             retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
@@ -123,12 +123,12 @@ sorcererAttack(Option,X,Y) :-
     ).
 
 run :- 
-    random(1,8,R),
+    random(1,11,R),
     (
     R =:= 1 -> 
-        write('N I G E R U N D A Y O ! S M O K E Y !\n')
+        write('\nN I G E R U N D A Y O ! S M O K E Y !\n')
     ;
-    write('\nyou\'re running away from the enemy\n')
+    write('\nYou\'re running away from the enemy\n')
     ).
 
 enemyAttack(X,Y) :-
@@ -155,8 +155,8 @@ slimeAttack(Option,X,Y) :-
         Option =:= 1 ->
             player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
             enemy(_,EnemyName,_,_,_,EnemyATT,_,Y,X),
-            write(EnemyName),
-            write(' use normal attack\n'),
+            % write(EnemyName),
+            write('Slime uses normal attack'),
             Damage is EnemyATT*(100/(100+DEF)),
             NewHP is round(HP-Damage),
             retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
@@ -166,8 +166,8 @@ slimeAttack(Option,X,Y) :-
         Option =:= 2 ->
             player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
             enemy(_,EnemyName,_,_,_,EnemyATT,_,Y,X),
-            write(EnemyName),
-            write(' use special attack\n'),
+            % write(EnemyName),
+            write('Slime uses special attack'),
             Damage is EnemyATT*(100/(100+DEF)),
             NewHP is round(HP-Damage),
             retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
@@ -180,8 +180,8 @@ goblinAttack(Option,X,Y) :-
         Option =:= 1 ->
             player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
             enemy(_,EnemyName,_,_,_,EnemyATT,_,Y,X),
-            write(EnemyName),
-            write(' use normal attack\n'),
+            % write(EnemyName),
+            write('Group of Goblins use normal attack'),
             Damage is EnemyATT*(100/(100+DEF)),
             NewHP is round(HP-Damage),
             retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
@@ -191,8 +191,8 @@ goblinAttack(Option,X,Y) :-
         Option =:= 2 ->
             player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
             enemy(_,EnemyName,_,_,_,EnemyATT,_,Y,X),
-            write(EnemyName),
-            write(' use special attack\n'),
+            % write(EnemyName),
+            write('Group of Goblins use special attack'),
             Damage is EnemyATT*(100/(100+DEF)),
             NewHP is round(HP-Damage),
             retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
@@ -204,8 +204,8 @@ wolfAttack(Option,X,Y) :-
         Option =:= 1 ->
             player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
             enemy(_,EnemyName,_,_,_,EnemyATT,_,Y,X),
-            write(EnemyName),
-            write(' use normal attack\n'),
+            % write(EnemyName),
+            write('Wild Wolf uses normal attack'),
             Damage is EnemyATT*(100/(100+DEF)),
             NewHP is round(HP-Damage),
             retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
@@ -216,7 +216,7 @@ wolfAttack(Option,X,Y) :-
             player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
             enemy(_,EnemyName,_,_,_,EnemyATT,_,Y,X),
             write(EnemyName),
-            write(' use special attack\n'),
+            write('Wild Wolf uses special attack'),
             Damage is EnemyATT*(100/(100+DEF)),
             NewHP is round(HP-Damage),
             retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
@@ -274,7 +274,16 @@ playerStatus :-
 enemyStatus(X,Y) :-
     enemy(_,Name,Level,HP,MaxHP,_,_,Y,X),
     write('\n\nEnemy\'s status:\n\n'),
-    write(Name),
+    (
+        Name = slime ->
+            write('Slime')
+        ;
+        Name = goblin ->
+            write('Group of Goblins')
+        ;
+        Name = wolf ->
+            write('Wild Wolf')
+    ),
     write('\nLevel    :'),
     write(Level),
     write('\nHealth   :'),
@@ -282,7 +291,7 @@ enemyStatus(X,Y) :-
 
 battleMode(_,_) :-
     isPlayerDefeated,
-    write('\nYou\'re defeated!\n'),
+    write('\n\nYou\'re defeated!\n'),
     write('\nGame Over!\n'),
     quit,!.
 

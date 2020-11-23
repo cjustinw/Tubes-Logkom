@@ -885,3 +885,18 @@ printX(Y,X) :-
 	),
     NextX is (X + 1),
     printX(Y,NextX).
+
+% Print arti simbol peta
+print_legend :-
+	nl,
+	write('[] -> Ground\t'),
+	write('-- -> Water\t'),
+	write('/'),put(92),write(' -> Mountain'),nl,
+	write('() -> Swamp [Slimes\' territoy]\t'),
+	write('{} -> Hills [Wild Wolves\' territory]\t'),
+	write('<> -> Valley [Goblins\' territory]'),nl,
+	write('*P -> Player\t'),
+	write('*S -> Shop\t'),
+	write('*Q -> Quest Board\t'),
+	write('*D -> Dungeon'),
+	nl.

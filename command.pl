@@ -1,4 +1,5 @@
 print_wolf :-
+	% ASCII Art from: https://www.asciiart.eu/animals/wolves
 	write('                              __'),nl,
 	write('                            .d$$b'),nl,
 	write('                          .'),put(39),write(' TO$;'),put(92),nl,
@@ -28,6 +29,7 @@ print_wolf :-
 	write('There is a wild wolf ahead, Traveler! Prepare for bloodbath!').
 
 print_slime :-
+	% ASCII Art from: https://textart.sh/topic/slime
 	write('                @@@@@@@@@@@@@@@@/                '),nl,
 	write('          @@@@@@.  *//.   .***. #@@@@@@          '),nl,
 	write('       @@@.............................@@@       '),nl,
@@ -47,6 +49,7 @@ print_slime :-
 	write('There is a slime ahead, Traveler! Prepare for bloodbath!').
 
 print_goblin :-
+	% ASCII Art from: https://www.oocities.org/spunk1111/people.htm
 	write('         ,      ,         '),write('         ,      ,         '),write('         ,      ,         '),nl,
 	write('        /(.-""-.)'),put(92),write('        '),write('        /(.-""-.)'),put(92),write('        '),write('        /(.-""-.)'),put(92),write('        '),nl,
 	write('    |'),put(92),write('  '),put(92),write('/      '),put(92),write('/  /|    '),write('    |'),put(92),write('  '),put(92),write('/      '),put(92),write('/  /|    '),write('    |'),put(92),write('  '),put(92),write('/      '),put(92),write('/  /|    '),nl,
@@ -82,7 +85,8 @@ status :-
     
 map :-
     init(_),
-    printX(0,0),!.
+    printX(0,0),!,
+	print_legend.
 
 % Perintah Navigasi:
 % Gerak ke atas
@@ -97,7 +101,6 @@ w :-
 		write('You are at Shop! Happy Trading!'),nl,
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
-		% write('['),write(Next),write(','),write(TempX),write(']'),
         retract(stamina(_)),
         asserta(stamina(5)),
 		shop
@@ -106,19 +109,19 @@ w :-
 		write('You are at The Iron Catacombs! Advance at once pyrrhic victory, Traveler'),nl,
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
-		% write('['),write(Next),write(','),write(TempX),write(']'),
         retract(stamina(_)),
         asserta(stamina(5))
 	;
 	water(Y,X), Next =:= Y, TempX =:= X ->
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
-		write('['),write(Next),write(','),write(TempX),write(']'),
+		write('You are at ['),write(Next),write(','),write(TempX),write(']'),
         stamina(N),
         N1 is N - 1,
         (
         N1 =:= 0 ->
-            write('You drowned! Better see your surroundings next time, Traveler!'),
+			nl,
+            write('You drowned! Better watch your surroundings next time, Traveler!'),
             quit
         ;
         retract(stamina(N)),
@@ -129,7 +132,6 @@ w :-
 		write('Ad astra abyssoque! You are at Quest Board!'),nl,
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
-		% write('['),write(Next),write(','),write(TempX),write(']'),
         retract(stamina(_)),
         asserta(stamina(5)),
 		questlist
@@ -147,7 +149,6 @@ w :-
 		),
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
-		% write('['),write(Next),write(','),write(TempX),write(']'),
         retract(stamina(_)),
         asserta(stamina(5)),
         battleMode(X,Next),
@@ -158,7 +159,7 @@ w :-
 	;
 	retract(player_Y(_)),
 	asserta(player_Y(Next)),!,
-	write('['),write(Next),write(','),write(TempX),write(']'),
+	write('You are at ['),write(Next),write(','),write(TempX),write(']'),
     retract(stamina(_)),
     asserta(stamina(5))
 	).
@@ -175,7 +176,6 @@ a :-
 		write('You are at Shop! Happy Trading!'),nl,
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
-		% write('['),write(TempY),write(','),write(Next),write(']'),
         retract(stamina(_)),
         asserta(stamina(5)),
 		shop
@@ -184,19 +184,19 @@ a :-
 		write('You are at The Iron Catacombs! Advance at once pyrrhic victory, Traveler'),nl,
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
-		% write('['),write(TempY),write(','),write(Next),write(']'),
         retract(stamina(_)),
         asserta(stamina(5))
 	;
 	water(Y,X), TempY =:= Y, Next =:= X ->
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
-		write('['),write(TempY),write(','),write(Next),write(']'),
+		write('You are at ['),write(TempY),write(','),write(Next),write(']'),
         stamina(N),
         N1 is N - 1,
         (
         N1 =:= 0 ->
-            write('You drowned! Better see your surroundings next time, Traveler!'),
+			nl,
+            write('You drowned! Better watch your surroundings next time, Traveler!'),
             quit
         ;
         retract(stamina(N)),
@@ -207,7 +207,6 @@ a :-
 		write('Ad astra abyssoque! You are at Quest Board!'),nl,
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
-		% write('['),write(TempY),write(','),write(Next),write(']'),
         retract(stamina(_)),
         asserta(stamina(5)),
 		questlist
@@ -225,7 +224,6 @@ a :-
 		),
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
-		% write('['),write(TempY),write(','),write(Next),write(']'),
         retract(stamina(_)),
         asserta(stamina(5)),
         battleMode(Next,Y),
@@ -236,7 +234,7 @@ a :-
 	;
 	retract(player_X(_)),
 	asserta(player_X(Next)),!,
-	write('['),write(TempY),write(','),write(Next),write(']'),
+	write('You are at ['),write(TempY),write(','),write(Next),write(']'),
     retract(stamina(_)),
     asserta(stamina(5))
 	).
@@ -253,7 +251,6 @@ s :-
 		write('You are at Shop! Happy Trading!'),nl,
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
-		% write('['),write(Next),write(','),write(TempX),write(']'),
         retract(stamina(_)),
         asserta(stamina(5)),
 		shop
@@ -262,19 +259,19 @@ s :-
 		write('You are at The Iron Catacombs! Advance at once pyrrhic victory, Traveler'),nl,
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
-		% write('['),write(Next),write(','),write(TempX),write(']'),
         retract(stamina(_)),
         asserta(stamina(5))
 	;
 	water(Y,X), TempX =:= X, Next =:= Y ->
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
-		write('['),write(Next),write(','),write(TempX),write(']'),
+		write('You are at ['),write(Next),write(','),write(TempX),write(']'),
         stamina(N),
         N1 is N - 1,
         (
         N1 =:= 0 ->
-            write('You drowned! Better see your surroundings next time, Traveler!'),
+			nl,
+            write('You drowned! Better watch your surroundings next time, Traveler!'),
             quit
         ;
         retract(stamina(N)),
@@ -285,7 +282,6 @@ s :-
 		write('Ad astra abyssoque! You are at Quest Board!'),nl,
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
-		% write('['),write(Next),write(','),write(TempX),write(']'),
         retract(stamina(_)),
         asserta(stamina(5)),
 		questlist
@@ -303,7 +299,6 @@ s :-
 		),
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
-		% write('['),write(Next),write(','),write(TempX),write(']'),
         retract(stamina(_)),
         asserta(stamina(5)),
         battleMode(X,Next),
@@ -314,7 +309,7 @@ s :-
 	;
 	retract(player_Y(_)),
 	asserta(player_Y(Next)),!,
-	write('['),write(Next),write(','),write(TempX),write(']'),
+	write('You are at ['),write(Next),write(','),write(TempX),write(']'),
     retract(stamina(_)),
     asserta(stamina(5))
 	).
@@ -331,7 +326,6 @@ d :-
 		write('You are at Shop! Happy Trading!'),nl,
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
-		% write('['),write(TempY),write(','),write(Next),write(']'),
         retract(stamina(_)),
         asserta(stamina(5)),
 		shop
@@ -340,19 +334,19 @@ d :-
 		write('You are at The Iron Catacombs! Advance at once for pyrrhic victory, Traveler'),nl,
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
-		% write('['),write(TempY),write(','),write(Next),write(']'),
         retract(stamina(_)),
         asserta(stamina(5))
 	;
 	water(Y,X), TempY =:= Y, Next =:= X ->
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
-		write('['),write(TempY),write(','),write(Next),write(']'),
+		write('You are at ['),write(TempY),write(','),write(Next),write(']'),
         stamina(N),
         N1 is N - 1,
         (
         N1 =:= 0 ->
-            write('You drowned! Better see your surroundings next time, Traveler!'),
+			nl,
+            write('You drowned! Better watch your surroundings next time, Traveler!'),
             quit
         ;
         retract(stamina(N)),
@@ -363,7 +357,6 @@ d :-
 		write('Ad astra abyssoque! You are at Quest Board!'),nl,
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
-		% write('['),write(TempY),write(','),write(Next),write(']'),
         retract(stamina(_)),
         asserta(stamina(5)),
 		questlist
@@ -381,7 +374,6 @@ d :-
 		),
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
- 		% write('['),write(TempY),write(','),write(Next),write(']'),
         retract(stamina(_)),
         asserta(stamina(5)),
         battleMode(Next,Y),
@@ -392,7 +384,7 @@ d :-
 	;
 	retract(player_X(_)),
 	asserta(player_X(Next)),!,
-	write('['),write(TempY),write(','),write(Next),write(']'),
+	write('You are at ['),write(TempY),write(','),write(Next),write(']'),
     retract(stamina(_)),
     asserta(stamina(5))
 	).
