@@ -5,17 +5,40 @@ isGoldEnough(Gold,Price) :-
 
 buyItem(Option) :-
     (
-        player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
-        Option =:= 1, isGoldEnough(Gold,50) -> 
-            NewGold is Gold-50,
-            addInventory(potion),
-            retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
-            asserta(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,NewGold)),!
+        Option =:= 1 ->
+        (
+            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+            isGoldEnough(Gold,50) -> 
+                NewGold is Gold-50,
+                addInventory(potion),
+                retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+                asserta(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,NewGold)),
+                write('\nYou get potion\n'),!
+        );
+        (
+            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+            \+isGoldEnough(Gold,50) -> 
+                write('\nYour gold is not sufficient\n'),!
+        )
     );
     (
-        player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
-        Option =:= 1, \+isGoldEnough(50) -> 
-            write('\nYour gold is not sufficient\n')
+        Option =:= 2 ->
+        (
+            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+            isGoldEnough(Gold,200) -> 
+                NewGold is Gold-200,
+                random(2,21,ID),
+                item(ID,ItemName,_,_,_,_),
+                addInventory(ItemName),
+                retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+                asserta(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,NewGold)),
+                write('\nYou get '),write(ItemName),write('\n'),!
+        );
+        (
+            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+            \+isGoldEnough(Gold,200) -> 
+                write('\nYour gold is not sufficient\n'),!
+        )
     ).
 
 shop :- 
