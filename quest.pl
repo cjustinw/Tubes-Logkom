@@ -158,6 +158,5 @@ questComplete :-
     write('\nGold Reward : '),
     write(IncreaseGold),
     retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
-    asserta(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,NewEXP,MaxEXP,NewGold)),
-    levelUp,!.
+    asserta(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,NewEXP,MaxEXP,NewGold)).
 
