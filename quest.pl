@@ -155,7 +155,7 @@ questComplete :-
     NewGold is Gold+IncreaseGold,
     write('\nExp Reward : '),
     write(IncreaseEXP),
-    write('\nGold Reward : '),
+    write('\nGold Reward : \n'),
     write(IncreaseGold),
     retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
     asserta(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,NewEXP,MaxEXP,NewGold)).
