@@ -276,7 +276,7 @@ enemyStatus(X,Y) :-
 
 battleMode(_,_) :-
     isPlayerDefeated,
-    write('\nYou\'re defeated!\n'),
+    write('\n\nYou\'re defeated!\n'),
     write('\nGame Over!\n'),
     quit,!.
 
