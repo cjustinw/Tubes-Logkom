@@ -85,7 +85,8 @@ status :-
     
 map :-
     init(_),
-    printX(0,0),!.
+    printX(0,0),!,
+	print_legend.
 
 % Perintah Navigasi:
 % Gerak ke atas
