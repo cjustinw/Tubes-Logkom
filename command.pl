@@ -385,3 +385,25 @@ d :-
     asserta(stamina(5))
 	).
 
+tp :-
+	player_X(_),
+    player_Y(_),
+	write('\nChoose a waypoint:\n'),
+	write('1. Monstadt\n'),
+	write('2. Liyue Harbor\n'),
+	write('3. Qingyun Peak\n\n'),
+	read(WPchoice),
+	(
+		WPchoice =:= 1 ->
+			monstadt(Y,X)
+		;
+		WPchoice =:= 2 ->
+			liyue_harbor(Y,X)
+		;
+		WPchoice =:= 3 ->
+			qingyun_peak(Y,X)
+	),
+	retract(player_Y(_)),
+	retract(player_X(_)),
+	asserta(player_Y(Y)),
+	asserta(player_X(X)).

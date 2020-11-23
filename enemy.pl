@@ -60,6 +60,18 @@ generateEnemy(Condition) :-
                 Condition = fail
         );
         (
+            monstadt(Y,X), PosY =:= Y, PosX =:= X ->
+                Condition = fail
+        );
+        (
+            liyue_harbor(Y,X), PosY =:= Y, PosX =:= X ->
+                Condition = fail
+        );
+        (
+            qingyun_peak(Y,X), PosY =:= Y, PosX =:= X ->
+                Condition = fail
+        );
+        (
             boss_dungeon(Y,X), PosY =:= Y, PosX =:= X ->
                 Condition = fail
         );

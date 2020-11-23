@@ -33,6 +33,7 @@ help :-
     write('%     a       : gerak ke barat 1 langkah       %\n'),
     write('%     s       : gerak ke selatan 1 langkah     %\n'),
     write('%     d       : gerak ke timur 1 langkah       %\n'),
+    write('%     tp      : berpindah ke waypoint          %\n'),
     write('%     quest   : menampilkan quest berlangsung  %\n'),
     write('%     help    : menampilkan bantuan            %\n'),
     write('%     quit    : keluar permainan               %\n'),
@@ -72,8 +73,6 @@ quit :-
     write('\nGood-bye!\n'),
     retractall(player(_,_,_,_,_,_,_,_,_,_)),
     retractall(enemy(_,_,_,_,_,_,_,_,_)),
-    retractall(size(_,_)),
-    retractall(playerPosition(_,_)),
-    retractall(shopPosition(_,_)),
-    retractall(questPosition(_,_)),
-    retractall(dungeonPosition(_,_)),!.
+    retract(player_X(_)),
+    retract(player_Y(_)),!
+    .

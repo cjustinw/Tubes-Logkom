@@ -206,8 +206,14 @@ wolf_Z(33,12).
 quest(9,20).
 quest(28,14).
 
-shop(27,13).
 shop(8,20).
+shop(27,13).
+
+monstadt(8,19).
+
+liyue_harbor(28,13).
+
+qingyun_peak(19,5).
 
 boss_dungeon(6,14).
 
@@ -840,6 +846,31 @@ printX(Y,X) :-
     NextX is (X + 1),
     printX(Y,NextX).
 
+% Print Waypoint
+printX(Y,X) :-
+	(
+	monstadt(TempY,TempX), Y =:= TempY, X =:= TempX ->
+		write('*W')
+	),
+	NextX is (X + 1),
+    printX(Y,NextX).
+
+printX(Y,X) :-
+	(
+	liyue_harbor(TempY,TempX), Y =:= TempY, X =:= TempX ->
+		write('*W')
+	),
+	NextX is (X + 1),
+    printX(Y,NextX).
+
+printX(Y,X) :-
+	(
+	qingyun_peak(TempY,TempX), Y =:= TempY, X =:= TempX ->
+		write('*W')
+	),
+	NextX is (X + 1),
+    printX(Y,NextX).
+
 % Print batas bawah
 printX(Y,X) :-
 	(
@@ -891,11 +922,13 @@ print_legend :-
 	nl,
 	write('[] -> Ground\t'),
 	write('-- -> Water\t'),
-	write('/'),put(92),write(' -> Mountain'),nl,
+	write('/'),put(92),write(' -> Mountain\t'),
+	put(164),write('E -> Enemy'),nl,
 	write('() -> Swamp [Slimes\' territoy]\t'),
 	write('{} -> Hills [Wild Wolves\' territory]\t'),
 	write('<> -> Valley [Goblins\' territory]'),nl,
 	write('*P -> Player\t'),
+	write('*W -> Waypoint\t'),
 	write('*S -> Shop\t'),
 	write('*Q -> Quest Board\t'),
 	write('*D -> Dungeon'),
