@@ -5,19 +5,22 @@ actionName :-
         Job = swordsman ->
             write('\n1. Use Slash'),
             write('\n2. Use Ravage Conqueror'),
-            write('\n3. Run\n\n'),!
+            write('\n3. Use Potion'),
+            write('\n4. Run\n'),!
     );
     (
         Job = archer ->
             write('\n1. Take Aim'),
             write('\n2. Use Divine Puncture'),
-            write('\n3. Run\n\n'),!
+            write('\n3. Use Potion'),
+            write('\n4. Run\n'),!
     );
     (
         Job = sorcerer ->
             write('\n1. Use Fireball'),
             write('\n2. Use Elemental Armageddon'),
-            write('\n3. Run\n\n'),!
+            write('\n3. Use Potion'),
+            write('\n4. Run\n'),!
     ).
     
 
@@ -60,6 +63,10 @@ swordsmanAttack(Option,X,Y) :-
             retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
             asserta(enemy(EnemyID,EnemyType,EnemyLVL,NewEnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X))
         )
+    );
+    (
+        Option =:= 3 ->
+            usePotion
     ).
     
 
@@ -83,6 +90,10 @@ archerAttack(Option,X,Y) :-
             NewEnemyHP is round(EnemyHP-Damage),
             retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
             asserta(enemy(EnemyID,EnemyType,EnemyLVL,NewEnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X))
+    );
+    (
+        Option =:= 3 ->
+            usePotion
     ).
 
 sorcererAttack(Option,X,Y) :-
@@ -105,6 +116,10 @@ sorcererAttack(Option,X,Y) :-
             NewEnemyHP is round(EnemyHP-Damage),
             retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
             asserta(enemy(EnemyID,EnemyType,EnemyLVL,NewEnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X))      
+    );
+    (
+        Option =:= 3 ->
+            usePotion
     ).
 
 run :- 
@@ -296,7 +311,7 @@ battleMode(X,Y) :-
     read(Option),
     (
         (
-            Option =:= 3 -> run
+            Option =:= 4 -> run
         );
         (
             playerAttack(Option,X,Y),
