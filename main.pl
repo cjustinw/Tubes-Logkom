@@ -56,7 +56,7 @@ start :-
     write('\nNow, please choose your job!\n'),
     write('1. Swordsman\n'),
     write('2. Archer\n'),
-    write('3. Sorcerer\n'),
+    write('3. Sorcerer\n\n'),
     read(JobID),
     generatePlayer(Username,JobID),
     player(Username,Job,_,_,_,_,_,_,_,_),

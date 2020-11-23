@@ -5,19 +5,19 @@ actionName :-
         Job = swordsman ->
             write('\n1. Use Slash'),
             write('\n2. Use Ravage Conqueror'),
-            write('\n3. Run\n'),!
+            write('\n3. Run\n\n'),!
     );
     (
         Job = archer ->
             write('\n1. Take Aim'),
             write('\n2. Use Divine Puncture'),
-            write('\n3. Run\n'),!
+            write('\n3. Run\n\n'),!
     );
     (
         Job = sorcerer ->
             write('\n1. Use Fireball'),
             write('\n2. Use Elemental Armageddon'),
-            write('\n3. Run\n'),!
+            write('\n3. Run\n\n'),!
     ).
     
 
@@ -42,7 +42,7 @@ swordsmanAttack(Option,X,Y) :-
         (   
             player(_,_,_,_,_,ATT,_,_,_,_),
             enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
-            write('You use Slash\n'),
+            write('\nYou use Slash\n'),
             Damage is ATT*(100/(100+EnemyDEF)),
             NewEnemyHP is round(EnemyHP-Damage),
             retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
@@ -54,7 +54,7 @@ swordsmanAttack(Option,X,Y) :-
         (
             player(_,_,_,_,_,ATT,_,_,_,_),
             enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
-            write('You use Ravage Conqueror\n'),
+            write('\nYou use Ravage Conqueror\n'),
             Damage is ATT*(100/(100+EnemyDEF))*3,
             NewEnemyHP is round(EnemyHP-Damage),
             retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
@@ -68,7 +68,7 @@ archerAttack(Option,X,Y) :-
         Option =:= 1 ->
             player(_,_,_,_,_,ATT,_,_,_,_),
             enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
-            write('You Take Aim\n'),
+            write('\nYou Take Aim\n'),
             Damage is ATT*(100/(100+EnemyDEF)),
             NewEnemyHP is round(EnemyHP-Damage),
             retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
@@ -78,7 +78,7 @@ archerAttack(Option,X,Y) :-
         Option =:= 2 ->
             player(_,_,_,_,_,ATT,_,_,_,_),
             enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
-            write('You use Divine Puncture\n'),
+            write('\nYou use Divine Puncture\n'),
             Damage is ATT*(100/(100+EnemyDEF))*3,
             NewEnemyHP is round(EnemyHP-Damage),
             retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
@@ -90,7 +90,7 @@ sorcererAttack(Option,X,Y) :-
         Option =:= 1 ->
             player(_,_,_,_,_,ATT,_,_,_,_),
             enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
-            write('You use Fireball\n'),
+            write('\nYou use Fireball\n'),
             Damage is ATT*(100/(100+EnemyDEF)),
             NewEnemyHP is round(EnemyHP-Damage),
             retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
@@ -100,7 +100,7 @@ sorcererAttack(Option,X,Y) :-
         Option =:= 2 ->
             player(_,_,_,_,_,ATT,_,_,_,_),
             enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
-            write('You use Elemental Armageddon\n'),
+            write('\nYou use Elemental Armageddon\n'),
             Damage is ATT*(100/(100+EnemyDEF))*3,
             NewEnemyHP is round(EnemyHP-Damage),
             retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
@@ -108,10 +108,10 @@ sorcererAttack(Option,X,Y) :-
     ).
 
 run :- 
-    random(1,8,R),
+    random(1,11,R),
     (
     R =:= 1 -> 
-        write('N I G E R U N D A Y O ! S M O K E Y !\n')
+        write('\nN I G E R U N D A Y O ! S M O K E Y !\n')
     ;
     write('\nYou\'re running away from the enemy\n')
     ).
