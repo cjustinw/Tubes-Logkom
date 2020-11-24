@@ -3,7 +3,6 @@
 :- dynamic(killreq/3).
 :- dynamic(questing/1).
 
-
 quest :-
     \+questing(_),
     write('\nYou are on a quest, Traveler! Type "questlist." to see your progress\n'),!.
@@ -150,7 +149,7 @@ questComplete :-
     player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
     killreq(Rslime,Rgoblin,Rwolf),
     IncreaseEXP is (Rslime+Rgoblin+Rwolf)*50,
-    IncreaseGold is (Rslime+Rgoblin+Rwolf)*30,
+    IncreaseGold is (Rslime+Rgoblin+Rwolf)*400,
     NewEXP is EXP+IncreaseEXP,
     NewGold is Gold+IncreaseGold,
     write('\nExp Reward : '),

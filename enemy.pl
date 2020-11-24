@@ -43,6 +43,9 @@ createEnemy(ID,PosY,PosX) :-
     DEF is Defense*Level,
     asserta(enemy(ID,wolf,Level,HP,MaxHP,ATT,DEF,PosY,PosX)),!.
 
+createBoss :-
+    asserta(enemy(4,dragon,7,3000,3000,1000,800,6,14)).
+
 generateEnemy(Condition) :-
     random(1,34,PosX),
     random(1,34,PosY),
@@ -119,6 +122,7 @@ generateAllEnemy(N) :-
 
 randomEnemy :-
     retractall(enemy(_,_,_,_,_,_,_,_,_)),
-    generateAllEnemy(50).
+    generateAllEnemy(50),
+    createBoss.
 
 

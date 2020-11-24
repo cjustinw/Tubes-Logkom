@@ -3,7 +3,12 @@
 :- dynamic(playerInventory/2).
 
 initInventory  :-
-    asserta(playerInventory([],0)).
+    asserta(playerInventory([],0)),
+    addInventory(potion),
+    addInventory(potion),
+    addInventory(potion),
+    addInventory(potion),
+    addInventory(potion).
 
 isInventoryFull :-
     playerInventory(_,Total),
@@ -102,7 +107,7 @@ usePotion:-
     );
     (
         isItemAvailable(potion),
-        item(_,ItemName,_,_,HPEffect,_),
+        item(_,ItemName,_,_,_,HPEffect,_),
         ItemName = potion,
         player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
         NewHP is HP+HPEffect,
@@ -114,7 +119,7 @@ usePotion:-
     );
     (
         isItemAvailable(potion),
-        item(_,ItemName,_,_,HPEffect,_),
+        item(_,ItemName,_,_,_,HPEffect,_),
         ItemName = potion,
         player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
         NewHP is HP+HPEffect,
@@ -122,6 +127,6 @@ usePotion:-
             retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
             asserta(player(Username,Job,LVL,MaxHP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
             removeInventory(potion),
-            Heal is NewHP-MaxHP,
+            Heal is MaxHP-HP,
             write('\nYou heal '),write(Heal),write('exp\n'),!
     ).

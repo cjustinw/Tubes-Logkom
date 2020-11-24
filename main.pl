@@ -69,7 +69,8 @@ start :-
     write(', lets explore the world!\n'),
     initial,
     initInventory,
-    initEquipment,
+    initEquipment(Job),
+    createBoss,
     generateAllEnemy(50),!.
 
 quit :-

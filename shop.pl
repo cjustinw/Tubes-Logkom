@@ -14,14 +14,14 @@ buyItem(Option) :-
                 retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
                 asserta(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,NewGold)),
                 write('\nYou get potion\n'),!
-        );
-        (
+        ;
+        
             player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
             \+isGoldEnough(Gold,50) -> 
                 write('\nYour gold is not sufficient\n'),!
         )
-    );
-    (
+    ;
+    
         Option =:= 2 ->
         (
             player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
@@ -33,12 +33,15 @@ buyItem(Option) :-
                 retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
                 asserta(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,NewGold)),
                 write('\nYou get '),write(ItemName),write('\n'),!
-        );
-        (
+        ;
+        
             player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
             \+isGoldEnough(Gold,200) -> 
                 write('\nYour gold is not sufficient\n'),!
         )
+    ;   
+        Option =:= 3 ->
+            cancel
     ).
 
 shop :- 
@@ -46,6 +49,7 @@ shop :-
     write('What do you want to buy?\n'),
     write('1. Potion (50)\n'),
     write('2. Gacha Item (200)\n'),
+    write('3. Cancel\n'),
     read(Option),
     buyItem(Option).
 
