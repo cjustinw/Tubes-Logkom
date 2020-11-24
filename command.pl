@@ -153,7 +153,7 @@ w :-
 		asserta(player_Y(Next)),!,
         retract(stamina(_)),
         asserta(stamina(5)),
-        battleMode(X,Next)
+		dungeon
 	;
 	water(Y,X), Next =:= Y, TempX =:= X ->
 		retract(player_Y(_)),
@@ -195,7 +195,7 @@ w :-
 		asserta(player_Y(Next)),!,
         retract(stamina(_)),
         asserta(stamina(5)),
-        battleMode(X,Next),
+        battleMode(X,Next,0,N1),
         randomEnemy,!
 	;
 	mount(Y,X), Next =:= Y, TempX =:= X ->
@@ -230,7 +230,7 @@ a :-
 		asserta(player_X(Next)),!,
         retract(stamina(_)),
         asserta(stamina(5)),
-        battleMode(Next,Y)
+        dungeon
 	;
 	water(Y,X), TempY =:= Y, Next =:= X ->
 		retract(player_X(_)),
@@ -272,7 +272,7 @@ a :-
 		asserta(player_X(Next)),!,
         retract(stamina(_)),
         asserta(stamina(5)),
-        battleMode(Next,Y),
+        battleMode(Next,Y,0,N1),
         randomEnemy,!
     ;
 	mount(Y,X), TempY =:= Y, Next =:= X ->
@@ -307,7 +307,7 @@ s :-
 		asserta(player_Y(Next)),!,
         retract(stamina(_)),
         asserta(stamina(5)),
-        battleMode(X,Next)
+        dungeon
 	;
 	water(Y,X), TempX =:= X, Next =:= Y ->
 		retract(player_Y(_)),
@@ -349,7 +349,7 @@ s :-
 		asserta(player_Y(Next)),!,
         retract(stamina(_)),
         asserta(stamina(5)),
-        battleMode(X,Next),
+        battleMode(X,Next,0,N1),
         randomEnemy,!
     ;
 	mount(Y,X), TempX =:= X, Next =:= Y ->
@@ -384,7 +384,7 @@ d :-
 		asserta(player_X(Next)),!,
         retract(stamina(_)),
         asserta(stamina(5)),
-        battleMode(Next,Y)
+        dungeon
 	;
 	water(Y,X), TempY =:= Y, Next =:= X ->
 		retract(player_X(_)),
@@ -426,7 +426,7 @@ d :-
 		asserta(player_X(Next)),!,
         retract(stamina(_)),
         asserta(stamina(5)),
-        battleMode(Next,Y),
+        battleMode(Next,Y,0,N1),
         randomEnemy,!
     ;
 	mount(Y,X), TempY =:= Y, Next =:= X ->
