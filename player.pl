@@ -96,23 +96,31 @@ printEquipment :-
 equipment :-
     write('\n1. Show your equipment'),
     write('\n2. Use item'),
-    write('\n3. Return the item to inventory\n'),
+    write('\n3. Return item to inventory\n'),
     read(Option),
     equipmentAction(Option).
-
-useItem(Item,_,_) :-
-    \+isItemAvailable(Item) ->
-    write('\nYou don\'t have this item\n'),!.
 
 useItem(Item,Job,Type) :-
     isItemAvailable(Item),
         (
             (
                 Type = sword,Job = swordsman,
-                removeInventory(Item),
                 playerEquipment(Weapon,Armor,Accessories),
-                retract(playerEquipment(Weapon,Armor,Accessories)),
-                asserta(playerEquipment(Item,Armor,Accessories)),!
+                (
+                    Weapon = empty,
+                    removeInventory(Item),
+                    retract(playerEquipment(Weapon,Armor,Accessories)),
+                    asserta(playerEquipment(Item,Armor,Accessories)),
+                    item(_,Item,_,EquipmentATT,_,_,_),
+                    player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+                    NewATT is ATT+EquipmentATT,
+                    retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+                    asserta(player(Username,Job,LVL,HP,MaxHP,NewATT,DEF,EXP,MaxEXP,Gold)),!,!
+                );
+                (
+                    Weapon \= empty,
+                    write('\nYou have already used a sword!\n'),!
+                ) 
             );
             (
                 Type = sword,Job \= swordsman,
@@ -122,10 +130,22 @@ useItem(Item,Job,Type) :-
         (
             (
                 Type = bow,Job = archer,
-                removeInventory(Item),
                 playerEquipment(Weapon,Armor,Accessories),
-                retract(playerEquipment(Weapon,Armor,Accessories)),
-                asserta(playerEquipment(Item,Armor,Accessories)),!
+                (
+                    Weapon = empty,
+                    removeInventory(Item),
+                    retract(playerEquipment(Weapon,Armor,Accessories)),
+                    asserta(playerEquipment(Item,Armor,Accessories)),
+                    item(_,Item,_,EquipmentATT,_,_,_),
+                    player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+                    NewATT is ATT+EquipmentATT,
+                    retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+                    asserta(player(Username,Job,LVL,HP,MaxHP,NewATT,DEF,EXP,MaxEXP,Gold)),!
+                );
+                (
+                    Weapon \= empty,
+                    write('\nYou have already used a bow!\n'),!
+                ) 
             );
             (
                 Type = bow,Job \= archer,
@@ -135,10 +155,22 @@ useItem(Item,Job,Type) :-
         (
             (
                 Type = wand,Job = sorcerer,
-                removeInventory(Item),
                 playerEquipment(Weapon,Armor,Accessories),
-                retract(playerEquipment(Weapon,Armor,Accessories)),
-                asserta(playerEquipment(Item,Armor,Accessories)),!
+                (
+                    Weapon = empty,
+                    removeInventory(Item),
+                    retract(playerEquipment(Weapon,Armor,Accessories)),
+                    asserta(playerEquipment(Item,Armor,Accessories)),
+                    item(_,Item,_,EquipmentATT,_,_,_),
+                    player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+                    NewATT is ATT+EquipmentATT,
+                    retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+                    asserta(player(Username,Job,LVL,HP,MaxHP,NewATT,DEF,EXP,MaxEXP,Gold)),!
+                );
+                (
+                    Weapon \= empty,
+                    write('\nYou have already used a wand!\n'),!
+                ) 
             );
             (
                 Type = wand,Job \= sorcerer,
@@ -147,18 +179,102 @@ useItem(Item,Job,Type) :-
         );
         (
             Type = armor,
-            removeInventory(Item),
             playerEquipment(Weapon,Armor,Accessories),
-            retract(playerEquipment(Weapon,Armor,Accessories)),
-            asserta(playerEquipment(Weapon,Item,Accessories)),!
+            (
+                Armor = empty,
+                removeInventory(Item),
+                retract(playerEquipment(Weapon,Armor,Accessories)),
+                asserta(playerEquipment(Weapon,Item,Accessories)),
+                item(_,Item,_,_,EquipmentDEF,_,_),
+                player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+                NewDEF is DEF+EquipmentDEF,
+                retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+                asserta(player(Username,Job,LVL,HP,MaxHP,ATT,NewDEF,EXP,MaxEXP,Gold)),!
+            );
+            (
+                Armor \= empty,
+                write('\nYou have already used armor!\n'),!
+            ) 
         );
         (
             Type = accessories,
-            removeInventory(Item),
             playerEquipment(Weapon,Armor,Accessories),
+            (
+                Accessories = empty,
+                removeInventory(Item),
+                retract(playerEquipment(Weapon,Armor,Accessories)),
+                asserta(playerEquipment(Weapon,Armor,Item)),
+                item(_,Item,_,_,_,EquipmentHP,_),
+                player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+                NewMaxHP is MaxHP+EquipmentHP,
+                retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+                asserta(player(Username,Job,LVL,HP,NewMaxHP,ATT,DEF,EXP,MaxEXP,Gold)),!
+            );
+            (
+                Accessories \= empty,
+                write('\nYou have already used accessories!\n'),!
+            ) 
+        ),!.
+
+useItem(Item,_,_) :-
+    \+isItemAvailable(Item) ->
+    write('\nYou don\'t have this item\n'),!.
+
+returnItem(Item) :-
+    (
+        playerEquipment(Weapon,Armor,Accessories),
+        Item == Weapon ->
+            addInventory(Item),
+            item(_,Weapon,_,EquipmentATT,_,_,_),
+            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+            NewATT is ATT-EquipmentATT,
+            retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+            asserta(player(Username,Job,LVL,HP,MaxHP,NewATT,DEF,EXP,MaxEXP,Gold)),
             retract(playerEquipment(Weapon,Armor,Accessories)),
-            asserta(playerEquipment(Weapon,Armor,Item)),!
-        ).
+            asserta(playerEquipment(empty,Armor,Accessories)),!
+    );
+    (
+        playerEquipment(Weapon,Armor,Accessories),
+        Item == Armor ->
+            addInventory(Item),
+            item(_,Armor,_,_,EquipmentDEF,_,_),
+            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+            NewDEF is DEF-EquipmentDEF,
+            retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+            asserta(player(Username,Job,LVL,HP,MaxHP,ATT,NewDEF,EXP,MaxEXP,Gold)),
+            retract(playerEquipment(Weapon,Armor,Accessories)),
+            asserta(playerEquipment(Weapon,empty,Accessories)),!
+    );
+    (
+        playerEquipment(Weapon,Armor,Accessories),
+        Item == Accessories ->
+            addInventory(Item),
+            item(_,Accessories,_,_,_,EquipmentHP,_),
+            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+            NewMaxHP is MaxHP-EquipmentHP,
+            retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+            asserta(player(Username,Job,LVL,HP,NewMaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+            retract(playerEquipment(Weapon,Armor,Accessories)),
+            asserta(playerEquipment(empty,Armor,empty)),!
+        
+    );
+    (
+        playerEquipment(Weapon,Armor,Accessories),
+        Item == Accessories ->
+            addInventory(Item),
+            item(_,Accessories,_,_,_,EquipmentHP,_),
+            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+            NewMaxHP is MaxHP-EquipmentHP,
+            HP > NewMaxHP, 
+            NewHP is NewMaxHP,
+            retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+            asserta(player(Username,Job,LVL,NewHP,NewMaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+            retract(playerEquipment(Weapon,Armor,Accessories)),
+            asserta(playerEquipment(empty,Armor,empty)),!
+    );
+    (
+        write('\nYou don\'t have this item\n'),!
+    ).
 
 equipmentAction(Option) :-
     Option =:= 1,
@@ -171,5 +287,81 @@ equipmentAction(Option) :-
     read(Item),
     player(_,Job,_,_,_,_,_,_,_,_),
     item(_,Item,Type,_,_,_,_),
-    useItem(Item,Job,Type).
+    useItem(Item,Job,Type),!.
+
+equipmentAction(Option) :-
+    Option =:= 3,
+    printEquipment,
+    write('\nWhat do you want to return?\n'),
+    read(Item),
+    returnItem(Item),!.
+
+/*
+addEquipmentEffect(Item) :-
+    (
+        playerEquipment(Weapon,Armor,Accessories),
+        Item == Weapon ->
+            item(_,Weapon,_,EquipmentATT,_,_,_),
+            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+            NewATT is ATT+EquipmentATT,
+            retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+            asserta(player(Username,Job,LVL,HP,MaxHP,NewATT,DEF,EXP,MaxEXP,Gold)),!
+    );
+    (
+        playerEquipment(Weapon,Armor,Accessories),
+        Item == Armor ->
+            item(_,Armor,_,_,EquipmentDEF,_,_),
+            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+            NewDEF is DEF+EquipmentDEF,
+            retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+            asserta(player(Username,Job,LVL,HP,MaxHP,ATT,NewDEF,EXP,MaxEXP,Gold)),!
+    );
+    (
+        playerEquipment(Weapon,Armor,Accessories),
+        Item == Accessories ->
+            item(_,Accessories,_,_,_,EquipmentHP,_),
+            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+            NewMaxHP is MaxHP+EquipmentHP,
+            retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+            asserta(player(Username,Job,LVL,HP,NewMaxHP,ATT,DEF,EXP,MaxEXP,Gold)),!
+    ).
+
+removeEquipmentEffect(Item) :-
+    (
+        playerEquipment(Weapon,Armor,Accessories),
+        Item == Weapon ->
+            item(_,Weapon,_,EquipmentATT,_,_,_),
+            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+            NewATT is ATT-EquipmentATT,
+            retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+            asserta(player(Username,Job,LVL,HP,MaxHP,NewATT,DEF,EXP,MaxEXP,Gold)),!
+    );
+    (
+        playerEquipment(Weapon,Armor,Accessories),
+        Item == Armor ->
+            item(_,Armor,_,_,EquipmentDEF,_,_),
+            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+            NewDEF is DEF-EquipmentDEF,
+            retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+            asserta(player(Username,Job,LVL,HP,MaxHP,ATT,NewDEF,EXP,MaxEXP,Gold)),!
+    );
+    (
+        playerEquipment(Weapon,Armor,Accessories),
+        Item == Accessories ->
+            item(_,Accessories,_,_,_,EquipmentHP,_),
+            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+            NewMaxHP is MaxHP-EquipmentHP,
+            (
+                HP > NewMaxHP,
+                NewHP is NewMaxHP,
+                retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+                asserta(player(Username,Job,LVL,NewHP,NewMaxHP,ATT,DEF,EXP,MaxEXP,Gold)),!
+            );
+            (
+                NewHP = HP,
+                retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+                asserta(player(Username,Job,LVL,NewHP,NewMaxHP,ATT,DEF,EXP,MaxEXP,Gold)),!
+            )
+    ).
+*/
     

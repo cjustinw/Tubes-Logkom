@@ -32,3 +32,4 @@ item(18,ring,accessories,0,0,10,0).
 item(19,necklace,accessories,0,0,15,0).
 item(20,earing,accessories,0,0,20,0).
 
+item(99,empty,empty,0,0,0,0).

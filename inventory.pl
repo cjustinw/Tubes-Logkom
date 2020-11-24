@@ -125,4 +125,3 @@ usePotion:-
             Heal is NewHP-MaxHP,
             write('\nYou heal '),write(Heal),write('exp\n'),!
     ).
-

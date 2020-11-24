@@ -36,6 +36,7 @@ help :-
     write('%     d          : gerak ke timur 1 langkah       %\n'),
     write('%     tp         : berpindah ke waypoint          %\n'),
     write('%     inventory  : menampilkan inventory pemain   %\n'),
+    write('%     equipment  : menampilkan equipment pemain   %\n'),
     write('%     quest      : menampilkan quest berlangsung  %\n'),
     write('%     help       : menampilkan bantuan            %\n'),
     write('%     quit       : keluar permainan               %\n'),
