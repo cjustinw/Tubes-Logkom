@@ -1,3 +1,13 @@
+print_you_drowned :-
+	% ASCII Art from: https://manytools.org/hacker-tools/ascii-banner/
+	write(':::   :::  ::::::::  :::    :::      :::::::::  :::::::::   ::::::::  :::       ::: ::::    ::: :::::::::: :::::::::  '),nl,
+	write(':+:   :+: :+:    :+: :+:    :+:      :+:    :+: :+:    :+: :+:    :+: :+:       :+: :+:+:   :+: :+:        :+:    :+: '),nl,
+	write(' +:+ +:+  +:+    +:+ +:+    +:+      +:+    +:+ +:+    +:+ +:+    +:+ +:+       +:+ :+:+:+  +:+ +:+        +:+    +:+ '),nl,
+	write('  +#++:   +#+    +:+ +#+    +:+      +#+    +:+ +#++:++#:  +#+    +:+ +#+  +:+  +#+ +#+ +:+ +#+ +#++:++#   +#+    +:+ '),nl,
+	write('   +#+    +#+    +#+ +#+    +#+      +#+    +#+ +#+    +#+ +#+    +#+ +#+ +#+#+ +#+ +#+  +#+#+# +#+        +#+    +#+ '),nl,
+	write('   #+#    #+#    #+# #+#    #+#      #+#    #+# #+#    #+# #+#    #+#  #+#+# #+#+#  #+#   #+#+# #+#        #+#    #+# '),nl,
+	write('   ###     ########   ########       #########  ###    ###  ########    ###   ###   ###    #### ########## #########  '),nl.
+
 print_wolf :-
 	% ASCII Art from: https://www.asciiart.eu/animals/wolves
 	write('                              __'),nl,
@@ -121,8 +131,9 @@ w :-
         N1 is N - 1,
         (
         N1 =:= 0 ->
-			nl,
-            write('You drowned! Better watch your surroundings next time, Traveler!'),
+			nl,nl,
+			print_you_drowned,
+            write('\nBetter watch your surroundings next time, Traveler!'),
             quit
         ;
         retract(stamina(N)),
@@ -197,8 +208,9 @@ a :-
         N1 is N - 1,
         (
         N1 =:= 0 ->
-			nl,
-            write('You drowned! Better watch your surroundings next time, Traveler!'),
+			nl,nl,
+			print_you_drowned,
+            write('\nBetter watch your surroundings next time, Traveler!'),
             quit
         ;
         retract(stamina(N)),
@@ -273,8 +285,9 @@ s :-
         N1 is N - 1,
         (
         N1 =:= 0 ->
-			nl,
-            write('You drowned! Better watch your surroundings next time, Traveler!'),
+			nl,nl,
+			print_you_drowned,
+            write('\nBetter watch your surroundings next time, Traveler!'),
             quit
         ;
         retract(stamina(N)),
@@ -349,8 +362,9 @@ d :-
         N1 is N - 1,
         (
         N1 =:= 0 ->
-			nl,
-            write('You drowned! Better watch your surroundings next time, Traveler!'),
+			nl,nl,
+			print_you_drowned,
+            write('\nBetter watch your surroundings next time, Traveler!'),
             quit
         ;
         retract(stamina(N)),

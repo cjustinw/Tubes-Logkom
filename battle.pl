@@ -1,3 +1,12 @@
+print_you_died :-
+    % ASCII Art from: https://manytools.org/hacker-tools/ascii-banner/
+    write(':::   :::  ::::::::  :::    :::      ::::::::: ::::::::::: :::::::::: :::::::::  '),nl,
+    write(':+:   :+: :+:    :+: :+:    :+:      :+:    :+:    :+:     :+:        :+:    :+: '),nl,
+    write(' +:+ +:+  +:+    +:+ +:+    +:+      +:+    +:+    +:+     +:+        +:+    +:+ '),nl,
+    write('  +#++:   +#+    +:+ +#+    +:+      +#+    +:+    +#+     +#++:++#   +#+    +:+ '),nl,
+    write('   +#+    +#+    +#+ +#+    +#+      +#+    +#+    +#+     +#+        +#+    +#+ '),nl,
+    write('   #+#    #+#    #+# #+#    #+#      #+#    #+#    #+#     #+#        #+#    #+# '),nl,
+    write('   ###     ########   ########       ######### ########### ########## #########  '),nl.
 
 actionName :-
     player(_,Job,_,_,_,_,_,_,_,_),
@@ -324,8 +333,8 @@ enemyStatus(X,Y) :-
 
 battleMode(_,_) :-
     isPlayerDefeated,
-    write('\n\nYou\'re defeated!\n'),
-    write('\nGame Over!\n'),
+    nl,nl,
+    print_you_died,
     quit,!.
 
 battleMode(X,Y) :-
