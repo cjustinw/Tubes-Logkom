@@ -1,5 +1,6 @@
 
 :- dynamic(player/10).
+:- dynamic(playerEquipment/3).
 
 generatePlayer(Username, JobID) :-
     JobID =:= 1,
@@ -81,3 +82,94 @@ levelUp :-
     RequiredEXP is LVL*90,
     EXP < RequiredEXP,
     write('Fight more enemies to level up!'),!.
+
+initEquipment :-
+    asserta(playerEquipment(empty,empty,empty)).
+
+printEquipment :-
+    playerEquipment(Weapon,Armor,Accessories),
+    write('\nWeapon     : '),write(Weapon),
+    write('\nArmor      : '),write(Armor),
+    write('\nAccessories: '),write(Accessories),
+    write('\n').
+
+equipment :-
+    write('\n1. Show your equipment'),
+    write('\n2. Use item'),
+    write('\n3. Return the item to inventory\n'),
+    read(Option),
+    equipmentAction(Option).
+
+useItem(Item,_,_) :-
+    \+isItemAvailable(Item) ->
+    write('\nYou don\'t have this item\n'),!.
+
+useItem(Item,Job,Type) :-
+    isItemAvailable(Item),
+        (
+            (
+                Type = sword,Job = swordsman,
+                removeInventory(Item),
+                playerEquipment(Weapon,Armor,Accessories),
+                retract(playerEquipment(Weapon,Armor,Accessories)),
+                asserta(playerEquipment(Item,Armor,Accessories)),!
+            );
+            (
+                Type = sword,Job \= swordsman,
+                write('\nYou cannot use this item\n'),!
+            )
+        );
+        (
+            (
+                Type = bow,Job = archer,
+                removeInventory(Item),
+                playerEquipment(Weapon,Armor,Accessories),
+                retract(playerEquipment(Weapon,Armor,Accessories)),
+                asserta(playerEquipment(Item,Armor,Accessories)),!
+            );
+            (
+                Type = bow,Job \= archer,
+                write('\nYou cannot use this item\n'),!
+            )
+        );
+        (
+            (
+                Type = wand,Job = sorcerer,
+                removeInventory(Item),
+                playerEquipment(Weapon,Armor,Accessories),
+                retract(playerEquipment(Weapon,Armor,Accessories)),
+                asserta(playerEquipment(Item,Armor,Accessories)),!
+            );
+            (
+                Type = wand,Job \= sorcerer,
+                write('\nYou cannot use this item\n'),!
+            )
+        );
+        (
+            Type = armor,
+            removeInventory(Item),
+            playerEquipment(Weapon,Armor,Accessories),
+            retract(playerEquipment(Weapon,Armor,Accessories)),
+            asserta(playerEquipment(Weapon,Item,Accessories)),!
+        );
+        (
+            Type = accessories,
+            removeInventory(Item),
+            playerEquipment(Weapon,Armor,Accessories),
+            retract(playerEquipment(Weapon,Armor,Accessories)),
+            asserta(playerEquipment(Weapon,Armor,Item)),!
+        ).
+
+equipmentAction(Option) :-
+    Option =:= 1,
+    printEquipment,!.
+
+equipmentAction(Option) :-
+    Option =:= 2,
+    inventory,
+    write('\nWhat do you want to use?\n'),
+    read(Item),
+    player(_,Job,_,_,_,_,_,_,_,_),
+    item(_,Item,Type,_,_,_,_),
+    useItem(Item,Job,Type).
+    

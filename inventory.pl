@@ -87,7 +87,7 @@ printInventory([[A|[B|_]]|T]) :-
 inventory :-
     (
         isInventoryEmpty ->
-            write('\nYour inventory is empty\n')
+            write('\nempty\n')
     );
     (
         \+isInventoryEmpty ->

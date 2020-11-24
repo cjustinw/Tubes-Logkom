@@ -28,7 +28,7 @@ buyItem(Option) :-
             isGoldEnough(Gold,200) -> 
                 NewGold is Gold-200,
                 random(2,21,ID),
-                item(ID,ItemName,_,_,_,_),
+                item(ID,ItemName,_,_,_,_,_),
                 addInventory(ItemName),
                 retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
                 asserta(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,NewGold)),
