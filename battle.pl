@@ -24,24 +24,25 @@ actionName :-
     ).
     
 
-playerAttack(Option,X,Y) :-
+playerAttack(Option,X,Y,N,N1) :-
     player(_,Job,_,_,_,_,_,_,_,_),
     (
         Job = swordsman ->
-            swordsmanAttack(Option,X,Y),!
+            swordsmanAttack(Option,X,Y,N,N1),!
     ;
     
         Job = archer ->
-            archerAttack(Option,X,Y),!
+            archerAttack(Option,X,Y,N,N1),!
     ;
     
         Job = sorcerer ->
-            sorcererAttack(Option,X,Y),!
+            sorcererAttack(Option,X,Y,N,N1),!
     ).
 
-swordsmanAttack(Option,X,Y) :-
+swordsmanAttack(Option,X,Y,N,N1) :-
     (
         Option =:= 1 ->
+            N1 is N+1,
             player(_,_,_,_,_,ATT,_,_,_,_),
             enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
             write('\nYou use Slash\n'),
@@ -50,25 +51,35 @@ swordsmanAttack(Option,X,Y) :-
             retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
             asserta(enemy(EnemyID,EnemyType,EnemyLVL,NewEnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X))
     ;
-    
         Option =:= 2 ->
-            player(_,_,_,_,_,ATT,_,_,_,_),
-            enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
-            write('\nYou use Ravage Conqueror\n'),
-            Damage is ATT*(100/(100+EnemyDEF))*3,
-            NewEnemyHP is round(EnemyHP-Damage),
-            retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
-            asserta(enemy(EnemyID,EnemyType,EnemyLVL,NewEnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X))
+        (
+            N >= 3 ->
+                N1 = 0,
+                player(_,_,_,_,_,ATT,_,_,_,_),
+                enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
+                write('\nYou use Ravage Conqueror\n'),
+                Damage is ATT*(100/(100+EnemyDEF))*3,
+                NewEnemyHP is round(EnemyHP-Damage),
+                retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
+                asserta(enemy(EnemyID,EnemyType,EnemyLVL,NewEnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X))
+        ;
+            N < 3 ->
+                N1 is N+1,
+                Turn is 3-N,
+                write('\nYou can use Ravage Conqueror in '),write(Turn),write(' more turns\n')
+        )
     ;
     
         Option =:= 3 ->
+            N1 is N+1,
             usePotion
     ).
     
 
-archerAttack(Option,X,Y) :-
+archerAttack(Option,X,Y,N,N1) :-
     (
         Option =:= 1 ->
+            N1 is N+1,
             player(_,_,_,_,_,ATT,_,_,_,_),
             enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
             write('\nYou Take Aim\n'),
@@ -77,24 +88,33 @@ archerAttack(Option,X,Y) :-
             retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
             asserta(enemy(EnemyID,EnemyType,EnemyLVL,NewEnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X))
     ;
-    
         Option =:= 2 ->
-            player(_,_,_,_,_,ATT,_,_,_,_),
-            enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
-            write('\nYou use Divine Puncture\n'),
-            Damage is ATT*(100/(100+EnemyDEF))*3,
-            NewEnemyHP is round(EnemyHP-Damage),
-            retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
-            asserta(enemy(EnemyID,EnemyType,EnemyLVL,NewEnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X))
+        (
+            N >= 3  ->
+                N1 = 0,
+                player(_,_,_,_,_,ATT,_,_,_,_),
+                enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
+                write('\nYou use Divine Puncture\n'),
+                Damage is ATT*(100/(100+EnemyDEF))*3,
+                NewEnemyHP is round(EnemyHP-Damage),
+                retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
+                asserta(enemy(EnemyID,EnemyType,EnemyLVL,NewEnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X))
+        ;
+            N < 3 ->
+                N1 is N+1,
+                Turn is 3-N,
+                write('\nYou can use Divine Puncture in '),write(Turn),write(' more turns\n')
+        )
     ;
-    
         Option =:= 3 ->
+            N1 is N+1,
             usePotion
     ).
 
-sorcererAttack(Option,X,Y) :-
+sorcererAttack(Option,X,Y,N,N1) :-
     (
         Option =:= 1 ->
+            N1 is N+1,
             player(_,_,_,_,_,ATT,_,_,_,_),
             enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
             write('\nYou use Fireball\n'),
@@ -103,18 +123,26 @@ sorcererAttack(Option,X,Y) :-
             retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
             asserta(enemy(EnemyID,EnemyType,EnemyLVL,NewEnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X))
     ;
-    
         Option =:= 2 ->
-            player(_,_,_,_,_,ATT,_,_,_,_),
-            enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
-            write('\nYou use Elemental Armageddon\n'),
-            Damage is ATT*(100/(100+EnemyDEF))*3,
-            NewEnemyHP is round(EnemyHP-Damage),
-            retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
-            asserta(enemy(EnemyID,EnemyType,EnemyLVL,NewEnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X))      
+        (
+            N >= 3 ->
+                N1 = 0,
+                player(_,_,_,_,_,ATT,_,_,_,_),
+                enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
+                write('\nYou use Elemental Armageddon\n'),
+                Damage is ATT*(100/(100+EnemyDEF))*3,
+                NewEnemyHP is round(EnemyHP-Damage),
+                retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
+                asserta(enemy(EnemyID,EnemyType,EnemyLVL,NewEnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X))      
+        ;
+            N < 3 ->
+                N1 is N+1,
+                Turn is 3-N,
+                write('\nYou can use Divine Puncture in '),write(Turn),write(' more turns\n')
+        )
     ;
-    
         Option =:= 3 ->
+            N1 is N+1,
             usePotion
     ).
 
@@ -322,20 +350,20 @@ enemyStatus(X,Y) :-
     write('\nHealth   :'),
     write(HP),write('/'), write(MaxHP).
 
-battleMode(_,_) :-
+battleMode(_,_,_,_) :-
     isPlayerDefeated,
     write('\n\nYou\'re defeated!\n'),
     write('\nGame Over!\n'),
     quit,!.
 
-battleMode(X,Y) :-
+battleMode(X,Y,_,_) :-
     isEnemyDefeated(X,Y),
     write('\nEnemy is defeated!\n'),
     expIncrease(X,Y),
     questEnemyKilled(X,Y),
     levelUp,!.
 
-battleMode(X,Y) :-
+battleMode(X,Y,N,N1) :-
     \+isEnemyDefeated(X,Y),
     playerStatus,
     enemyStatus(X,Y),
@@ -347,7 +375,7 @@ battleMode(X,Y) :-
             Option =:= 4 -> run
         );
         (
-            playerAttack(Option,X,Y),
+            playerAttack(Option,X,Y,N,N1),
             (
                 (
                     isEnemyDefeated(X,Y)
@@ -356,6 +384,19 @@ battleMode(X,Y) :-
                     enemyAttack(X,Y)
                 )
             ),
-            battleMode(X,Y)
+            battleMode(X,Y,N1,_)
         )
+    ).
+
+dungeon :-
+    write('Do you want to fight the boss?\n'),
+    write('1. Yes\n'),
+    write('2. No\n'),
+    read(Option),
+    (
+        Option =:= 1 ->
+            battleMode(14,6,0,_)
+    ;
+        Option =:= 2 ->
+            write('\n')
     ).
