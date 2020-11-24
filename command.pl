@@ -1,3 +1,35 @@
+print_boss :-
+	% ASCII Art from: https://ascii.co.uk/art/dragon
+write('                                 _'),nl,
+write('                              ==(W{==========-      /===-'),nl,
+write('                                ||  (.--.)         /===-_---~~~~~~~----__'),nl,
+write('                                | '),put(92),write('_,|**|,__      |===-~___            _,-'),put(39),write('`'),nl,
+write('                   -=='),put(92),put(92),write('        `'),put(92),write(' '),put(39),write(' `--'),put(39),write('   ),    `//~'),put(92),put(92),write('   ~~~~`--._.-~'),nl,
+write('               ______-==|        /`'),put(92),write('_. .__/'),put(92),write(' '),put(92),write('    | |  '),put(92),put(92),write('          _-~`'),nl,
+write('         __--~~~  ,-/-=='),put(92),put(92),write('      (   | .  |~~~~|   | |   `'),put(92),write('       ,'),put(39),nl,
+write('      _-~       /'),put(39),write('    |  '),put(92),put(92),write('     )__/==0==-'),put(92),write('<>/   / /      '),put(92),write('     /'),nl,
+write('    .'),put(39),write('        /       |   '),put(92),put(92),write('      /~'),put(92),write('___/~~'),put(92),write('/  /'),put(39),write(' /        '),put(92),write('   /'),nl,
+write('   /  ____  /         |    '),put(92),write('`'),put(92),write('.__/-~~   '),put(92),write('  |_/'),put(39),write('  /          '),put(92),write('/'),put(39),nl,
+write('  /-'),put(39),write('~    ~~~~~---__  |     ~-/~         ( )   /'),put(39),write('       _--~`'),nl,
+write('                    '),put(92),write('_|      /        _) | ;  ),   __--~~'),nl,
+write('                      '),put(39),write('~~--_/      _-~/- |/ '),put(92),write('   '),put(39),write('-~ '),put(92),nl,
+write('                     {'),put(92),write('__--_/}    / '),put(92),put(92),write('_>-|)<__'),put(92),write('      '),put(92),nl,
+write('                     /'),put(39),write('   (_/  _-~  | |__>--<__|      |'),nl,
+write('                    |   _/) )-~     | |__>--<__|      |'),nl,
+write('                    / /~ ,_/       / /__>---<__/      |'),nl,
+write('                   o-o _//        /-~_>---<__-~      /'),nl,
+write('                   (^(~          /~_>---<__-      _-~'),nl,
+write('                  ,/|           /__>--<__/     _-~'),nl,
+write('               ,//('),put(39),write('(          |__>--<__|     /                  .--_'),nl,
+write('              ( ( '),put(39),write('))          |__>--<__|    |                 /'),put(39),write(' _-_~'),put(92),nl,
+write('           `-)) )) (           |__>--<__|    |               /'),put(39),write(' /   ~'),put(92),write('`'),put(92),nl,
+write('          ,/,'),put(39),write('//( (             '),put(92),write('__>--<__'),put(92),write('    '),put(92),write('            /'),put(39),write(' //      ||'),nl,
+write('        ,( ( ((, ))              ~-__>--<_~-_  ~--__---~'),put(39),write('/'),put(39),write('/  /'),put(39),write('      VV'),nl,
+write('      `~/  )` ) ,/|                 ~-_~>--<_/-__      __-~_/'),nl,
+write('    ._-~//( )/ )) `                    ~~-'),put(39),write('_/_/ /~~~~~__--~'),nl,
+write('     ;'),put(39),write('( '),put(39),write('))/ ,)(                              ~~~~~~~~'),nl,
+write('    '),put(39),write(' '),put(39),write(') '),put(39),write('( (/'),nl.
+
 print_you_drowned :-
 	% ASCII Art from: https://manytools.org/hacker-tools/ascii-banner/
 	write(':::   :::  ::::::::  :::    :::      :::::::::  :::::::::   ::::::::  :::       ::: ::::    ::: :::::::::: :::::::::  '),nl,
