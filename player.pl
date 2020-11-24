@@ -31,7 +31,7 @@ levelUp :-
     NewEXP is EXP-MaxEXP,
     retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
     asserta(player(Username,Job,NewLVL,HP,NewMaxHP,NewATT,NewDEF,NewEXP,NewMaxEXP,Gold)),
-    write('Congratulations! You achieve level '),
+    write('\nCongratulations! You achieve level '),
     write(NewLVL),!.
 
 levelUp :-
@@ -58,7 +58,7 @@ levelUp :-
     NewEXP is EXP-MaxEXP,
     retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
     asserta(player(Username,Job,NewLVL,HP,NewMaxHP,NewATT,NewDEF,NewEXP,NewMaxEXP,Gold)),
-    write('Congratulations! You achieve level '),
+    write('\nCongratulations! You achieve level '),
     write(NewLVL),!.
 
 levelUp :-
@@ -85,7 +85,7 @@ levelUp :-
     NewEXP is EXP-MaxEXP,
     retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
     asserta(player(Username,Job,NewLVL,HP,NewMaxHP,NewATT,NewDEF,NewEXP,NewMaxEXP,Gold)),
-    write('Congratulations! You achieve level '),
+    write('\nCongratulations! You achieve level '),
     write(NewLVL),!.
 
 levelUp :-
@@ -121,9 +121,9 @@ printEquipment :-
     write('\n').
 
 equipment :-
-    write('\n1. Show your equipment'),
-    write('\n2. Use item'),
-    write('\n3. Return item to inventory\n'),
+    write('\n1. Show your equipments'),
+    write('\n2. Use an item'),
+    write('\n3. Return an item to inventory\n'),
     read(Option),
     equipmentAction(Option).
 
@@ -146,12 +146,12 @@ useItem(Item,Job,Type) :-
                 ;
                 
                     Weapon \= empty,
-                    write('\nYou have already used a sword!\n'),!
+                    write('\nYou have already equipped a sword!\n'),!
                 ) 
             ;
             
                 Type = sword,Job \= swordsman,
-                write('\nYou cannot use this item\n'),!
+                write('\nYou can not use this item\n'),!
             )
         ;
         
@@ -171,12 +171,12 @@ useItem(Item,Job,Type) :-
                 ;
                 
                     Weapon \= empty,
-                    write('\nYou have already used a bow!\n'),!
+                    write('\nYou have already equipped a bow!\n'),!
                 ) 
             ;
             
                 Type = bow,Job \= archer,
-                write('\nYou cannot use this item\n'),!
+                write('\nYou can not use this item\n'),!
             )
         ;
         
@@ -196,12 +196,12 @@ useItem(Item,Job,Type) :-
                 ;
                 
                     Weapon \= empty,
-                    write('\nYou have already used a wand!\n'),!
+                    write('\nYou have already equipped a wand!\n'),!
                 ) 
             ;
             
                 Type = wand,Job \= sorcerer,
-                write('\nYou cannot use this item\n'),!
+                write('\nYou can not use this item\n'),!
             )
         ;
         
@@ -220,7 +220,7 @@ useItem(Item,Job,Type) :-
             ;
             
                 Armor \= empty,
-                write('\nYou have already used armor!\n'),!
+                write('\nYou have already equipped an armor!\n'),!
             ) 
         ;
         
@@ -239,7 +239,7 @@ useItem(Item,Job,Type) :-
             ;
             
                 Accessories \= empty,
-                write('\nYou have already used accessories!\n'),!
+                write('\nYou have already equipped an accessories!\n'),!
             ) 
         ;
             Type = healing,
@@ -249,7 +249,7 @@ useItem(Item,Job,Type) :-
 
 useItem(Item,_,_) :-
     \+isItemAvailable(Item) ->
-    write('\nYou don\'t have this item\n'),!.
+    write('\nYou do not have this item!\n'),!.
 
 returnItem(Item) :-
     (
@@ -292,9 +292,10 @@ returnItem(Item) :-
             retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
             asserta(player(Username,Job,LVL,NewHP,NewMaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
             retract(playerEquipment(Weapon,Armor,Accessories)),
-            asserta(playerEquipment(Weapon,Armor,empty)),!
-    ;
-        write('\nYou don\'t have this item\n'),!
+            asserta(playerEquipment(empty,Armor,empty)),!
+    );
+    (
+        write('\nYou do not have this item!\n'),!
     ).
 
 equipmentAction(Option) :-
