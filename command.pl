@@ -110,7 +110,8 @@ w :-
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
         retract(stamina(_)),
-        asserta(stamina(5))
+        asserta(stamina(5)),
+        battleMode(X,Next)
 	;
 	water(Y,X), Next =:= Y, TempX =:= X ->
 		retract(player_Y(_)),
@@ -185,7 +186,8 @@ a :-
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
         retract(stamina(_)),
-        asserta(stamina(5))
+        asserta(stamina(5)),
+        battleMode(Next,Y)
 	;
 	water(Y,X), TempY =:= Y, Next =:= X ->
 		retract(player_X(_)),
@@ -260,7 +262,8 @@ s :-
 		retract(player_Y(_)),
 		asserta(player_Y(Next)),!,
         retract(stamina(_)),
-        asserta(stamina(5))
+        asserta(stamina(5)),
+        battleMode(X,Next)
 	;
 	water(Y,X), TempX =:= X, Next =:= Y ->
 		retract(player_Y(_)),
@@ -335,7 +338,8 @@ d :-
 		retract(player_X(_)),
 		asserta(player_X(Next)),!,
         retract(stamina(_)),
-        asserta(stamina(5))
+        asserta(stamina(5)),
+        battleMode(Next,Y)
 	;
 	water(Y,X), TempY =:= Y, Next =:= X ->
 		retract(player_X(_)),
@@ -411,3 +415,6 @@ tp :-
 	retract(player_X(_)),
 	asserta(player_Y(Y)),
 	asserta(player_X(X)).
+
+cancel :-
+	write('\n').

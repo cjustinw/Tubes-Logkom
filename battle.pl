@@ -7,15 +7,15 @@ actionName :-
             write('\n2. Use Ravage Conqueror'),
             write('\n3. Use Potion'),
             write('\n4. Run\n\n'),!
-    );
-    (
+    ;
+    
         Job = archer ->
             write('\n1. Take Aim'),
             write('\n2. Use Divine Puncture'),
             write('\n3. Use Potion'),
             write('\n4. Run\n\n'),!
-    );
-    (
+    ;
+    
         Job = sorcerer ->
             write('\n1. Use Fireball'),
             write('\n2. Use Elemental Armageddon'),
@@ -29,12 +29,12 @@ playerAttack(Option,X,Y) :-
     (
         Job = swordsman ->
             swordsmanAttack(Option,X,Y),!
-    );
-    (
+    ;
+    
         Job = archer ->
             archerAttack(Option,X,Y),!
-    );
-    (
+    ;
+    
         Job = sorcerer ->
             sorcererAttack(Option,X,Y),!
     ).
@@ -42,7 +42,6 @@ playerAttack(Option,X,Y) :-
 swordsmanAttack(Option,X,Y) :-
     (
         Option =:= 1 ->
-        (   
             player(_,_,_,_,_,ATT,_,_,_,_),
             enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
             write('\nYou use Slash\n'),
@@ -50,11 +49,9 @@ swordsmanAttack(Option,X,Y) :-
             NewEnemyHP is round(EnemyHP-Damage),
             retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
             asserta(enemy(EnemyID,EnemyType,EnemyLVL,NewEnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X))
-        )
-    );
-    (
+    ;
+    
         Option =:= 2 ->
-        (
             player(_,_,_,_,_,ATT,_,_,_,_),
             enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
             write('\nYou use Ravage Conqueror\n'),
@@ -62,9 +59,8 @@ swordsmanAttack(Option,X,Y) :-
             NewEnemyHP is round(EnemyHP-Damage),
             retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
             asserta(enemy(EnemyID,EnemyType,EnemyLVL,NewEnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X))
-        )
-    );
-    (
+    ;
+    
         Option =:= 3 ->
             usePotion
     ).
@@ -80,8 +76,8 @@ archerAttack(Option,X,Y) :-
             NewEnemyHP is round(EnemyHP-Damage),
             retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
             asserta(enemy(EnemyID,EnemyType,EnemyLVL,NewEnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X))
-    );
-    (
+    ;
+    
         Option =:= 2 ->
             player(_,_,_,_,_,ATT,_,_,_,_),
             enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
@@ -90,8 +86,8 @@ archerAttack(Option,X,Y) :-
             NewEnemyHP is round(EnemyHP-Damage),
             retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
             asserta(enemy(EnemyID,EnemyType,EnemyLVL,NewEnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X))
-    );
-    (
+    ;
+    
         Option =:= 3 ->
             usePotion
     ).
@@ -106,8 +102,8 @@ sorcererAttack(Option,X,Y) :-
             NewEnemyHP is round(EnemyHP-Damage),
             retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
             asserta(enemy(EnemyID,EnemyType,EnemyLVL,NewEnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X))
-    );
-    (
+    ;
+    
         Option =:= 2 ->
             player(_,_,_,_,_,ATT,_,_,_,_),
             enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X),
@@ -116,8 +112,8 @@ sorcererAttack(Option,X,Y) :-
             NewEnemyHP is round(EnemyHP-Damage),
             retract(enemy(EnemyID,EnemyType,EnemyLVL,EnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X)),
             asserta(enemy(EnemyID,EnemyType,EnemyLVL,NewEnemyHP,EnemyMaxHP,EnemyATT,EnemyDEF,Y,X))      
-    );
-    (
+    ;
+    
         Option =:= 3 ->
             usePotion
     ).
@@ -138,16 +134,20 @@ enemyAttack(X,Y) :-
         EnemyName = slime ->
             random(1,3,Option),
             slimeAttack(Option,X,Y)
-    );
-    (
+    ;
+    
         EnemyName = goblin ->
             random(1,3,Option),
             goblinAttack(Option,X,Y)
-    );
-    (
+    ;
+    
         EnemyName = wolf ->
             random(1,3,Option),
             wolfAttack(Option,X,Y)
+    ;
+        EnemyName = dragon ->
+            random(1,3,Option),
+            dragonAttack(Option,X,Y)
     ).
 
 slimeAttack(Option,X,Y) :-
@@ -161,14 +161,14 @@ slimeAttack(Option,X,Y) :-
             NewHP is round(HP-Damage),
             retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
             asserta(player(Username,Job,LVL,NewHP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold))
-    );
-    (
+    ;
+    
         Option =:= 2 ->
             player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
             enemy(_,EnemyName,_,_,_,EnemyATT,_,Y,X),
             % write(EnemyName),
             write('Slime uses special attack'),
-            Damage is EnemyATT*(100/(100+DEF)),
+            Damage is EnemyATT*(100/(100+DEF))*2,
             NewHP is round(HP-Damage),
             retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
             asserta(player(Username,Job,LVL,NewHP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold))
@@ -186,14 +186,14 @@ goblinAttack(Option,X,Y) :-
             NewHP is round(HP-Damage),
             retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
             asserta(player(Username,Job,LVL,NewHP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold))
-    );
-    (
+    ;
+    
         Option =:= 2 ->
             player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
             enemy(_,EnemyName,_,_,_,EnemyATT,_,Y,X),
             % write(EnemyName),
             write('Group of Goblins use special attack'),
-            Damage is EnemyATT*(100/(100+DEF)),
+            Damage is EnemyATT*(100/(100+DEF))*2,
             NewHP is round(HP-Damage),
             retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
             asserta(player(Username,Job,LVL,NewHP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold))
@@ -210,14 +210,38 @@ wolfAttack(Option,X,Y) :-
             NewHP is round(HP-Damage),
             retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
             asserta(player(Username,Job,LVL,NewHP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold))
-    );
-    (
+    ;
+    
         Option =:= 2 ->
             player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
             enemy(_,EnemyName,_,_,_,EnemyATT,_,Y,X),
-            write(EnemyName),
+            % write(EnemyName),
             write('Wild Wolf uses special attack'),
+            Damage is EnemyATT*(100/(100+DEF))*2,
+            NewHP is round(HP-Damage),
+            retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+            asserta(player(Username,Job,LVL,NewHP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold))
+    ).
+
+dragonAttack(Option,X,Y) :-
+    (
+        Option =:= 1 ->
+            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+            enemy(_,EnemyName,_,_,_,EnemyATT,_,Y,X),
+            % write(EnemyName),
+            write('Dragon uses normal attack'),
             Damage is EnemyATT*(100/(100+DEF)),
+            NewHP is round(HP-Damage),
+            retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+            asserta(player(Username,Job,LVL,NewHP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold))
+    ;
+    
+        Option =:= 2 ->
+            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+            enemy(_,EnemyName,_,_,_,EnemyATT,_,Y,X),
+            % write(EnemyName),
+            write('Dragon uses special attack'),
+            Damage is EnemyATT*(100/(100+DEF))*2,
             NewHP is round(HP-Damage),
             retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
             asserta(player(Username,Job,LVL,NewHP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold))
@@ -232,25 +256,31 @@ isEnemyDefeated(X,Y) :-
     EnemyHP =< 0.
 
 expIncrease(X,Y) :-
+    player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+    enemy(_,EnemyType,EnemyLVL,_,_,_,_,Y,X),
     (
-        enemy(_,EnemyType,EnemyLVL,_,_,_,_,Y,X),EnemyType = slime ->
-            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+        EnemyType = slime ->
             IncreaseEXP is EnemyLVL*30,
             NewEXP is EXP+IncreaseEXP,
             retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
             asserta(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,NewEXP,MaxEXP,Gold))
-    );
-    (
-        enemy(_,EnemyType,EnemyLVL,_,_,_,_,Y,X),EnemyType = goblin ->
-            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+    ;
+    
+        EnemyType = goblin ->
             IncreaseEXP is EnemyLVL*30,
             NewEXP is EXP+IncreaseEXP,
             retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
             asserta(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,NewEXP,MaxEXP,Gold))
-    );
-    (
-        enemy(_,EnemyType,EnemyLVL,_,_,_,_,Y,X),EnemyType = wolf ->
-            player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
+    ;
+    
+        EnemyType = wolf ->
+            IncreaseEXP is EnemyLVL*30,
+            NewEXP is EXP+IncreaseEXP,
+            retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
+            asserta(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,NewEXP,MaxEXP,Gold))
+    ;
+    
+        EnemyType = dragon ->
             IncreaseEXP is EnemyLVL*30,
             NewEXP is EXP+IncreaseEXP,
             retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
@@ -283,6 +313,9 @@ enemyStatus(X,Y) :-
         ;
         Name = wolf ->
             write('Wild Wolf')
+        ;
+        Name = dragon ->
+            write('Dragon')
     ),
     write('\nLevel    :'),
     write(Level),
