@@ -6,7 +6,7 @@
 
 quest :-
     \+questing(_),
-    write('You are not on a quest! "questlist" to choose quest!'),!.
+    write('\nYou are on a quest, Traveler! Type "questlist." to see your progress\n'),!.
 
 quest :-
     questing(_),
@@ -45,59 +45,59 @@ quest :-
 
 questlist :-
     \+questing(_),
-    write('\nChoose quest\n'),
-    write('1. kill 3 slime\n'),
-    write('2. kill 4 goblin\n'),
-    write('3. kill 2 wolf\n'),
-    write('4. kill 2 slime 2 goblin 1 wolf\n\n'),
+    write('\nPick a Quest:\n'),
+    write('1. Kill 3 Slime(s)\n'),
+    write('2. Kill 4 Group of Goblins\n'),
+    write('3. Kill 2 Wild Wolf(es)\n'),
+    write('4. Kill 2 Slime(s), 2 Group of Goblins, 1 Wild Wolf(es)\n\n'),
     read(QuestID),
     asserta(questing(QuestID)),
     getQuest(QuestID),!.
 
 questlist :-
     questing(_),
-    write('\nYou are on a quest! "quest" to see progress\n'),!.
+    write('\nYou are on a quest, Traveler! Type "quest." to see your progress\n'),!.
 
 getQuest(QuestID) :-
     QuestID =:= 1,
-    write('\nDialogue quest 1 kill 3 slime \n'),
     asserta(killcount(0,0,0)),
+    write('\n[Quest] --==++ Kill 3 Slime(s) ++==--\n'),
     asserta(killreq(3,0,0)),!.
 
 
 getQuest(QuestID) :-
     QuestID =:= 2,
-    write('\nDialogue quest 2 kill 4 goblin \n'),
+    write('\n[Quest] --==++ Clear 4 Camp of Goblins ++==--\n'),
     asserta(killcount(0,0,0)),
     asserta(killreq(0,4,0)),!.
     
 getQuest(QuestID) :-
     QuestID =:= 3,
-    write('\nDialogue quest 3 kill 2 wolf \n'),
+    write('\n[Quest] --==++ Eliminate 2 Wild Wolf(es) ++==--\n'),
     asserta(killcount(0,0,0)),
     asserta(killreq(0,0,2)),!.
 
 getQuest(QuestID) :-
     QuestID =:= 4,
-    write('\nDialogue quest 4 kill 2 slime 2 goblin 1 wolf\n'),
+    write('\n[Quest] --==++ Annihilate 2 Slime(s), 2 Camp of Goblins, and 1 Wild Wolf(es) ++==--\n'),
     asserta(killcount(0,0,0)),
     asserta(killreq(2,2,1)),!.
 
 questRemain :-
     questing(_),
-    write('You are on a quest!'),
+    write('\nYou are on a quest!\n'),
     killcount(Cslime,Cgoblin,Cwolf),
     killreq(Rslime,Rgoblin,Rwolf),
-    write('\nTo complete quest kill : '),
+    write('\nEnemy(s) remaining : '),
     SlimeRemain is Rslime-Cslime,
     write(SlimeRemain),
-    write(' Slime(s) '),
+    write(' Slime(s), '),
     GoblinRemain is Rgoblin-Cgoblin,
     write(GoblinRemain),
-    write(' Goblin(s) '),
+    write(' Group of Goblin(s), '),
     WolfRemain is Rwolf-Cwolf,
     write(WolfRemain),
-    write(' Wolf(s)\n'),!.
+    write(' Wild Wolf(es)\n'),!.
 
 questEnemyKilled(_,_):-
     \+questing(_).
@@ -146,7 +146,7 @@ questEnemyKilled(X,Y):-
 
 
 questComplete :-
-    write('\nQuest complete ! '),
+    write('\nQuest completed! '),
     player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
     killreq(Rslime,Rgoblin,Rwolf),
     IncreaseEXP is (Rslime+Rgoblin+Rwolf)*50,
