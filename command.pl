@@ -36,7 +36,7 @@ print_wolf :-
 	write('                            ;`-'),nl,
 	write('                           :'),put(92),nl,
 	write('                           ;'),nl,nl,
-	write('There is a wild wolf ahead, Traveler! Prepare for bloodbath!').
+	write('There is a Wild Wolf ahead, Traveler! Prepare for bloodbath!').
 
 print_slime :-
 	% ASCII Art from: https://textart.sh/topic/slime
@@ -56,7 +56,7 @@ print_slime :-
 	write('@@@%/*/.............@@@@@@@@@............./*(&@@@'),nl,
 	write('   %@@@%%%%%%%%%%%%%%%%%&%%%%%%%%%%%%%%%%%@@@    '),nl,
 	write('       @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@       '),nl,nl,
-	write('There is a slime ahead, Traveler! Prepare for bloodbath!').
+	write('There is a Slime ahead, Traveler! Prepare for bloodbath!').
 
 print_goblin :-
 	% ASCII Art from: https://www.oocities.org/spunk1111/people.htm
@@ -71,7 +71,7 @@ print_goblin :-
 	write('     ___'),put(92),write(' '),put(92),write('|--|/ /___     '),write('     ___'),put(92),write(' '),put(92),write('|--|/ /___     '),write('     ___'),put(92),write(' '),put(92),write('|--|/ /___     '),nl,
 	write('   /`    '),put(92),write('      /    `'),put(92),write('   '),write('   /`    '),put(92),write('      /    `'),put(92),write('   '),write('   /`    '),put(92),write('      /    `'),put(92),write('   '),nl,
 	write('  /       '),put(39),write('----'),put(39),write('       '),put(92),write('  '),write('  /       '),put(39),write('----'),put(39),write('       '),put(92),write('  '),write('  /       '),put(39),write('----'),put(39),write('       '),put(92),write('  '),nl,nl,
-	write('There is a group of goblins ahead, Traveler! Prepare for bloodbath!').
+	write('There is a Group of Goblins ahead, Traveler! Prepare for bloodbath!').
 
 status :-
     init(_),
