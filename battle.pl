@@ -375,7 +375,7 @@ battleMode(X,Y,N,N1) :-
             Option =:= 4 -> 
                 random(1,21,R),
                 (
-                R > 8, R < 17 -> 
+                R >= 8, R =< 17 -> 
                     write('\nWhy are you running? WHY ARE YOU RUNNING!\n'),
                     enemyAttack(X,Y),
                     battleMode(X,Y,N1,_)
