@@ -5,7 +5,7 @@
 
 quest :-
     \+questing(_),
-    write('\nYou are on a quest, Traveler! Type "questlist." to see your progress\n'),!.
+    write('\nYou are not on a quest, Traveler! Go to Quest Board (*Q) to get your quest! \n'),!.
 
 quest :-
     questing(_),
@@ -30,16 +30,7 @@ quest :-
 
 quest :-
     questing(_),
-    questing(QuestID),
-    killcount(Cslime,Cgoblin,Cwolf),
-    killreq(Rslime,Rgoblin,Rwolf),
-    Rslime =:= Cslime,
-    Rgoblin =:= Cgoblin,
-    Rwolf =:= Cwolf,
-    questComplete,
-    retract(questing(QuestID)),
-    retract(killcount(Cslime,Cgoblin,Cwolf)),
-    retract(killreq(Rslime,Rgoblin,Rwolf)),!.
+    questRemain,!.
 
 
 questlist :-
@@ -48,14 +39,34 @@ questlist :-
     write('1. Kill 3 Slime(s)\n'),
     write('2. Kill 4 Group of Goblins\n'),
     write('3. Kill 2 Wild Wolf(es)\n'),
-    write('4. Kill 2 Slime(s), 2 Group of Goblins, 1 Wild Wolf(es)\n\n'),
+    write('4. Kill 2 Slime(s), 2 Group of Goblins, 1 Wild Wolf(es)\n'),
+    write('5. Cancel\n\n'),    
     read(QuestID),
     asserta(questing(QuestID)),
     getQuest(QuestID),!.
 
 questlist :-
     questing(_),
-    write('\nYou are on a quest, Traveler! Type "quest." to see your progress\n'),!.
+    killcount(Cslime,Cgoblin,Cwolf),
+    killreq(Rslime,Rgoblin,Rwolf),
+    Rslime =:= Cslime,
+    Rgoblin =:= Cgoblin,
+    Rwolf =:= Cwolf,
+    questComplete,
+    retract(questing(_)),
+    retract(killcount(Cslime,Cgoblin,Cwolf)),
+    retract(killreq(Rslime,Rgoblin,Rwolf)),
+    questlist,!.
+
+
+questlist :-
+    questing(_),
+    write('\nYou are on a quest, Traveler! Type "quest." to see your progress or type "questquit." to abandon your quest\n'),!.
+
+
+questquit :-
+    questing(_),
+    retract(questing(_)),!.
 
 getQuest(QuestID) :-
     QuestID =:= 1,
@@ -81,6 +92,22 @@ getQuest(QuestID) :-
     write('\n[Quest] --==++ Annihilate 2 Slime(s), 2 Camp of Goblins, and 1 Wild Wolf(es) ++==--\n'),
     asserta(killcount(0,0,0)),
     asserta(killreq(2,2,1)),!.
+
+getQuest(QuestID) :-
+    QuestID =:= 5,
+    questing(QuestID),  
+    retract(questing(QuestID)),
+    cancel,!.
+
+questRemain :-
+    questing(_),
+    killcount(Cslime,Cgoblin,Cwolf),
+    killreq(Rslime,Rgoblin,Rwolf),
+    Rslime =:= Cslime,
+    Rgoblin =:= Cgoblin,
+    Rwolf =:= Cwolf,
+    write('\nQuest complete! Go to Quest Board (*Q) to get your reward! \n'),!.
+
 
 questRemain :-
     questing(_),
