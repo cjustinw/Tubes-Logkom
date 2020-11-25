@@ -398,14 +398,15 @@ battleMode(X,Y,N,N1) :-
     ).
 
 dungeon :-
-    write('Do you want to fight the boss?\n'),
+    write('Are you sure this is the moment?\n'),
     write('1. Yes\n'),
-    write('2. No\n'),
+    write('2. No\n\n'),
     read(Option),
     (
         Option =:= 1 ->
+            print_boss,
             battleMode(14,6,0,_)
     ;
         Option =:= 2 ->
-            write('\n')
+            write('\nYou better be more prepared then!')
     ).
