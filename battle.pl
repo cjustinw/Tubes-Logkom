@@ -154,20 +154,7 @@ sorcererAttack(Option,X,Y,N,N1) :-
             N1 is N+1,
             usePotion
     ).
-/*
-run :- 
-    random(1,21,R),
-    (
-    R > 8, R < 17 -> 
-        write('\nWhy are you running? WHY ARE YOU RUNNING!'),
-        battleMode(X,Y,_,_)
-    ;
-    R =:= 1 -> 
-        write('\nN I G E R U N D A Y O ! S M O K E Y !\n')
-    ;
-    write('\nYou\'re running away from the enemy\n')
-    ).
-*/
+
 enemyAttack(X,Y) :-
     write('\nEnemy turn\n'),
     enemy(_,EnemyName,_,_,_,_,_,Y,X),
