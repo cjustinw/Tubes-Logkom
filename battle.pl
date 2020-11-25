@@ -147,23 +147,27 @@ sorcererAttack(Option,X,Y,N,N1) :-
             N < 3 ->
                 N1 is N+1,
                 Turn is 3-N,
-                write('\nYou can use Divine Puncture in '),write(Turn),write(' more turns\n')
+                write('\nYou can use Elemental Armageddon in '),write(Turn),write(' more turns\n')
         )
     ;
         Option =:= 3 ->
             N1 is N+1,
             usePotion
     ).
-
+/*
 run :- 
-    random(1,11,R),
+    random(1,21,R),
     (
+    R > 8, R < 17 -> 
+        write('\nWhy are you running? WHY ARE YOU RUNNING!'),
+        battleMode(X,Y,_,_)
+    ;
     R =:= 1 -> 
         write('\nN I G E R U N D A Y O ! S M O K E Y !\n')
     ;
     write('\nYou\'re running away from the enemy\n')
     ).
-
+*/
 enemyAttack(X,Y) :-
     write('\nEnemy turn\n'),
     enemy(_,EnemyName,_,_,_,_,_,Y,X),
@@ -381,7 +385,19 @@ battleMode(X,Y,N,N1) :-
     read(Option),
     (
         (
-            Option =:= 4 -> run
+            Option =:= 4 -> 
+                random(1,21,R),
+                (
+                R > 8, R < 17 -> 
+                    write('\nWhy are you running? WHY ARE YOU RUNNING!\n'),
+                    enemyAttack(X,Y),
+                    battleMode(X,Y,N1,_)
+                ;
+                R =:= 1 -> 
+                    write('\nN I G E R U N D A Y O ! S M O K E Y !\n')
+                ;
+                write('\nYou\'re running away from the enemy\n')
+                )
         );
         (
             playerAttack(Option,X,Y,N,N1),
