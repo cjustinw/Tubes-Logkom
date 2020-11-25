@@ -25,23 +25,24 @@ title :-
     help.
 
 help :-
-    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
-    write('%                  ~Command Table~                %\n'),
-    write('%                                                 %\n'),
-    write('%     status     : menampilkan status pemain      %\n'),
-    write('%     map        : menampilkan peta               %\n'),
-    write('%     w          : gerak ke utara 1 langkah       %\n'),
-    write('%     a          : gerak ke barat 1 langkah       %\n'),
-    write('%     s          : gerak ke selatan 1 langkah     %\n'),
-    write('%     d          : gerak ke timur 1 langkah       %\n'),
-    write('%     tp         : berpindah ke waypoint          %\n'),
-    write('%     inventory  : menampilkan inventory pemain   %\n'),
-    write('%     equipment  : menampilkan equipment pemain   %\n'),
-    write('%     quest      : menampilkan quest berlangsung  %\n'),
-    write('%     help       : menampilkan bantuan            %\n'),
-    write('%     quit       : keluar permainan               %\n'),
-    write('%                                                 %\n'),
-    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n').
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n'),
+    write('%                  ~Command Table~                    %\n'),
+    write('%                                                     %\n'),
+    write('%     status     : menampilkan status pemain          %\n'),
+    write('%     map        : menampilkan peta                   %\n'),
+    write('%     w          : gerak ke utara 1 langkah           %\n'),
+    write('%     a          : gerak ke barat 1 langkah           %\n'),
+    write('%     s          : gerak ke selatan 1 langkah         %\n'),
+    write('%     d          : gerak ke timur 1 langkah           %\n'),
+    write('%     tp         : berpindah ke waypoint              %\n'),
+    write('%     inventory  : menampilkan inventory pemain       %\n'),
+    write('%     equipment  : menampilkan equipment pemain       %\n'),
+    write('%     quest      : menampilkan quest berlangsung      %\n'),
+    write('%     questquit  : mengehentikan quest yang aktif     %\n'),
+    write('%     help       : menampilkan bantuan                %\n'),
+    write('%     quit       : keluar permainan                   %\n'),
+    write('%                                                     %\n'),
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n').
 
 start :- 
     init(_),
