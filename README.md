@@ -2,19 +2,14 @@
 
 ## Abstrak
 Membuat sebuah survival role-playing game di dunia baru sebagai seorang programmer dengan menggunakan bahasa pemrograman deklaratif Prolog (gunakan GNU Prolog).
-Implementasi tugas besar harus mengandung materi:
-1.	Rekurens
-2.	List
-3.	Cut
-4.	Fail
-5.	Loop
+Implementasi tugas besar harus mengandung materi: rekurens, list, cut, fail, dan loop.
 
 Tujuan dari tugas besar ini adalah mengkombinasikan berbagai keterampilan dan teknik yang telah dipelajari dalam perkuliahan Logika Komputasional–IF2121, pra-praktikum, dan eksplorasi mandiri mengenai Logika Komputasional dan Prolog.
 
-## Prerequisite:
+## Prasyarat
 * GNU Prolog
 
-## Cara Menjalankan Program:
+## Cara Eksekusi Program
 1. Seluruh file prolog (.pl) diletakkan dalam satu directory (folder) yang sama.
 2. Jalankan main.pl dengan mengklik kiri dua kali.
 3. Masukkan perintah 'start.' untuk memulai permainan.
