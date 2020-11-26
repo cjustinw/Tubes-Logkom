@@ -12,10 +12,10 @@ Tujuan dari tugas besar ini adalah mengkombinasikan berbagai keterampilan dan te
 ## Cara Eksekusi Program
 1. Seluruh file prolog (.pl) diletakkan dalam satu direktori (folder) yang sama.
 2. Jalankan <b>main.pl</b> dengan mengklik kiri dua kali.
-3. Masukkan perintah <b>start.</b> untuk memulai permainan.
-4. Untuk input nama pemain, harap menggunakan huruf non-kapital. (e.g. <b>ather.</b> atau <b>lumine.</b>)
-5. Untuk pilihan-pilihan dengan numbering dalam game, masukkan input angka saja diakhiri titik. (e.g. <b>1.</b>)
-6. Untuk memilih item yang di-equip atau di-return, masukkan nama item tersebut diakhir titik. (e.g. <b>ultimate_sword.</b>)
+3. Masukkan perintah `start.` untuk memulai permainan.
+4. Untuk input nama pemain, harap menggunakan huruf non-kapital. (e.g. `ather.` atau `lumine.`)
+5. Untuk pilihan-pilihan dengan numbering dalam game, masukkan input angka saja diakhiri titik. (e.g. `1.`)
+6. Untuk memilih item yang di-<i>equip</i> atau di-<i>return</i>, masukkan nama item tersebut diakhir titik. (e.g. `ultimate_sword.`)
 
 ## Tentang Kami
 Kelas 02 Kelompok 12 <i>'Gacha rate up is a lie'</i>: <br>
