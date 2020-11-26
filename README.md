@@ -18,3 +18,5 @@ Kelas 02 Kelompok 12 <i>'Gacha rate up is a lie'</i>: <br>
 3. Jusuf Junior Athala (13519174)
 4. Aurelius Marcel Candra (13519198)
 
+## Game CLI
+![Example screenshot](https://github.com/cjustinw/Tubes-Logkom/blob/master/Screenshot.PNG)
