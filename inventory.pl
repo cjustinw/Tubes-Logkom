@@ -115,7 +115,7 @@ usePotion:-
             retract(player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
             asserta(player(Username,Job,LVL,NewHP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
             removeInventory(potion),
-            write('\nYou heal 500 exp\n'),!
+            write('\nYou gain 500 HP\n'),!
     );
     (
         isItemAvailable(potion),
@@ -128,5 +128,5 @@ usePotion:-
             asserta(player(Username,Job,LVL,MaxHP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold)),
             removeInventory(potion),
             Heal is MaxHP-HP,
-            write('\nYou heal '),write(Heal),write('exp\n'),!
+            write('\nYou gain '),write(Heal),write(' HP\n'),!
     ).
