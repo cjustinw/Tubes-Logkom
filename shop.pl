@@ -154,10 +154,11 @@ buyItem(Option) :-
                 ;
                     (ItemName = armor ; ItemName = silver_armor ; ItemName = royal_armor ; ItemName = ultimate_armor) ->
                         print_Armor
+                ;
+                    (ItemName = earrings ; ItemName = necklace ; ItemName = royal_armor ; ItemName = ring)
                 ),
                 write('\nYou get '),write(ItemName),write('\n'),!
         ;
-        
             player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
             \+isGoldEnough(Gold,200) -> 
                 write('\nYour gold is not sufficient\n'),!
