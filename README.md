@@ -26,3 +26,7 @@ Kelas 02 Kelompok 12 <i>'Gacha rate up is a lie'</i>: <br>
 
 ## Game CLI
 ![Example screenshot](Screenshot.PNG)
+
+
+Github:
+https://github.com/cjustinw/Tubes-Logkom.git
