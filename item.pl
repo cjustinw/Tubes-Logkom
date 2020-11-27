@@ -27,7 +27,7 @@ item(16,royal_armor,armor,0,55,0,0).
 item(17,ultimate_armor,armor,0,70,0,0).
 
 /* accessories */
-item(18,earing,accessories,0,0,100,0).
+item(18,earrings,accessories,0,0,100,0).
 item(19,necklace,accessories,0,0,150,0).
 item(20,ring,accessories,0,0,200,0).
 
