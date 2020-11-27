@@ -283,6 +283,10 @@ isEnemyDefeated(X,Y) :-
     enemy(_,_,_,EnemyHP,_,_,_,Y,X),
     EnemyHP =< 0.
 
+isBossDefeated(X,Y) :-
+    enemy(_,_,_,BossHP,_,_,_,Y,X),
+    BossHP =< 0.
+
 expIncrease(X,Y) :-
     player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold),
     enemy(_,EnemyType,EnemyLVL,_,_,_,_,Y,X),
@@ -385,18 +389,27 @@ battleMode(X,Y,N,N1) :-
                 ;
                 write('\nYou\'re running away from the enemy\n')
                 )
-        );
-        (
-            playerAttack(Option,X,Y,N,N1),
+        ;
+        
+            playerAttack(Option,X,Y,N,N1),enemy(_,EnemyName,_,_,_,_,_,Y,X),
             (
+                EnemyName \= dragon ->
+                    (
+                        isEnemyDefeated(X,Y),!
+                    ;
+                        enemyAttack(X,Y)
+                    ),
+                    battleMode(X,Y,N1,_),!
+            ;
                 (
-                    isEnemyDefeated(X,Y)
-                );
-                (
-                    enemyAttack(X,Y)
+                    isBossDefeated(X,Y) ->
+                    write('\nYou win the game\n'),!
+                ;
+                    \+isBossDefeated(X,Y) ->
+                    enemyAttack(X,Y),
+                    battleMode(X,Y,N1,_),!
                 )
-            ),
-            battleMode(X,Y,N1,_)
+            )
         )
     ).
 

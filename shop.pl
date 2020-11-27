@@ -1,4 +1,3 @@
-/* Belum Selesai */
 
 isGoldEnough(Gold,Price) :-
     Gold >= Price.
@@ -51,5 +50,12 @@ shop :-
     write('2. Gacha Item (200)\n'),
     write('3. Cancel\n'),
     read(Option),
-    buyItem(Option).
+    (
+        Option =\= 3 ->
+            buyItem(Option),
+            shop
+    ;
+        write('\nThank you for shopping here\n')
+    ).
+    
 

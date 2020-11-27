@@ -78,7 +78,7 @@ quit :-
     init(_),
     retract(init(_)),
     write('\nYour endeavor will not be remembered!'),
-    retractall(player(_,_,_,_,_,_,_,_,_,_)),
+    retract(player(_,_,_,_,_,_,_,_,_,_)),
     retractall(enemy(_,_,_,_,_,_,_,_,_)),
     retract(player_X(_)),
     retract(player_Y(_)),!

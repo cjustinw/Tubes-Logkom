@@ -1,4 +1,3 @@
-/* Belum Selesai */
 
 :- dynamic(playerInventory/2).
 
@@ -30,7 +29,7 @@ deleteItem(A,[B,C|D],[B|E]) :-
 
 addInventory(_) :-
     isInventoryFull,
-    write('\nYour inventory is full\n'),!.
+    write('\nYour inventory is full\n'),!,fail.
 
 addInventory(Item) :-
     \+isInventoryFull,

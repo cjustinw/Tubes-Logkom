@@ -2,6 +2,8 @@
 :- dynamic(player/10).
 :- dynamic(playerEquipment/3).
 
+/* player(Username,Job,LVL,HP,MaxHP,ATT,DEF,EXP,MaxEXP,Gold) */
+
 generatePlayer(Username, JobID) :-
     JobID =:= 1,
     asserta(player(Username,swordsman,1,1000,1000,80,70,0,100,1000)),!.

@@ -1,6 +1,5 @@
-/* Belum Selesai */
 
-/* item(ID, NamaItem, Type, harga, Efek ke ATT, Efek ke DEF, Efek ke HP, Efek ke EXP)*/
+/* item(ID, NamaItem, Type, Harga, Efek ke ATT, Efek ke DEF, Efek ke HP, Efek ke EXP)*/
 
 /* Potion */
 item(1,potion,healing,0,0,500,0).
