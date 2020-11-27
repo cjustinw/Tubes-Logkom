@@ -131,42 +131,58 @@ questEnemyKilled(_,_):-
 questEnemyKilled(X,Y):-
     (
             questing(_),enemy(_,EnemyType,_,_,_,_,_,Y,X),EnemyType = slime,killreq(Rslime,_,_),Rslime =:= 0
-    );
-    (
+    ;
+    
             questing(_),enemy(_,EnemyType,_,_,_,_,_,Y,X),EnemyType = slime,killreq(Rslime,_,_),Rslime =\= 0 ->               
                 killcount(Cslime,Cgoblin,Cwolf),
                 killreq(Rslime,_,_),
-                Cslime < Rslime,
-                NewCslime is Cslime+1,
-                retract(killcount(Cslime,Cgoblin,Cwolf)),
-                asserta(killcount(NewCslime,Cgoblin,Cwolf)),
-                quest
-    );
-    (
+                (
+                    Cslime < Rslime ->
+                        NewCslime is Cslime+1,
+                        retract(killcount(Cslime,Cgoblin,Cwolf)),
+                        asserta(killcount(NewCslime,Cgoblin,Cwolf)),
+                        quest
+                ;
+                    Cslime =:= Rslime ->
+                        quest
+                )
+                
+    ;
             questing(_),enemy(_,EnemyType,_,_,_,_,_,Y,X),EnemyType = goblin,killreq(_,Rgoblin,_),Rgoblin =:= 0
-    );
-    (
+    ;
+    
             questing(_),enemy(_,EnemyType,_,_,_,_,_,Y,X),EnemyType = goblin,killreq(_,Rgoblin,_),Rgoblin =\= 0 ->
                 killcount(Cslime,Cgoblin,Cwolf),
                 killreq(_,Rgoblin,_),
-                Cgoblin < Rgoblin,
-                NewCgoblin is Cgoblin+1,
-                retract(killcount(Cslime,Cgoblin,Cwolf)),
-                asserta(killcount(Cslime,NewCgoblin,Cwolf)),
-                quest
-    );
-    (
+                (
+                    Cgoblin < Rgoblin ->
+                        NewCgoblin is Cgoblin+1,
+                        retract(killcount(Cslime,Cgoblin,Cwolf)),
+                        asserta(killcount(Cslime,NewCgoblin,Cwolf)),
+                        quest
+                ;
+                    Cgoblin =:= Rgoblin ->
+                        quest
+                )
+                
+    ;
+    
             questing(_),enemy(_,EnemyType,_,_,_,_,_,Y,X),EnemyType = wolf,killreq(_,_,Rwolf),Rwolf =:= 0 
-    );
-    (
+    ;
+    
             questing(_),enemy(_,EnemyType,_,_,_,_,_,Y,X),EnemyType = wolf,killreq(_,_,Rwolf),Rwolf =\= 0 ->
                 killcount(Cslime,Cgoblin,Cwolf),
                 killreq(_,_,Rwolf),
-                Cwolf < Rwolf,
-                NewCwolf is Cwolf+1,
-                retract(killcount(Cslime,Cgoblin,Cwolf)),
-                asserta(killcount(Cslime,Cgoblin,NewCwolf)),
-                quest
+                (
+                    Cwolf < Rwolf ->
+                        NewCwolf is Cwolf+1,
+                        retract(killcount(Cslime,Cgoblin,Cwolf)),
+                        asserta(killcount(Cslime,Cgoblin,NewCwolf)),
+                        quest
+                ;
+                    Cwolf =:= Rwolf ->
+                        quest
+                )
     ).
 
 

@@ -378,7 +378,7 @@ battleMode(X,Y,N,N1) :-
                 R >= 8, R =< 17 -> 
                     write('\nWhy are you running? WHY ARE YOU RUNNING!\n'),
                     enemyAttack(X,Y),
-                    battleMode(X,Y,N1,_)
+                    battleMode(X,Y,N,N1)
                 ;
                 R =:= 1 -> 
                     write('\nN I G E R U N D A Y O ! S M O K E Y !\n')
